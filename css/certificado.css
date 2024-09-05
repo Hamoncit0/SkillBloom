@@ -1,0 +1,77 @@
+/* Estilos para el Certificado */
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('../imagenes/bosque2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.certificate-container {
+    background-color: rgb(53, 53, 53);
+    border: 1px solid #2c2c2e;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    max-width: 900px;
+    padding: 30px;
+    text-align: center;
+}
+
+.certificate-header {
+    margin-bottom: 20px;
+}
+.certificate-header .logo {
+    max-width: 100px;
+    margin-bottom: 10px;
+}
+
+.certificate-header h1 {
+    color: #77b375;
+    font-size: 24px;
+    margin: 0;
+}
+
+.certificate-body p {
+    font-size: 16px;
+    color: #77b375;
+    margin: 10px 0;
+}
+
+.certificate-body h2,
+.certificate-body h3,
+.certificate-body h4 {
+    color: #577a59;
+    margin: 5px 0;
+}
+
+.certificate-footer {
+    margin-top: 30px;
+    font-size: 16px;
+    color: #77b375;
+}
+
+.certificate-footer p {
+    margin: 10px 0;
+}
+
+.print-button {
+    background-color: #77b375;
+    color: #1c1c1e;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.print-button:hover {
+    background-color: #577a59;
+}

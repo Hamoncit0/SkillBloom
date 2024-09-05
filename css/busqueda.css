@@ -1,0 +1,156 @@
+/* Estilo general para la página de búsqueda avanzada */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1c1c1e;
+    color: #e5e5e7;
+    margin: 0;
+}
+/* Encabezado */
+header {
+    background-color: #2c2c2e;
+    padding: 15px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    color: #f5f5f7;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+nav .logo {
+    height: 40px;
+    margin-right: 20px;
+}
+
+nav a {
+    color: #77b375;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-container input[type="text"] {
+    padding: 5px;
+    border: 1px solid #3a3a3c;
+    border-radius: 5px;
+    background-color: #3a3a3c;
+    color: #f5f5f7;
+}
+
+.search-container button {
+    background-color: #577a59;
+    color: #2c2c2e;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.search-container button:hover {
+    background-color: #007aff;
+}
+
+/* Búsqueda Avanzada */
+#busqueda-avanzada {
+    margin-top: 30px;
+}
+
+#busqueda-avanzada form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#busqueda-avanzada label {
+    font-weight: bold;
+}
+
+#busqueda-avanzada input[type="text"] {
+    padding: 10px;
+    border: 1px solid #3a3a3c;
+    border-radius: 5px;
+    background-color: #3a3a3c;
+    color: #f5f5f7;
+}
+
+#busqueda-avanzada button {
+    background-color: #77b375;
+    color: #2c2c2e;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#busqueda-avanzada button:hover {
+    background-color: #577a59;
+}
+
+
+h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+.search-advanced {
+    background-color: #2c2c2e;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"], select {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #577a59;
+    color: #f5f5f7;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #1a0f27;
+}
+
+
