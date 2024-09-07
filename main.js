@@ -58,3 +58,6 @@ document.getElementById('registroForm').addEventListener('submit', function(even
         window.location.href = '/'; // Redirige al usuario a la ruta '/'
     }
 });
+
+
+
