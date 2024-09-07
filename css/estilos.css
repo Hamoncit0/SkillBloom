@@ -150,3 +150,6 @@ button:hover {
 #new-category-section {
     margin-top: 15px;
 }
+.text-danger{
+    color: #dc3545;
+}
