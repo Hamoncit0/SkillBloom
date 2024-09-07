@@ -54,8 +54,8 @@ document.getElementById('registroForm').addEventListener('submit', function(even
     // Si todas las validaciones pasan, muestra el mensaje de éxito y limpia el formulario
     if (isValid) {
         alert('Usuario registrado con éxito');
-        this.reset(); // Limpia el formulario
-        window.location.href = '/'; // Redirige al usuario a la ruta '/'
+        this.reset();
+        window.location.href = '/'; 
     }
 });
 
