@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Cursos - Estudiante</title>
+        
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="../css/dashboard.css">
     <script src="scripts.js" defer></script>
+
+
 </head>
 <body>
     <div class="container">
@@ -30,7 +35,7 @@
                         <p><strong>Progreso:</strong> 60%</p>
                         <p><strong>Fecha de Inscripción:</strong> 01/06/2024</p>
                         <p><strong>Última Fecha de Ingreso:</strong> 15/08/2024</p>
-                        <button>Continuar</button>
+                        <button class="btn btn-primary w-100">Continuar</button>
                     </div>
                     <div class="course">
                         <img src="ruta_a_imagen_del_curso.jpg" alt="Imagen del Curso">
@@ -38,7 +43,7 @@
                         <p><strong>Progreso:</strong> 30%</p>
                         <p><strong>Fecha de Inscripción:</strong> 15/07/2024</p>
                         <p><strong>Última Fecha de Ingreso:</strong> 20/08/2024</p>
-                        <button>Continuar</button>
+                        <button class="btn btn-primary w-100">Continuar</button>
                     </div>
                     <div class="course">
                         <img src="ruta_a_imagen_del_curso.jpg" alt="Imagen del Curso">
@@ -46,7 +51,7 @@
                         <p><strong>Progreso:</strong> 85%</p>
                         <p><strong>Fecha de Inscripción:</strong> 01/05/2024</p>
                         <p><strong>Última Fecha de Ingreso:</strong> 22/08/2024</p>
-                        <button>Continuar</button>
+                        <button class="btn btn-primary w-100">Continuar</button>
                     </div>
                     <div class="course">
                         <img src="ruta_a_imagen_del_curso.jpg" alt="Imagen del Curso">
@@ -54,12 +59,13 @@
                         <p><strong>Progreso:</strong> 45%</p>
                         <p><strong>Fecha de Inscripción:</strong> 10/06/2024</p>
                         <p><strong>Última Fecha de Ingreso:</strong> 18/08/2024</p>
-                        <button>Continuar</button>
+                        <button class="btn btn-primary w-100">Continuar</button>
                     </div>
                 </div>
             </section>
         </main>
         <?php include 'partials/footer.php'; ?>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

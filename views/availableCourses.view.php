@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Cursos Disponibles</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/availableCourses.css">
     <script src="scripts.js" defer></script>
 </head>
 <body>
@@ -14,7 +15,7 @@
         </header>
         <main>
             <section id="cursos">
-                <h2>Cursos Disponibles</h2>
+                <h2 class="title text-center">Cursos Disponibles</h2>
                 <div class="filters">
                     <label for="course-filter">Filtrar Cursos:</label>
                     <select id="course-filter">
@@ -67,6 +68,7 @@
                         <p><strong>Cantidad de Comentarios:</strong> 10</p>
                         <button>Ver Más</button>
                     </div>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                 </div>
             </section>
         </main>

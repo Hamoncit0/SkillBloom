@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Cursos Disponibles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
@@ -13,7 +14,7 @@
         </header>
         <main>
             <section id="cursos">
-                <h2>Cursos Disponibles</h2>
+                <h2 class="title text-center">Cursos Disponibles</h2>
                 <div class="filters">
                     <label for="course-filter">Filtrar Cursos:</label>
                     <select id="course-filter">
@@ -40,33 +41,35 @@
                     <h4>Curso de Programación Web</h4>
                     <p>Aprende a desarrollar aplicaciones web desde cero. Este curso cubre HTML, CSS, JavaScript y más.</p>
                     <p><strong>Costo:</strong> $99.99</p>
-                    <button onclick="location.href='/courseSeeMore';">Ver Más</button>
+                    <button onclick="location.href='/courseSeeMore';" class="btn btn-primary w-100">Ver Más</button>
                 </div>
                 <div class="course">
                     <img src="ruta_a_imagen_del_curso.jpg" alt="Imagen del Curso">
                     <h4>Curso de Programación Web</h4>
                     <p>Aprende a desarrollar aplicaciones web desde cero. Este curso cubre HTML, CSS, JavaScript y más.</p>
                     <p><strong>Costo:</strong> $99.99</p>
-                    <button>Ver Más</button>
+                    <button class="btn btn-primary w-100">Ver Más</button>
                 </div>
                 <div class="course">
                     <img src="ruta_a_imagen_del_curso.jpg" alt="Imagen del Curso">
                     <h4>Curso de Programación Web</h4>
                     <p>Aprende a desarrollar aplicaciones web desde cero. Este curso cubre HTML, CSS, JavaScript y más.</p>
                     <p><strong>Costo:</strong> $99.99</p>
-                    <button>Ver Más</button>
+                    <button class="btn btn-primary w-100">Ver Más</button>
                 </div>
                 <div class="course">
                     <img src="ruta_a_imagen_del_curso.jpg" alt="Imagen del Curso">
                     <h4>Curso de Programación Web</h4>
                     <p>Aprende a desarrollar aplicaciones web desde cero. Este curso cubre HTML, CSS, JavaScript y más.</p>
                     <p><strong>Costo:</strong> $99.99</p>
-                    <button>Ver Más</button>
+                    <button class="btn btn-primary w-100">Ver Más</button>
                 </div>
             </div>
 
         </main>
 
         <?php include 'partials/footer.php'; ?>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </div>
 </body>

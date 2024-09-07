@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kardex de Cursos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/kardex.css"> 
 </head>
 <body>
@@ -21,7 +22,7 @@
                 <input type="date" id="start-date" name="start-date">
                 <input type="date" id="end-date" name="end-date">
             </div>
-            <div>
+            <div class="col-md-3 mb-3">
                 <label for="category">Categoría:</label>
                 <select id="category" name="category">
                     <option value="all">Todas</option>
@@ -30,7 +31,7 @@
 
                 </select>
             </div>
-            <div>
+            <div class="col-md-3 mb-3">
                 <label for="status">Estado del Curso:</label>
                 <select id="status" name="status">
                     <option value="all">Todos</option>
@@ -81,5 +82,6 @@
 
         <button>Exportar a PDF</button>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

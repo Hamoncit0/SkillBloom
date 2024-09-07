@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Búsqueda Avanzada</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/busqueda.css">
+    
 </head>
 <body>
     <header>
@@ -64,15 +66,17 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="keywords">Palabras Clave</label>
-                    <input type="text" id="keywords" name="keywords" placeholder="Buscar por palabras clave">
-                </div>
+                <div class="col-md-6">
+                        <label for="keywords" class="form-label">Palabras Clave</label>
+                        <input type="text" id="keywords" name="keywords" class="form-control" placeholder="Buscar por palabras clave">
+                    </div>
 
-                <button type="submit">Buscar</button>
+                    <div class="col-12">
+                        <button type="submit">Buscar</button>
+                    </div>
             </form>
         </section>
     </main>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

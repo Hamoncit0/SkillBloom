@@ -1,3 +1,3 @@
 <footer>
-    <p>&copy; 2024 Tu Plataforma de Cursos</p>
+    <p>&copy; 2024 SkillBloom</p>
 </footer>

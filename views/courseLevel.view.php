@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curso - Nivel 1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/nivel.css">
 </head>
 <body>
@@ -12,7 +13,7 @@
     </header>
     <div class="course-container">
         <div class="course-header">
-            <h1>Curso: [Nombre del Curso]</h1>
+            <h1 class="title text-center">Curso: [Nombre del Curso]</h1>
             <p>Descripción: [Descripción del Curso]</p>
         </div>
 
@@ -52,6 +53,7 @@
             <button onclick="goToPreviousLevel()">Nivel Anterior</button>
             <button onclick="goToNextLevel()">Siguiente Nivel</button>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </div>
 </body>
 </html>

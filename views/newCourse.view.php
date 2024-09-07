@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Curso</title>
-    <link rel="stylesheet" href="../css/crearc.css"> <!-- Enlaza tu CSS aquí -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/crearc.css"> 
 </head>
 <body>
     <header>
         <nav>
+        <img src="../../imagenes/SkillBloom_icon.png" alt="Logo" class="logo">
             <a href="dashboard.html">Cursos Disponibles</a>
             <a href="perfil.html">Perfil</a>
             <a href="mensajes.html">Mensajes</a>
@@ -23,7 +25,7 @@
     </header>
 
         <div class="course-form">
-            <h2>Crear Curso</h2>
+            <h2 class="title text-center">Crear Curso</h2>
             <form id="courseForm">
                 <div class="form-group">
                     <label for="title">Título del Curso</label>
@@ -47,9 +49,9 @@
 
                 <button type="submit">Crear Niveles</button>
 
-                <h3>Niveles del Curso</h3>
+                <h3 class="title text-center">Niveles del Curso</h3>
                 <div class="level-form">
-                    <h4>Nivel 1</h4>
+                    <h4 class="title text-center">Nivel 1</h4>
                     <div class="form-group">
                         <label for="levelTitle1">Título del Nivel</label>
                         <input type="text" id="levelTitle1" name="levelTitle1">
@@ -69,7 +71,7 @@
                 </div>
 
                 <div class="level-form">
-                    <h4>Nivel 2</h4>
+                    <h4 class="title text-center">Nivel 2</h4>
                     <div class="form-group">
                         <label for="levelTitle2">Título del Nivel</label>
                         <input type="text" id="levelTitle2" name="levelTitle2">
@@ -91,6 +93,7 @@
                 <button type="submit">Crear Curso</button>
             </form>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </div>
 </body>
 </html>
