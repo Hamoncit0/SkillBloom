@@ -21,6 +21,9 @@ $routes = [
     '/courseLevel' => 'controllers/courseLevel.php',
     '/salesSummary' => 'controllers/salesSummary.php',
     '/studentsPerCourse' => 'controllers/studentsPerCourse.php',
+    '/paymentMethod' => 'controllers/paymentMethod.php',
+    '/paypal' => 'controllers/paypal.php',
+    '/transferencia' => 'controllers/transferencia.php',
 ];
 
 function abort($code = 404)
