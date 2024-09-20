@@ -1,5 +1,6 @@
 <?php
 
-$heading = "updateUser";
+$heading = 'Edit Profile';
+
 
 require 'views/updateUser.view.php';

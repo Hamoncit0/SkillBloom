@@ -1,5 +1,6 @@
 <?php
 
-$heading = "login";
+$heading = 'Log In';
+
 
 require 'views/login.view.php';

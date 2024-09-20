@@ -1,64 +1,73 @@
-<?php require 'partials/head.php' ?>
-<body>
-    <div class="container mt-5">
-        <div class="register-container border p-4 shadow-sm rounded">
-            <h2 class="text-center mb-4">Registro de Usuario</h2>
-            <form id="registroForm" action="/" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <input type="text" id="nombre_completo" name="nombre_completo" class="form-control" placeholder="Nombre completo" required>
-                    <small id="nombreError" class="text-danger"></small>
-                </div>
-                <div class="mb-3">
-                    <select id="genero" name="genero" class="form-select" required>
-                        <option value="" disabled selected>Género</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
-                        <option value="otro">Otro</option>
-                    </select>
-                    <small id="generoError" class="text-danger"></small>
-                    <br>
-                </div>
-                <div class="mb-3">
-                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" required>
-                    <small id="fechaError" class="text-danger"></small>
-                    <br>
-                </div>
-                <div class="mb-3">
-                    <input type="file" id="avatar" name="avatar" class="form-control" accept="image/*" required>
-                    <small id="avatarError" class="text-danger"></small>
-                    <br>
-                </div>
-                <div class="mb-3">
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Correo electrónico" required>
-                    <small id="emailError" class="text-danger"></small>
-                </div>
-                <div class="mb-3">
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
-                    <small id="passwordError" class="text-danger"></small>
-                </div>
-                <div class="mb-3">
-                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirmar contraseña" required>
-                    <small id="confirmPasswordError" class="text-danger"></small>
-                </div>
-                <div class="mb-3">
-                    <select id="rol" name="rol" class="form-select" required>
-                        <option value="" disabled selected>Selecciona tu rol</option>
-                        <option value="alumno">Alumno</option>
-                        <option value="instructor">Instructor</option>
-                    </select>
-                    <small id="rolError" class="text-danger"></small>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Registrarse</button>
-            </form>
-            <div class="links">
-                <a href="/">¿Ya tienes una cuenta? Inicia Sesión</a>
-            </div>
+<?php require "partials/head.php" ?>
+<?php require "partials/nav.php" ?>
+<div class="signup bg-light">
+    <img src="../images/supporting-business-person-diagonal-svgrepo-com.svg" alt="">
+    <form id="signupForm" action="">
+        <h2>Sign up and start learning</h2>
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name:</label>
+            <input class="form-control" type="text" name="firstName" id="firstNameSU">
+            <small class="text-danger" id="firstNameError"></small>
         </div>
-    </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name:</label>
+            <input class="form-control" type="text" name="lastName" id="lastNameSU">
+            <small class="text-danger" id="lastNameError"></small>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input class="form-control" type="email" name="email" id="emailSU">
+            <small class="text-danger" id="emailError"></small>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input class="form-control" type="password" name="password" id="passwordSU"> 
+            <small class="text-danger" id="passwordError"></small>
+        </div>
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm password:</label>
+            <input class="form-control" type="password" name="confirmPassword" id="confirmPasswordSU">
+            <small class="text-danger" id="confirmPasswordError"></small>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Birth date:</label>
+            <input class="form-control" type="date" name="birthdate" min="today" id="date-input">
+            <small class="text-danger" id="date-inputError"></small>
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Gender:</label>
+            <select class="form-select" aria-label="Default select example" id="genderSU">
+                <option value="" disabled selected>Select your gender...</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="other">Other</option>
+            </select>
+            <small class="text-danger" id="genderError"></small> 
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Rol:</label>
+            <select class="form-select" aria-label="Default select example" id="rolSU">
+                <option value="" disabled selected>Select your rol...</option>
+                <option value="student">Student</option>
+                <option value="instructor">Instructor</option>
+            </select>
+            <small class="text-danger" id="rolError"></small> 
+        </div>
+        <button type="submit" class="btn btn-primary fs-4 fw-5 text-light">Sign up</button>
+        <div class="smallLogin">You already have an account? <a href="/login">Log in</a></div>
+    </form>
+</div>
+<script>
+  // Obtener la fecha de ayer
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  // Formatear la fecha a YYYY-MM-DD
+  const formattedDate = yesterday.toISOString().split('T')[0];
 
-    <!-- JavaScript para validaciones -->
-    <script src="../main.js"></script>
-</body>
+  // Asignar la fecha máxima al input
+  document.getElementById('date-input').setAttribute('max', formattedDate);
+</script>
+<script src="../scripts/signupValidations.js"></script>
+<? require "partials/footer.php" ?>

@@ -1,5 +1,6 @@
 <?php
 
-$heading = "courseStadistics";
+$heading = 'Course Stadistics';
+
 
 require 'views/courseStadistics.view.php';

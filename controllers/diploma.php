@@ -1,5 +1,6 @@
 <?php
 
-$heading = "diploma";
+$heading = 'Diploma';
+
 
 require 'views/diploma.view.php';

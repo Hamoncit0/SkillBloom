@@ -1,92 +1,62 @@
-
-<?php require 'partials/head.php' ?><body>
-<body>
-
-    <div class="container">
-        <div class="update-container">
-            <h2>Actualizar Información de Usuario</h2>
-            <form id="updateForm" action="" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <input type="text" id="nombre_completo" name="nombre_completo" class="form-control" placeholder="Nombre completo" value="Nombre Actual" required>
+<?php require "partials/head.php" ?>
+<?php require "partials/nav.php" ?>
+<div class="user-data bg-light">
+    <div class="edit-container">
+        <div class="leftEditProfile">
+            <img class="rounded-circle img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgYN6WeHs6tndhVLPPLjId5KiXOlZ26pLLig&s" alt="">
+            <h4>First Name</h4>
+        </div>
+        <div class="rightEditProfile">
+            <form action="" id="updateUserInfo">
+                <h4>Information:</h4>
+                <p class="text-success" id="updateSuccess"></p>
+                <div class="mb-3">
+                    <input name="editFirstName" type="text" placeholder="First Name" class="form-control" id="firstNameUU">
+                    <small class="text-danger" id="firstNameError"></small>
                 </div>
-                
-                <div class="form-group">
-                    <select id="genero" name="genero" class="form-control" required>
-                        <option value="masculino" selected>Masculino</option>
-                        <option value="femenino">Femenino</option>
-                        <option value="otro">Otro</option>
+                <div class="mb-3">
+                    <input name="editLastName" type="text" placeholder="Last Name" class="form-control" id="lastNameUU">
+                    <small class="text-danger" id="lastNameError"></small>
+                </div>
+                <div class="mb-3">
+                    <input name="editEmail" type="email" placeholder="Email" class="form-control" disabled id="emailUU" value="user@gmail.com">
+                    <small class="text-danger" id="emailError"></small>
+                </div>
+                <div class="mb-3">
+                    <input name="editBirthDate" type="date" placeholder="Email" class="form-control" id="date-inputUU">
+                    <small class="text-danger" id="date-inputError"></small>
+                </div>
+                <div class="mb-3">
+                    <select class="form-select" aria-label="Default select example" id="genderUU">
+                        <option value="" disabled selected>Select your gender...</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="other">Other</option>
                     </select>
-                    <small id="generoError" class="form-error"></small>
+                    <small class="text-danger" id="genderError"></small> 
                 </div>
-                
-                <div class="form-group">
-                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" value="2000-01-01" required>
-                    <small id="fechaError" class="form-error"></small>
-                </div>
-                
-                <div class="form-group">
-                    <input type="file" id="avatar" name="avatar" class="form-control" accept="image/*">
-                    <small id="avatarError" class="form-error"></small>
-                </div>
-                
-                <div class="form-group">
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Correo electrónico" value="email@ejemplo.com" required>
-                    <small id="emailError" class="form-error"></small>
-                </div>
-                
-                <div class="form-group">
-                    <input type="password" id="password_actual" name="password_actual" class="form-control" placeholder="Contraseña Actual" required>
-                    <small id="passwordError" class="form-error"></small>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Actualizar Información</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </form>
-            
-            <div class="links mt-3">
-                <a href="/dashboard">Volver</a><br>
-                <a href="#dar de baja">Deshabilitar Cuenta</a>
-            </div>
+            <hr>
+            <img class="rounded-circle img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgYN6WeHs6tndhVLPPLjId5KiXOlZ26pLLig&s" alt="" style="max-width: 50%; align-self:center; margin: 3rem;">
+            <button class="btn btn-primary">Upload Picture</button>
+            <hr>
+            <form id="updateUserPassword" action="">
+                <h4>Change Password:</h4>
+                <p class="text-success" id="passwordSuccess"></p>
+                <div class="mb-3">
+                    <input type="password" placeholder="New Password" class="form-control" id="passwordUU">
+                    <small class="text-danger" id="passwordError"></small>
+                </div>
+                <div class="mb-3">
+                    <input name="editConfirmNewPassword" type="password" placeholder="Confirm New Password" class="form-control" id="confirmPasswordUU">
+                    <small class="text-danger" id="confirmPasswordError"></small>
+                </div>
+                <button type="submit" class="btn btn-primary">Change Password</button>
+            </form>
         </div>
     </div>
+</div>
 
-    <script>
-       document.getElementById('updateForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evita el envío tradicional del formulario
-
-    let isValid = true;
-
-    
-
-    // Validación de email
-    const email = document.getElementById('email').value;
-    const emailError = document.getElementById('emailError');
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(email)) {
-        emailError.textContent = 'Por favor, ingresa un correo electrónico válido.';
-        isValid = false;
-    } else {
-        emailError.textContent = '';
-    }
-
-    // Validación de fecha de nacimiento
-    const fechaNacimiento = document.getElementById('fecha_nacimiento').value;
-    const fechaError = document.getElementById('fechaError');
-    const today = new Date().toISOString().split('T')[0];
-
-    if (fechaNacimiento >= today) {
-        fechaError.textContent = 'La fecha de nacimiento no puede ser mayor o igual a la fecha actual.';
-        isValid = false;
-    } else {
-        fechaError.textContent = '';
-    }
-
-    // Si todas las validaciones pasan, muestra el mensaje de éxito y limpia el formulario
-    if (isValid) {
-        alert('Usuario actualizado con exito');
-    }
-});
-
-    </script>
-
-</body>
+<script src="../scripts/updateUserValidations.js"></script>
+<? require "partials/footer.php" ?>

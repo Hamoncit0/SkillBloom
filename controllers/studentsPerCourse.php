@@ -1,5 +1,6 @@
 <?php
 
-$heading = "studentsPerCourse";
+$heading = 'Students per course';
+
 
 require 'views/studentsPerCourse.view.php';
