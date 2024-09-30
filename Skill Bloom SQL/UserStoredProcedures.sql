@@ -56,3 +56,80 @@ BEGIN
 END
 
 DELIMITER;
+DELIMITER 
+
+CREATE PROCEDURE update_user(
+    IN userId INT,
+    IN firstName VARCHAR(50),
+    IN lastName VARCHAR(50),
+    IN gender ENUM('m', 'f', 'o'),
+    IN birthdate DATE
+)
+BEGIN
+    UPDATE user
+    SET
+        firstName = firstName,
+        lastName = lastName,
+        gender = gender,
+        birthdate = birthdate,
+        updatedAt = CURRENT_TIMESTAMP
+    WHERE id = userId;
+END 
+
+DELIMITER ;
+DELIMITER 
+
+CREATE PROCEDURE change_password(
+    IN userId INT,
+    IN newPassword VARCHAR(20)
+)
+BEGIN
+    UPDATE user
+    SET
+        password = newPassword,
+        updatedAt = CURRENT_TIMESTAMP
+    WHERE id = userId;
+END 
+
+DELIMITER ;
+
+DELIMITER 
+
+CREATE PROCEDURE change_pfp(
+    IN userId INT,
+    IN newPfpPath VARCHAR(255)
+)
+BEGIN
+    UPDATE user
+    SET
+        pfpPath = newPfpPath,
+        updatedAt = CURRENT_TIMESTAMP
+    WHERE id = userId;
+END 
+
+DELIMITER ;
+
+DELIMITER 
+
+CREATE PROCEDURE getinfo_user(
+    IN userId INT
+)
+BEGIN
+    SELECT
+        id,
+        firstName,
+        lastName,
+        email,
+        gender,
+        birthdate,
+        pfpPath,
+        idRol,
+        status,
+        createdAt,
+        updatedAt,
+        deletedAt
+    FROM user
+    WHERE id = userId;
+END 
+
+DELIMITER ;

@@ -8,3 +8,11 @@ VALUES
 ('Emma', 'Taylor', 'emma.taylor@example.com', 'f', 'emmapass', '1989-12-19', '/images/emma.jpg', 3, 'deleted'),
 ('Oliver', 'Jones', 'oliver.jones@example.com', 'm', 'oliverpass', '1991-09-28', '/images/oliver.jpg', 1, 'active'),
 ('Sophia', 'Williams', 'sophia.williams@example.com', 'f', 'sophiapass', '1993-07-03', '/images/sophia.jpg', 2, 'active');
+
+
+CALL change_password (1, 'passchida');
+CALL change_pfp (1, 'imagenChida.png');
+CALL getinfo_user (1);
+CALL login_user ('john.doe@example.com', 'passchida');
+CALL register_user('Tania', 'Rodriguez', 'tania@gmail.com', 'm', 'passchidota', '', '2004-10-18', 3);
+CALL update_user(9, 'Tania', 'Rodriguez', 'f', '2004-10-18');
