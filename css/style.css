@@ -564,6 +564,56 @@
     min-height: 100vh;
     padding: 3rem;
 }
+
+.see-profile{
+    height: 100%;
+    min-height: 100vh;
+    padding: 2rem;
+}
+.courses-profile{
+    display: flex;
+    flex-wrap: wrap;
+}
+.user-data{
+    display: flex;
+    padding: 2rem;
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
+        --s: 140px; /* control the size*/
+        --c1: #ffffff;
+        --c2: #b9d5c5;
+        
+        --_g: #0000 52%,var(--c1) 54% 57%,#0000 59%; 
+        background: 
+         radial-gradient(farthest-side at -33.33% 50%,var(--_g)) 0 calc(var(--s)/2),
+         radial-gradient(farthest-side at 50% 133.33%,var(--_g)) calc(var(--s)/2) 0,
+         radial-gradient(farthest-side at 133.33% 50%,var(--_g)),
+         radial-gradient(farthest-side at 50% -33.33%,var(--_g)),
+         var(--c2);
+        background-size: calc(var(--s)/4.667) var(--s),var(--s) calc(var(--s)/4.667);
+      
+}
+.user-data img{
+    width: auto;
+    height: 100%;
+    max-height: 25rem;
+    margin: 2rem;
+    border: white 5px solid;
+    border-radius: 50%;
+    -moz-border-radius:75px;
+    -webkit-border-radius: 75px;
+}
+.user-data div{
+    background-color: #414f47CC;
+    color: #ffffff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(107, 123, 80, 0.3);
+    
+}
+.user-data .btn{
+    opacity: 100%;
+}
 @media only screen and (max-width: 600px) {
     .see-course-info{
         min-height: 100vh;
@@ -579,5 +629,13 @@
     .see-course-preview > video{
         min-width: 250px;
         width: 80vw;
+    }
+    .user-data{
+        flex-direction: column;
+    }
+    
+    .user-data img{
+        width: auto;
+        height: 100%;
     }
 }
