@@ -1,5 +1,5 @@
 <?php require 'partials/head.php' ?>
-<?php require 'partials/nav-admin.php' ?>
+<?php require "partials/nav.php" ?>
 <div class="kardex bg-light">
     <h2>Categories</h2>
     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCreateCat"><i class="bi bi-plus-lg"></i> Create category</button>

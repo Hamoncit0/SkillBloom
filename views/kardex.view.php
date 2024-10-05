@@ -1,5 +1,5 @@
 <?php require 'partials/head.php' ?>
-<?php require 'partials/nav-student.php' ?>
+<?php require "partials/nav.php" ?>
 <div class="kardex bg-light">
     <h2>Kardex</h2>
     <div class="kardex-filters">

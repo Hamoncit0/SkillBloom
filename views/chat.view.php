@@ -1,5 +1,5 @@
 <?php require "partials/head.php" ?>
-<?php require "partials/nav-student.php" ?>
+<?php require "partials/nav.php" ?>
 <div class="chat-page bg-light">
     <div class="user-chat-list">
         <?php require "partials/chat-user-profile.php" ?>

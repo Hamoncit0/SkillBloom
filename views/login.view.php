@@ -2,7 +2,7 @@
 <?php require "partials/nav.php" ?>
 <div class="login bg-light">
     <img src="../images/supporting-business-person-svgrepo-com.svg"/>
-    <form id="loginForm" action="">
+    <form id="loginForm" action=""  method="POST">
         <h2>Log in to continue your learning journey</h2>
         <div class="mb-3">
             <label for="loginEmail" class="form-label">Email:</label>

@@ -1,5 +1,5 @@
 <?php require "partials/head.php" ?>
-<?php require "partials/nav-student.php" ?>
+<?php require "partials/nav.php" ?>
 <div class="course-level bg-light">
     <div class="level-content-display">
         <video controls>

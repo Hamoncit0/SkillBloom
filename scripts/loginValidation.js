@@ -1,5 +1,5 @@
 document.getElementById("loginForm").addEventListener('submit', function(event){
-    event.preventDefault();
+    
     let isValid = true;
     //validaciones de nombre
     const password = document.getElementById('loginPassword');
@@ -25,7 +25,8 @@ document.getElementById("loginForm").addEventListener('submit', function(event){
     // Si todas las validaciones pasan, muestra el mensaje de éxito y limpia el formulario
     if (isValid) {
         alert('Log in successful');
-        this.reset();
         window.location.href = '/'; 
+    }else{
+        event.preventDefault();
     }
 });

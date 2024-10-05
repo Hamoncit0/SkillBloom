@@ -565,16 +565,16 @@
     padding: 3rem;
 }
 
-.see-profile{
+.see-profile-public{
     height: 100%;
     min-height: 100vh;
     padding: 2rem;
 }
-.courses-profile{
+.courses-profile-public{
     display: flex;
     flex-wrap: wrap;
 }
-.user-data{
+.user-data-public{
     display: flex;
     padding: 2rem;
     border-radius: 10px;
@@ -593,7 +593,7 @@
         background-size: calc(var(--s)/4.667) var(--s),var(--s) calc(var(--s)/4.667);
       
 }
-.user-data img{
+.user-data-public img{
     width: auto;
     height: 100%;
     max-height: 25rem;
@@ -603,7 +603,7 @@
     -moz-border-radius:75px;
     -webkit-border-radius: 75px;
 }
-.user-data div{
+.user-data-public div{
     background-color: #414f47CC;
     color: #ffffff;
     padding: 1rem;
@@ -611,9 +611,10 @@
     box-shadow: 0px 4px 8px rgba(107, 123, 80, 0.3);
     
 }
-.user-data .btn{
+.user-data-public .btn{
     opacity: 100%;
 }
+
 @media only screen and (max-width: 600px) {
     .see-course-info{
         min-height: 100vh;
@@ -630,11 +631,11 @@
         min-width: 250px;
         width: 80vw;
     }
-    .user-data{
+    .user-data-public{
         flex-direction: column;
     }
     
-    .user-data img{
+    .user-data-public img{
         width: auto;
         height: 100%;
     }

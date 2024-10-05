@@ -14,5 +14,5 @@ CALL change_password (1, 'passchida');
 CALL change_pfp (1, 'imagenChida.png');
 CALL getinfo_user (1);
 CALL login_user ('john.doe@example.com', 'passchida');
-CALL register_user('Tania', 'Rodriguez', 'tania@gmail.com', 'm', 'passchidota', '', '2004-10-18', 3);
-CALL update_user(9, 'Tania', 'Rodriguez', 'f', '2004-10-18');
+CALL register_user('Ana', 'Hernandez', 'ana@gmail.com', 'm', 'passchidota', '', '2004-10-18', 3);
+CALL update_user(9, 'Ana', 'Hernandez', 'f', '2004-10-18');

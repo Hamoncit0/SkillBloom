@@ -1,7 +1,7 @@
 <?php require 'partials/head.php' ?>
-<?php require "partials/nav-instructor.php" ?>
-<div class="see-profile bg-light">
-    <div class="user-data">
+<?php require "partials/nav.php" ?>
+<div class="see-profile-public bg-light">
+    <div class="user-data-public">
         <img class="rounded-circle img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgYN6WeHs6tndhVLPPLjId5KiXOlZ26pLLig&s" alt="">
         <div>
             <h4>First Name</h4>
@@ -12,7 +12,7 @@
             <button class="btn btn-primary">Send Message</button>
         </div>
     </div>
-    <div class="courses-profile">
+    <div class="courses-profile-public">
     <?php require "partials/course-profile.php" ?>
     <?php require "partials/course-profile.php" ?>
     <?php require "partials/course-profile.php" ?>

@@ -1,5 +1,5 @@
 <?php require "partials/head.php" ?>
-<?php require "partials/nav-instructor.php" ?>
+<?php require "partials/nav.php" ?>
 <div class="see-course-info bg-light">
     <div class="see-course-main">
         <h2>Nombre del curso</h2>

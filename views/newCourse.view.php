@@ -1,5 +1,5 @@
 <?php require "partials/head.php" ?>
-<?php require "partials/nav-instructor.php" ?>
+<?php require "partials/nav.php" ?>
 <div class="new-course  bg-light">
     <div class="bg-white new-course-container">
         <h2>Create a new course</h2>

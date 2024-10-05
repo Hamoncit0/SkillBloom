@@ -1,5 +1,5 @@
 <?php require "partials/head.php" ?>
-<?php require "partials/nav-student.php" ?>
+<?php require "partials/nav.php" ?>
 <div class="student-courses bg-light">
     <h1>Your courses</h1>
     <div class="dropdown">
