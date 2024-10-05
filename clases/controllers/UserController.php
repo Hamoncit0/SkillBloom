@@ -11,9 +11,8 @@ class UserController {
     }
 
     // Crear usuario
-    public function createUser($user) {
-        $query = "INSERT INTO user (firstName, lastName, email, gender, password, birthdate, idRol) 
-                  VALUES (:firstName, :lastName, :email, :gender, :password, :birthdate, :idRol)";
+    public function signUp($user) {
+        $query = "CALL register_user(:firstName, :lastName, :email, :gender, :password, :birthdate, :idRol)";
 
         $stmt = $this->db->prepare($query);
 
@@ -28,7 +27,7 @@ class UserController {
         return $stmt->execute();
     }
 
-    public function getUser($email, $password) {
+    public function logIn($email, $password) {
         $query = "CALL login_user(:email, :password);";
         
         $stmt = $this->db->prepare($query);

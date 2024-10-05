@@ -12,15 +12,15 @@
         </ul>
     </div>
     <div class="course-container">
-        <? require "partials/course-student.php" ?>
-        <? require "partials/course-student.php" ?>
-        <? require "partials/course-student.php" ?>
-        <? require "partials/course-student.php" ?>
-        <? require "partials/course-student.php" ?>
-        <? require "partials/course-student.php" ?>
-        <? require "partials/course-student.php" ?>
+        <?php require "partials/course-student.php" ?>
+        <?php require "partials/course-student.php" ?>
+        <?php require "partials/course-student.php" ?>
+        <?php require "partials/course-student.php" ?>
+        <?php require "partials/course-student.php" ?>
+        <?php require "partials/course-student.php" ?>
+        <?php require "partials/course-student.php" ?>
 
     </div>
 
 </div>
-<? require "partials/footer.php" ?>
+<?php require "partials/footer.php" ?>

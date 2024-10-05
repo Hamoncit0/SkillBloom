@@ -12,13 +12,13 @@
 <div class="filled-cart">
     <div class="cart-products">
 
-        <? require "partials/cartCourse.php" ?>
+        <?php require "partials/cartCourse.php" ?>
         <hr>
-        <? require "partials/cartCourse.php" ?>
+        <?php require "views/partials/cartCourse.php" ?>
         <hr>
-        <? require "partials/cartCourse.php" ?>
+        <?php require "partials/cartCourse.php" ?>
         <hr>
-        <? require "partials/cartCourse.php" ?>
+        <?php require "partials/cartCourse.php" ?>
     </div>
     <div class="checkout-cart">
         <span>Total:</span>
@@ -28,4 +28,4 @@
     </div>
 </div>
 </div>
-<? require "partials/footer.php" ?>
+<?php require "partials/footer.php" ?>

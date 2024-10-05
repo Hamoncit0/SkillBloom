@@ -40,4 +40,4 @@
         </nav>
     </div>
 </div>
-<? require "partials/footer.php" ?>
+<?php require "partials/footer.php" ?>

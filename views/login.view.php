@@ -24,4 +24,4 @@
     </form>
 </div>
 <script src="../scripts/loginValidation.js"></script>
-<? require "partials/footer.php" ?>
+<?php require "partials/footer.php" ?>

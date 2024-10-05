@@ -70,4 +70,4 @@
   document.getElementById('date-input').setAttribute('max', formattedDate);
 </script>
 <script src="../scripts/signupValidations.js"></script>
-<? require "partials/footer.php" ?>
+<?php require "partials/footer.php" ?>

@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userController = new UserController();
 
     // Verificar si el usuario existe y si la contraseña es correcta
-    $user = $userController->getUser($email, $password);
+    $user = $userController->logIn($email, $password);
 
     if ($user) {
         // Guardar el usuario en la sesión
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: /myCourses");
         exit();
     } else {
-        $loginError = "Invalid email or password.";
+        $loginError = "Invalid user.";
     }
 }
 

@@ -60,4 +60,4 @@
   </div>
 </div>
 <script src="../scripts/reviewValidations.js"></script>
-<? require "partials/footer.php" ?>
+<?php require "partials/footer.php" ?>

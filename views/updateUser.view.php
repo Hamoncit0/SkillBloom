@@ -59,4 +59,4 @@
 </div>
 
 <script src="../scripts/updateUserValidations.js"></script>
-<? require "partials/footer.php" ?>
+<?php require "partials/footer.php" ?>

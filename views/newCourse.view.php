@@ -50,4 +50,4 @@
     </div>
 </div>
 <script src="../scripts/newCourse.js"></script>
-<? require "partials/footer.php" ?>
+<?php require "partials/footer.php" ?>
