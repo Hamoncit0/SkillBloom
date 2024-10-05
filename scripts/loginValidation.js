@@ -16,7 +16,7 @@ document.getElementById("loginForm").addEventListener('submit', function(event){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(email)) {
-        emailError.textContent = 'Por favor, ingresa un correo electrónico válido.';
+        emailError.textContent = 'Input a valid email.';
         isValid = false;
     } else {
         emailError.textContent = '';
@@ -24,8 +24,7 @@ document.getElementById("loginForm").addEventListener('submit', function(event){
 
     // Si todas las validaciones pasan, muestra el mensaje de éxito y limpia el formulario
     if (isValid) {
-        alert('Log in successful');
-        window.location.href = '/'; 
+
     }else{
         event.preventDefault();
     }

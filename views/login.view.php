@@ -4,6 +4,11 @@
     <img src="../images/supporting-business-person-svgrepo-com.svg"/>
     <form id="loginForm" action=""  method="POST">
         <h2>Log in to continue your learning journey</h2>
+        <?php if (isset($loginError)): ?>
+            <div class="alert alert-danger">
+                <?php echo $loginError; ?>
+            </div>
+        <?php endif; ?>
         <div class="mb-3">
             <label for="loginEmail" class="form-label">Email:</label>
             <input class="form-control" type="email" name="loginEmail" id="loginEmail">
