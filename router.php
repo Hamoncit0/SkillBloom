@@ -30,6 +30,7 @@ $routes = [
     '/myCourses' => 'controllers/coursesInstructor.php',
     '/editCourse' => 'controllers/editCourse.php',
     '/seeProfile' => 'controllers/seeProfile.php',
+    '/logout' => 'controllers/logout.php',
 ];
 
 function abort($code = 404)

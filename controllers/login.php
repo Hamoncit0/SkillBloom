@@ -1,9 +1,4 @@
 <?php
-if (!isset($_SESSION['user'])) {
-    // Redirige si esta loggeado
-    header("Location: /");
-    exit();
-}
 
 $heading = 'Log In';
 

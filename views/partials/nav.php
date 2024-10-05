@@ -53,7 +53,7 @@ if (isset($_SESSION['user'])) {
                         <a href="/category" class="dropdown-item">Edit categories</a>
                         <div class="dropdown-divider"></div>
 
-                        <a href="/" class="dropdown-item">Log Out</a>
+                        <a href="/logout" class="dropdown-item">Log Out</a>
 
                     </div>
                 </div>
@@ -115,7 +115,7 @@ if (isset($_SESSION['user'])) {
                     <a href="/studentsPerCourse" class="dropdown-item">Enrolled Students</a>
                     <div class="dropdown-divider"></div>
 
-                    <a href="/" class="dropdown-item">Log Out</a>
+                    <a href="/logout" class="dropdown-item">Log Out</a>
 
                 </div>
             </div>
@@ -180,7 +180,7 @@ if (isset($_SESSION['user'])) {
                     <a href="/chat" class="dropdown-item">Messages</a>
                     <div class="dropdown-divider"></div>
 
-                    <a href="/" class="dropdown-item">Log Out</a>
+                    <a href="/logout" class="dropdown-item">Log Out</a>
 
                 </div>
             </div>
