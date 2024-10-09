@@ -1,48 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Level Statistics</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/estadisticas.css">
-    
-</head>
-<body>
-<header>
-            <?php include 'partials/nav.php'; ?>
-        </header>
-    <div class="stats-container">
-        <h1>Level 1: Introduction to Course</h1>
-        
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h2>Inscritos</h2>
-                <p>150</p>
-            </div>
-            <div class="stat-card">
-                <h2>Ganancias</h2>
-                <p>$2,500.00</p>
-            </div>
-            <div class="stat-card">
-                <h2>Calificación Promedio</h2>
-                <div class="circle-chart" data-percentage="90">
-                    <div class="circle-chart-inner">
-                        <span>4.5 / 5</span>
-                    </div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <h2>Comentarios</h2>
-                <ul class="comments">
-                    <li>"Excelente curso, muy recomendable."</li>
-                    <li>"Buena introducción, pero esperaba más detalle."</li>
-                    <li>"Muy claro y conciso, perfecto para principiantes."</li>
-                </ul>
-            </div>
+<?php require "partials/head.php" ?>
+<?php require "partials/nav.php" ?>
+<div class="see-course-info bg-light">
+    <div class="see-course-main">
+        <h2>Nombre del curso</h2>
+        <span>Category: Development</span>
+        <h4>Review Score:</h4>
+        <h6>4.5/5</h6>
+        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: 90%"></div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <h3>Enrolled Students: 80</h3>
+        <h4>Students who completed this course: 65</h4>
+        <h3>Total income: MX $80,000.00</h3>
+        <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate magnam magni culpa? Ipsum eaque cupiditate fugit illo earum at praesentium est excepturi quae sunt quasi exercitationem sint distinctio necessitatibus ut officiis cumque debitis, ratione animi neque eos in? Dolore consequuntur quos distinctio sit. Fuga unde ipsum temporibus non? Est, a!</p>
     </div>
-</body>
-</html>
-
+    <div class="see-course-preview bg-white" style="justify-self:right;">
+        <video controls>
+            <source src="../images/video.mp4" type="video/mp4">
+            <source src="movie.ogg" type="video/ogg">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="see-course-comments">
+        <h4>Reviews</h4>
+        <div class="comment-section">
+            <? require "partials/comment.php" ?>
+            <? require "partials/comment.php" ?>
+            <? require "partials/comment.php" ?>
+            
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<?php require "partials/footer.php" ?>

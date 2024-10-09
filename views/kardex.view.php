@@ -1,87 +1,85 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kardex de Cursos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/kardex.css"> 
-</head>
-<body>
-    <header>
-        <?php include 'partials/nav.php'; ?>
-    </header>
-
-    <div class="container">
-
-        <h1 class="title">Kardex de Cursos</h1>
-
-        <div class="filters">
-            <div>
-                <label for="date-range">Rango de Fechas:</label>
-                <input type="date" id="start-date" name="start-date">
-                <input type="date" id="end-date" name="end-date">
-            </div>
-            <div class="col-md-3 mb-3">
-                <label for="category">Categoría:</label>
-                <select id="category" name="category">
-                    <option value="all">Todas</option>
-                    <option value="categoria1">Categoría 1</option>
-                    <option value="categoria2">Categoría 2</option>
-
-                </select>
-            </div>
-            <div class="col-md-3 mb-3">
-                <label for="status">Estado del Curso:</label>
-                <select id="status" name="status">
-                    <option value="all">Todos</option>
-                    <option value="completed">Solo Cursos Terminados</option>
-                    <option value="active">Solo Cursos Activos</option>
-                </select>
-            </div>
+<?php require 'partials/head.php' ?>
+<?php require "partials/nav.php" ?>
+<div class="kardex bg-light">
+    <h2>Kardex</h2>
+    <div class="kardex-filters">
+        <div class="mb-3 kardex-select">
+            <label for="" class="form-label">Category:</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Select</option>
+                <option value="1">Development</option>
+                <option value="2">Music</option>
+                <option value="3">Bussiness</option>
+            </select>
         </div>
-
-
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Título del Curso</th>
-                        <th>Progreso</th>
-                        <th>Fecha de Inscripción</th>
-                        <th>Última Fecha de Ingreso</th>
-                        <th>Fecha de Terminación</th>
-                        <th>Estado del Curso</th>
-                        <th>Categoría</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Curso de Desarrollo Web</td>
-                        <td>75%</td>
-                        <td>01/03/2024</td>
-                        <td>15/07/2024</td>
-                        <td>30/07/2024</td>
-                        <td>Completado</td>
-                        <td>Desarrollo</td>
-                    </tr>
-                    <tr>
-                        <td>Introducción a Python</td>
-                        <td>40%</td>
-                        <td>15/05/2024</td>
-                        <td>20/07/2024</td>
-                        <td>N/A</td>
-                        <td>Activo</td>
-                        <td>Programación</td>
-                    </tr>
-
-                </tbody>
-            </table>
+        <div class="mb-3 kardex-select">
+            <label for="">State:</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Select</option>
+                <option value="1">Completed</option>
+                <option value="2">In progress</option>
+                <option value="3">Non started</option>
+            </select>
         </div>
-
-
-        <button>Exportar a PDF</button>
+        <div class="mb-3 kardex-select">
+            <label for="">Sort:</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Select</option>
+                <option value="1">A-z</option>
+                <option value="2">z-A</option>
+                <option value="3">Progress</option>
+                <option value="3">Last Time</option>
+            </select>
+        </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <div class="kadex-info">
+        <table class="table table-striped table-hover">
+            <thead class="">
+                <tr>
+                    <th scope="col">Course</th>
+                    <th scope="col">Instructor</th>
+                    <th scope="col">Progress</th>
+                    <th scope="col">Inscription date</th>
+                    <th scope="col">Last Entry date</th>
+                    <th scope="col">Completion date</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Javascript the final course</td>
+                    <td>Gandalf</td>
+                    <td>75%</td>
+                    <td>05/06/2024</td>
+                    <td>18/09/2024</td>
+                    <td>Doesnt Apply</td>
+                    <td>In progress</td>
+                    <td>Development</td>
+                </tr>
+                <tr>
+                    <td>Javascript the final course</td>
+                    <td>Gandalf</td>
+                    <td>75%</td>
+                    <td>05/06/2024</td>
+                    <td>18/09/2024</td>
+                    <td>Doesnt Apply</td>
+                    <td>In progress</td>
+                    <td>Development</td>
+                </tr>
+                <tr>
+                    <td>Javascript the final course</td>
+                    <td>Gandalf</td>
+                    <td>75%</td>
+                    <td>05/06/2024</td>
+                    <td>18/09/2024</td>
+                    <td>Doesnt Apply</td>
+                    <td>In progress</td>
+                    <td>Development</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button class="btn btn-primary">Export to pdf</button>
+</div>
+<?php require 'partials/footer.php' ?>

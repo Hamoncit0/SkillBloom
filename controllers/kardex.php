@@ -1,5 +1,6 @@
 <?php
 
-$heading = "kardex";
+$heading = 'Kardex';
+
 
 require 'views/kardex.view.php';

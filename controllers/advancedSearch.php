@@ -1,5 +1,6 @@
 <?php
 
-$heading = "search";
+$heading = 'Advanced Search';
+
 
 require 'views/advancedSearch.view.php';

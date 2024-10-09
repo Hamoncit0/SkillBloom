@@ -1,51 +1,84 @@
-
-<?php require 'partials/head.php' ?>
-<body>
-    <div class="container mt-5">
-        <div class="register-container border p-4 shadow-sm rounded">
-            <h2 class="text-center mb-4">Registro de Usuario</h2>
-            <form action="procesar_registro.php" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <input type="text" name="nombre_completo" class="form-control" placeholder="Nombre completo" required>
+<?php require "partials/head.php" ?>
+<?php require "partials/nav.php" ?>
+<div class="signup bg-light">
+    <img src="../images/supporting-business-person-diagonal-svgrepo-com.svg" alt="">
+    <form id="signupForm" action="" method="POST">
+        <h2>Sign up and start learning</h2>
+        <?php if (isset($signupStatus)): ?>
+            <?php if ($registered): ?>
+                <div class="alert alert-success">
+                    <?php echo $signupStatus; ?>
                 </div>
-                <div class="mb-3">
-                    <select name="genero" class="form-select" required>
-                        <option value="" disabled selected>Género</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
-                        <option value="otro">Otro</option>
-                    </select>
+            <?php else: ?>
+                <div class="alert alert-danger">
+                    <?php echo $signupStatus; ?>
                 </div>
-                <div class="mb-3">
-                    <input type="date" name="fecha_nacimiento" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <input type="file" name="avatar" class="form-control" accept="image/*" required>
-                </div>
-                <div class="mb-3">
-                    <input type="email" name="email" class="form-control" placeholder="Correo electrónico" required>
-                </div>
-                <div class="mb-3">
-                    <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
-                </div>
-                <div class="mb-3">
-                    <input type="password" name="confirm_password" class="form-control" placeholder="Confirmar contraseña" required>
-                </div>
-                <div class="mb-3">
-                    <select name="rol" class="form-select" required>
-                        <option value="" disabled selected>Selecciona tu rol</option>
-                        <option value="alumno">Alumno</option>
-                        <option value="instructor">Instructor</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Registrarse</button>
-            </form>
-            <div class="links">
-                <a href="/">¿Ya tienes una cuenta? Inicia Sesión</a>
-            </div>
+            <?php endif; ?>
+        <?php endif; ?>
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name:</label>
+            <input class="form-control" type="text" name="firstName" id="firstNameSU">
+            <small class="text-danger" id="firstNameError"></small>
         </div>
-    </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name:</label>
+            <input class="form-control" type="text" name="lastName" id="lastNameSU">
+            <small class="text-danger" id="lastNameError"></small>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input class="form-control" type="email" name="email" id="emailSU">
+            <small class="text-danger" id="emailError"></small>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input class="form-control" type="password" name="password" id="passwordSU"> 
+            <small class="text-danger" id="passwordError"></small>
+        </div>
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm password:</label>
+            <input class="form-control" type="password" name="confirmPassword" id="confirmPasswordSU">
+            <small class="text-danger" id="confirmPasswordError"></small>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Birth date:</label>
+            <input class="form-control" type="date" name="birthdate" min="today" id="date-input">
+            <small class="text-danger" id="date-inputError"></small>
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Gender:</label>
+            <select class="form-select" aria-label="Default select example" id="genderSU" name="gender">
+                <option value="" disabled selected>Select your gender...</option>
+                <option value="f">Female</option>
+                <option value="m">Male</option>
+                <option value="o">Other</option>
+            </select>
+            <small class="text-danger" id="genderError"></small> 
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Rol:</label>
+            <select class="form-select" aria-label="Default select example" id="rolSU" name="rol">
+                <option value="" disabled selected>Select your rol...</option>
+                <option value="3">Student</option>
+                <option value="2">Instructor</option>
+            </select>
+            <small class="text-danger" id="rolError"></small> 
+        </div>
+        <button type="submit" class="btn btn-primary fs-4 fw-5 text-light">Sign up</button>
+        <div class="smallLogin">You already have an account? <a href="/login">Log in</a></div>
+    </form>
+</div>
+<script>
+  // Obtener la fecha de ayer
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+  // Formatear la fecha a YYYY-MM-DD
+  const formattedDate = yesterday.toISOString().split('T')[0];
+
+  // Asignar la fecha máxima al input
+  document.getElementById('date-input').setAttribute('max', formattedDate);
+</script>
+<script src="../scripts/signupValidations.js"></script>
+<?php require "partials/footer.php" ?>

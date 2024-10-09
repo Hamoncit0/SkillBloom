@@ -1,5 +1,6 @@
 <?php
 
-$heading = "salesSummary";
+$heading = 'Sales Summary';
+
 
 require 'views/salesSummary.view.php';
