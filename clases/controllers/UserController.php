@@ -12,7 +12,7 @@ class UserController {
 
     // Crear usuario
     public function signUp($user) {
-        $query = "CALL register_user(:firstName, :lastName, :email, :gender, :password, :birthdate, :idRol)";
+        $query = "CALL register_user(:firstName, :lastName, :email, :gender, :password,  null, :birthdate, :idRol)";
 
         $stmt = $this->db->prepare($query);
 
@@ -24,7 +24,13 @@ class UserController {
         $stmt->bindParam(':birthdate', $user->birthdate);
         $stmt->bindParam(':idRol', $user->idRol);
 
-        return $stmt->execute();
+        try {
+            return $stmt->execute();  // true si fue exitoso, false si falló
+        } catch (PDOException $e) {
+            // Loguea el error o maneja la excepción según sea necesario
+            error_log("Error al registrar usuario: " . $e->getMessage());
+            return false;
+        }
     }
 
     public function logIn($email, $password) {

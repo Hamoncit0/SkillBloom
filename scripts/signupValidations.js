@@ -1,5 +1,4 @@
 document.getElementById("signupForm").addEventListener('submit', function(event){
-    event.preventDefault();
     let isValid = true;
     //validaciones de nombre
     const firstName = document.getElementById('firstNameSU');
@@ -95,8 +94,7 @@ document.getElementById("signupForm").addEventListener('submit', function(event)
 
     // Si todas las validaciones pasan, muestra el mensaje de éxito y limpia el formulario
     if (isValid) {
-        alert('User registered successfully');
-        this.reset();
-        window.location.href = '/'; 
+    }else{
+        event.preventDefault();
     }
 });

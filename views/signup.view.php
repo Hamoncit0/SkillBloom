@@ -2,8 +2,19 @@
 <?php require "partials/nav.php" ?>
 <div class="signup bg-light">
     <img src="../images/supporting-business-person-diagonal-svgrepo-com.svg" alt="">
-    <form id="signupForm" action="">
+    <form id="signupForm" action="" method="POST">
         <h2>Sign up and start learning</h2>
+        <?php if (isset($signupStatus)): ?>
+            <?php if ($registered): ?>
+                <div class="alert alert-success">
+                    <?php echo $signupStatus; ?>
+                </div>
+            <?php else: ?>
+                <div class="alert alert-danger">
+                    <?php echo $signupStatus; ?>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
         <div class="mb-3">
             <label for="firstName" class="form-label">First Name:</label>
             <input class="form-control" type="text" name="firstName" id="firstNameSU">
@@ -36,20 +47,20 @@
         </div>
         <div class="mb-3">
             <label for="" class="form-label">Gender:</label>
-            <select class="form-select" aria-label="Default select example" id="genderSU">
+            <select class="form-select" aria-label="Default select example" id="genderSU" name="gender">
                 <option value="" disabled selected>Select your gender...</option>
-                <option value="female">Female</option>
-                <option value="male">Male</option>
-                <option value="other">Other</option>
+                <option value="f">Female</option>
+                <option value="m">Male</option>
+                <option value="o">Other</option>
             </select>
             <small class="text-danger" id="genderError"></small> 
         </div>
         <div class="mb-3">
             <label for="" class="form-label">Rol:</label>
-            <select class="form-select" aria-label="Default select example" id="rolSU">
+            <select class="form-select" aria-label="Default select example" id="rolSU" name="rol">
                 <option value="" disabled selected>Select your rol...</option>
-                <option value="student">Student</option>
-                <option value="instructor">Instructor</option>
+                <option value="3">Student</option>
+                <option value="2">Instructor</option>
             </select>
             <small class="text-danger" id="rolError"></small> 
         </div>

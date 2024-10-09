@@ -18,7 +18,7 @@ CREATE TABLE user (
     password VARCHAR(20) NOT NULL,
     birthdate DATE NOT NULL,
     pfpPath VARCHAR(255),
-    idRol INT,
+    idRol INT NOT NULL,
     status ENUM(
         'blocked',
         'active',

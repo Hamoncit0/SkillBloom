@@ -37,9 +37,9 @@
     <div class="see-course-comments">
         <h4>Comment Section</h4>
         <div class="comment-section">
-            <? require "partials/comment.php" ?>
-            <? require "partials/comment.php" ?>
-            <? require "partials/comment.php" ?>
+            <?php require "partials/comment.php" ?>
+            <?php require "partials/comment.php" ?>
+            <?php require "partials/comment.php" ?>
             
         </div>
         <nav aria-label="Page navigation example">
