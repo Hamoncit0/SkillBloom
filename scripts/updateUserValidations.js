@@ -1,6 +1,6 @@
 
 document.getElementById("updateUserInfo").addEventListener('submit', function(event){
-    event.preventDefault();
+
     let isValid = true;
     const updateSuccess =  document.getElementById("updateSuccess");
     //validaciones de nombre
@@ -72,10 +72,12 @@ document.getElementById("updateUserInfo").addEventListener('submit', function(ev
      if (isValid) {
          alert('User updated successfully!');
          updateSuccess.textContent = 'User updated successfully!!';
+     }else{
+        event.preventDefault();
      }
 });
 document.getElementById("updateUserPassword").addEventListener('submit', function(event){
-    event.preventDefault();
+
     let isValid = true;
     const updateSuccess =  document.getElementById("passwordSuccess");
 
@@ -106,5 +108,7 @@ document.getElementById("updateUserPassword").addEventListener('submit', functio
         alert('Password changed successfully');
         updateSuccess.textContent = 'Password changed successfully!!';
         this.reset();
+    }else{
+        event.preventDefault();
     }
 });
