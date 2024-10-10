@@ -45,12 +45,12 @@ class UserController {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Verificar si el resultado contiene el id del usuario y si está activo
-        if (isset($result['id']) && $result['status'] === 'activo') {
+        if (isset($result['userId']) && $result['status'] === 'active') {
             // El usuario está activo, procedemos a obtener la información completa
             $query = "CALL getinfo_user(:id);";
         
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':id', $result['id']);
+            $stmt->bindParam(':id', $result['userId']);
 
             $stmt->execute();
             $userInfo = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -75,7 +75,7 @@ class UserController {
             } else {
                 return null;  // Error al obtener la información completa del usuario
             }
-        } elseif (isset($result['status']) && $result['status'] === 'inactivo') {
+        } elseif (isset($result['status']) && $result['status'] === 'blocked') {
             // El usuario está inactivo, devolver el mensaje o manejarlo como prefieras
             return 'Usuario inactivo';
         } else {
