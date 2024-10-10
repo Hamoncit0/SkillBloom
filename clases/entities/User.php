@@ -14,8 +14,7 @@ class User {
     public $createdAt;
     public $updatedAt;
     public $deletedAt;
- 
-   
+
     //constructor signup
     function __construct($firstName = null, $lastName = null, $email = null, $password = null, $birthdate = null, $gender = null, $rol = null) {
         $this->firstName = $firstName;

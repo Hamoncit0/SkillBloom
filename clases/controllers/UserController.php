@@ -53,7 +53,7 @@ class UserController {
        
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':id', $result['userId']);
- 
+
             $stmt->execute();
             $userInfo = $stmt->fetch(PDO::FETCH_ASSOC);
  
