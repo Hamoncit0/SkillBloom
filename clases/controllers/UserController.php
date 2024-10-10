@@ -95,20 +95,34 @@ class UserController {
     }
 
     public function updateUser($user) {
-        $query = "UPDATE users SET firstName = :firstName, lastName = :lastName, email = :email, gender = :gender, birthdate = :birthdate WHERE id = :id";
+        $query = "CALL update_user(:id, :firstName, :lastName, :gender, :birthdate)";
         $stmt = $this->db->prepare($query);
         
         $stmt->bindParam(':id', $user->id);
         $stmt->bindParam(':firstName', $user->firstName);
         $stmt->bindParam(':lastName', $user->lastName);
-        $stmt->bindParam(':email', $user->email);
         $stmt->bindParam(':gender', $user->gender);
         $stmt->bindParam(':birthdate', $user->birthdate);
         
         if ($stmt->execute()) {
-            echo 'Actualización exitosa';
+            return true;
         } else {
             var_dump($stmt->errorInfo()); // Mostrar errores
+            return false; 
+        }
+    }
+    public function changePassword($id, $password){
+        $query = "CALL change_password(:id, :password)";
+        $stmt = $this->db->prepare($query);
+        
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':password', $password);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            var_dump($stmt->errorInfo()); // Mostrar errores
+            return false; 
         }
     }
 }

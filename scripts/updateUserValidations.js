@@ -70,8 +70,6 @@ document.getElementById("updateUserInfo").addEventListener('submit', function(ev
  
      // Si todas las validaciones pasan, muestra el mensaje de éxito y limpia el formulario
      if (isValid) {
-         alert('User updated successfully!');
-         updateSuccess.textContent = 'User updated successfully!!';
      }else{
         event.preventDefault();
      }
@@ -105,9 +103,6 @@ document.getElementById("updateUserPassword").addEventListener('submit', functio
     }
     // Si todas las validaciones pasan, muestra el mensaje de éxito y limpia el formulario
     if (isValid) {
-        alert('Password changed successfully');
-        updateSuccess.textContent = 'Password changed successfully!!';
-        this.reset();
     }else{
         event.preventDefault();
     }

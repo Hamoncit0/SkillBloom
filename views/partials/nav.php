@@ -1,6 +1,7 @@
 <?php
-session_start(); // Inicia la sesión para acceder a los datos
-
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 if (isset($_SESSION['user'])) {
     $userRole = $_SESSION['user_role']; // Recupera el rol del usuario
 
