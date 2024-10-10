@@ -1,6 +1,6 @@
 <?php
 class User {
-
+ 
     public $id;
     public $firstName;
     public $lastName;
@@ -14,9 +14,10 @@ class User {
     public $createdAt;
     public $updatedAt;
     public $deletedAt;
-
+ 
+   
     //constructor signup
-    function __construct($firstName, $lastName, $email, $password, $birthdate, $gender, $rol) {
+    function __construct($firstName = null, $lastName = null, $email = null, $password = null, $birthdate = null, $gender = null, $rol = null) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
@@ -25,6 +26,6 @@ class User {
         $this->gender = $gender;
         $this->idRol = $rol;
     }
-
+ 
 }
 ?>

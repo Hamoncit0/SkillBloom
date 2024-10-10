@@ -9,10 +9,10 @@ VALUES
 ('Oliver', 'Jones', 'oliver.jones@example.com', 'm', 'oliverpass', '1991-09-28', '/images/oliver.jpg', 1, 'active'),
 ('Sophia', 'Williams', 'sophia.williams@example.com', 'f', 'sophiapass', '1993-07-03', '/images/sophia.jpg', 2, 'active');
 
-
+SELECT* FROM user;
 CALL change_password (1, 'passchida');
 CALL change_pfp (1, 'imagenChida.png');
 CALL getinfo_user (1);
-CALL login_user ('john.doe@example.com', 'passchida');
+CALL login_user ('jane.smith@example.com', 'password456');
 CALL register_user('Ana', 'Hernandez', 'ana@gmail.com', 'm', 'passchidota', '', '2004-10-18', 3);
 CALL update_user(9, 'Ana', 'Hernandez', 'f', '2004-10-18');

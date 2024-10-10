@@ -3,7 +3,7 @@ class Database {
     private $host = "localhost:3306";
     private $db_name = "db_skillbloom";
     private $username = "root";
-    private $password = "root";
+    private $password = "AAAaaa12*";
     public $conn;
 
     public function getConnection() {
