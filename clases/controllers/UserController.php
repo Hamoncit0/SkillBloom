@@ -12,7 +12,7 @@ class UserController {
  
     // Crear usuario
     public function signUp($user) {
-        $query = "CALL register_user(:firstName, :lastName, :email, :gender, :password,  null, :birthdate, :idRol)";
+        $query = "CALL register_user(:firstName, :lastName, :email, :gender, :password, :birthdate, :idRol)";
  
         $stmt = $this->db->prepare($query);
  
@@ -66,7 +66,7 @@ class UserController {
                 $newUser->email = $userInfo['email'];
                 $newUser->gender = $userInfo['gender'];
                 $newUser->birthdate = $userInfo['birthdate'];
-                $newUser->pfpPath = $userInfo['pfpPath'];
+                $newUser->pfpPath = $this->convertBlobToBase64($userInfo['pfp']);
                 $newUser->idRol = $userInfo['idRol'];
                 $newUser->status = $userInfo['status'];
                 $newUser->createdAt = $userInfo['createdAt'];
@@ -91,7 +91,27 @@ class UserController {
         $stmt->bindParam(':id', $id);
     
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC); // Retorna los datos del usuario
+        $userInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($userInfo){
+            $newUser = new User();
+            $newUser->id = $userInfo['id'];
+            $newUser->firstName = $userInfo['firstName'];
+            $newUser->lastName = $userInfo['lastName'];
+            $newUser->email = $userInfo['email'];
+            $newUser->gender = $userInfo['gender'];
+            $newUser->birthdate = $userInfo['birthdate'];
+            $newUser->pfpPath = $this->convertBlobToBase64($userInfo['pfp']);
+            $newUser->idRol = $userInfo['idRol'];
+            $newUser->status = $userInfo['status'];
+            $newUser->createdAt = $userInfo['createdAt'];
+            $newUser->updatedAt = $userInfo['updatedAt'];
+            $newUser->deletedAt = $userInfo['deletedAt'];
+ 
+            return $newUser;// Retorna los datos del usuario
+        }
+        else{
+            return null;
+        }
     }
 
     public function updateUser($user) {
@@ -124,6 +144,33 @@ class UserController {
             var_dump($stmt->errorInfo()); // Mostrar errores
             return false; 
         }
+    }
+
+    public function changePfp($id, $picture){
+        // Decodificar el Base64 a binario
+        $binaryImage = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $picture));
+        
+        $query = "CALL change_pfp(:id, :picture)";
+        $stmt = $this->db->prepare($query);
+        
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':picture', $binaryImage, PDO::PARAM_LOB);  // Usamos PARAM_LOB para datos binarios
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            var_dump($stmt->errorInfo()); // Mostrar errores
+            return false; 
+        }
+        return true;
+    }
+
+    // Función para convertir Blob a Base64
+    private function convertBlobToBase64($blob) {
+        if ($blob) {
+            return 'data:image/jpeg;base64,' . base64_encode($blob); // Ajusta el tipo MIME según sea necesario
+        }
+        return null;
     }
 }
 ?>

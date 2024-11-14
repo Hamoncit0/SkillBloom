@@ -17,7 +17,7 @@ CREATE TABLE user (
     gender ENUM('m', 'f', 'o') NOT NULL,
     password VARCHAR(20) NOT NULL,
     birthdate DATE NOT NULL,
-    pfpPath VARCHAR(255),
+    pfp BLOB, -- cambiar a blob D:
     idRol INT NOT NULL,
     status ENUM(
         'blocked',
@@ -43,7 +43,7 @@ CREATE TABLE course (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
-    previewImagePath VARCHAR(255) NOT NULL,
+    previewImage BLOB NOT NULL,
     previewVideoPath VARCHAR(255) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

@@ -51,6 +51,23 @@ if (isset($_SESSION['user'])) {
 
             }
         }
+        if (isset($_POST['profilePicture'])) {
+            $base64Image = $_POST['profilePicture'];
+            
+            // Actualizar la ruta en la base de datos
+            $changedPfp = $userController->changePfp($userId, $base64Image);
+        
+            if($changedPfp){
+                $pfpStatus = "Updated successfully!"; 
+                $user = $userController->getUserById($userId);
+                $_SESSION['user']->pfpPath = $user->pfpPath;
+                $_SESSION['user_avatar']= $user->pfpPath;
+            }else{
+                $pfpStatus = "Couldn't be updated.";    
+
+            }
+        }
+        
     }
 
     // Volver a obtener la información actualizada del usuario

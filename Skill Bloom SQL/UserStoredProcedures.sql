@@ -6,13 +6,12 @@ CREATE PROCEDURE register_user (
     IN p_email VARCHAR(50),
     IN p_gender ENUM('m', 'f', 'o'),
     IN p_password VARCHAR(20),
-    IN pfpPath VARCHAR(255),
     IN p_birthdate DATE,
     IN p_idRol INT
 )
 BEGIN
-    INSERT INTO user (firstName, lastName, email, gender, password, birthdate, pfpPath, idRol)
-    VALUES (p_firstName, p_lastName, p_email, p_gender, p_password, p_birthdate, pfpPath, p_idRol);
+    INSERT INTO user (firstName, lastName, email, gender, password, birthdate, idRol)
+    VALUES (p_firstName, p_lastName, p_email, p_gender, p_password, p_birthdate, p_idRol);
 END
 
 DELIMITER;
@@ -97,12 +96,12 @@ DELIMITER
 
 CREATE PROCEDURE change_pfp(
     IN userId INT,
-    IN newPfpPath VARCHAR(255)
+    IN newPfpPath BLOB
 )
 BEGIN
     UPDATE user
     SET
-        pfpPath = newPfpPath,
+        pfp = newPfpPath,
         updatedAt = CURRENT_TIMESTAMP
     WHERE id = userId;
 END 
@@ -122,7 +121,7 @@ BEGIN
         email,
         gender,
         birthdate,
-        pfpPath,
+        pfp,
         idRol,
         status,
         createdAt,

@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 if (isset($_SESSION['user'])) {
     $userRole = $_SESSION['user_role']; // Recupera el rol del usuario
+    $userAvatar = isset($_SESSION['user_avatar']) ? $_SESSION['user_avatar'] : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgYN6WeHs6tndhVLPPLjId5KiXOlZ26pLLig&s'; // Asegúrate de obtener la URL de la imagen
 
     if ($userRole == 1) //ADMINISTRADOR
     {
@@ -42,9 +43,8 @@ if (isset($_SESSION['user'])) {
               </li>
               <li>
                 <div class="dropdown">
-                    
                     <a data-bs="dropdown" id="navAvatarDropdown" role="button" href="/editProfile">
-                        <img class="rounded-circle nav-avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgYN6WeHs6tndhVLPPLjId5KiXOlZ26pLLig&s" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle nav-avatar" src="' . $userAvatar . '" alt="User Avatar" style="width: 40px; height: 40px;">
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navAvatarDropdown">
                         <a href="/editProfile" class="dropdown-item">Edit Your Profile</a>
@@ -53,9 +53,7 @@ if (isset($_SESSION['user'])) {
                         <a href="/courseList" class="dropdown-item">Course list</a>
                         <a href="/category" class="dropdown-item">Edit categories</a>
                         <div class="dropdown-divider"></div>
-
                         <a href="/logout" class="dropdown-item">Log Out</a>
-
                     </div>
                 </div>
               </li>
@@ -104,9 +102,8 @@ if (isset($_SESSION['user'])) {
           </li>
           <li>
             <div class="dropdown">
-                
                 <a data-bs="dropdown" id="navAvatarDropdown" role="button" href="/editProfile">
-                    <img class="rounded-circle nav-avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgYN6WeHs6tndhVLPPLjId5KiXOlZ26pLLig&s" alt="" style="width: 40px; height: 40px;">
+                    <img class="rounded-circle nav-avatar" src="' . $userAvatar . '" alt="User Avatar" style="width: 40px; height: 40px;">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navAvatarDropdown">
                     <a href="/editProfile" class="dropdown-item">Edit Your Profile</a>
@@ -115,9 +112,7 @@ if (isset($_SESSION['user'])) {
                     <a href="/myCourses" class="dropdown-item">My Courses</a>
                     <a href="/studentsPerCourse" class="dropdown-item">Enrolled Students</a>
                     <div class="dropdown-divider"></div>
-
                     <a href="/logout" class="dropdown-item">Log Out</a>
-
                 </div>
             </div>
           </li>
@@ -126,7 +121,6 @@ if (isset($_SESSION['user'])) {
     </div>
   </nav>
       ';
-
     }
     else if($userRole == 3) //ESTUDIANTE
     {
@@ -171,28 +165,25 @@ if (isset($_SESSION['user'])) {
           </li>
           <li>
             <div class="dropdown">
-                
                 <a data-bs="dropdown" id="navAvatarDropdown" role="button" href="/editProfile">
-                    <img class="rounded-circle nav-avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgYN6WeHs6tndhVLPPLjId5KiXOlZ26pLLig&s" alt="" style="width: 40px; height: 40px;">
+                    <img class="rounded-circle nav-avatar" src="' . $userAvatar . '" alt="User Avatar" style="width: 40px; height: 40px;">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navAvatarDropdown">
                     <a href="/editProfile" class="dropdown-item">Edit Your Profile</a>
-                    <a href="/kardex" class="dropdown-item">Kardex</a>
                     <a href="/chat" class="dropdown-item">Messages</a>
+                    <a href="/userList" class="dropdown-item">User List</a>
+                    <a href="/cart" class="dropdown-item">Shopping Cart</a>
+                    <a href="/courseList" class="dropdown-item">Courses</a>
                     <div class="dropdown-divider"></div>
-
                     <a href="/logout" class="dropdown-item">Log Out</a>
-
                 </div>
             </div>
           </li>
         </ul>
       </div>
     </div>
-  </nav>
-       ';
+  </nav>';
     }
-    
 }else //NO ESTA LOGGEADO
 {
   
@@ -244,7 +235,4 @@ if (isset($_SESSION['user'])) {
     </nav>';
 
 }
-
-
-
 ?>

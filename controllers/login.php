@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_start();
         $_SESSION['user'] = $user;
         $_SESSION['user_role'] = $user->idRol; 
-
+        $_SESSION['user_avatar']= $user->pfpPath;
         // Redireccionar a la página principal
         header("Location: /myCourses");
         exit();
