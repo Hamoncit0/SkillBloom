@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_role'] = $user->idRol; 
         $_SESSION['user_avatar']= $user->pfpPath;
         // Redireccionar a la página principal
-        header("Location: /myCourses");
+        header("Location: /");
         exit();
     } else {
         $loginError = "Invalid user.";

@@ -16,3 +16,7 @@ CALL getinfo_user (1);
 CALL login_user ('jane.smith@example.com', 'password456');
 CALL register_user('Ana', 'Hernandez', 'ana@gmail.com', 'm', 'passchidota', '', '2004-10-18', 3);
 CALL update_user(9, 'Ana', 'Hernandez', 'f', '2004-10-18');
+
+SELECT * FROM v_users;
+
+CALL change_userStatus(9, 'active');

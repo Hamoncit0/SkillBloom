@@ -1,40 +1,60 @@
 <?php require 'partials/head.php' ?>
 <?php require "partials/nav.php" ?>
+<?php
+    // Función para mapear el valor de género
+    function mapRol($rol) {
+        switch ($rol) {
+            case 1:
+                return 'Administrator';
+            case 2:
+                return 'Instructor';
+            case 3:
+                return 'Student';
+            default:
+                return 'No especificado'; // Para manejar valores inesperados
+        }
+    }
+    ?>
 <div class="user-list bg-light">
     <h2>User List</h2>
-    <div class="kardex-filters">
-        <div class="mb-3 kardex-select">
-            <label for="" class="form-label">Status:</label>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Select</option>
-                <option value="1">Active</option>
-                <option value="2">Inactive</option>
-                <option value="3">Blocked</option>
-            </select>
+    <form method="GET"> <!-- Cambié el formulario para enviar los datos con GET -->
+        <div class="kardex-filters">
+            <div class="mb-3 kardex-select">
+                <label for="" class="form-label">Status:</label>
+                <select name="status" class="form-select" aria-label="Default select example">
+                    <option value="">Select</option>
+                    <option value="active" <?php echo isset($_GET['status']) && $_GET['status'] == 'active' ? 'selected' : ''; ?>>Active</option>
+                    <option value="inactive" <?php echo isset($_GET['status']) && $_GET['status'] == 'inactive' ? 'selected' : ''; ?>>Inactive</option>
+                    <option value="blocked" <?php echo isset($_GET['status']) && $_GET['status'] == 'blocked' ? 'selected' : ''; ?>>Blocked</option>
+                </select>
+            </div>
+            <div class="mb-3 kardex-select">
+                <label for="">Rol:</label>
+                <select name="role" class="form-select" aria-label="Default select example">
+                    <option value="">Select</option>
+                    <option value="1" <?php echo isset($_GET['role']) && $_GET['role'] == 1 ? 'selected' : ''; ?>>Student</option>
+                    <option value="2" <?php echo isset($_GET['role']) && $_GET['role'] == 2 ? 'selected' : ''; ?>>Administrator</option>
+                    <option value="3" <?php echo isset($_GET['role']) && $_GET['role'] == 3 ? 'selected' : ''; ?>>Instructor</option>
+                </select>
+            </div>
+            <div class="mb-3 kardex-select">
+                <label for="">Sort:</label>
+                <select name="sort" class="form-select" aria-label="Default select example">
+                    <option value="">Select</option>
+                    <option value="1" <?php echo isset($_GET['sort']) && $_GET['sort'] == '1' ? 'selected' : ''; ?>>A-z</option>
+                    <option value="2" <?php echo isset($_GET['sort']) && $_GET['sort'] == '2' ? 'selected' : ''; ?>>z-A</option>
+                    <option value="3" <?php echo isset($_GET['sort']) && $_GET['sort'] == '3' ? 'selected' : ''; ?>>Last Entry Date</option>
+                </select>
+            </div>
+            <div class="mb-3 kardex-select">
+                <label for="" style="width:100%; margin-right: -20px">Search by email:</label>
+                <input type="text" name="email" class="form-control" value="<?php echo isset($_GET['email']) ? $_GET['email'] : ''; ?>">
+            </div>
+            <div class="mb-3 kardex-select">  
+              <button type="submit" class="btn btn-primary">Apply Filters</button>
+            </div>
         </div>
-        <div class="mb-3 kardex-select">
-            <label for="">Rol:</label>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Select</option>
-                <option value="1">Student</option>
-                <option value="2">Administrator</option>
-                <option value="3">Instructor</option>
-            </select>
-        </div>
-        <div class="mb-3 kardex-select">
-            <label for="">Sort:</label>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Select</option>
-                <option value="1">A-z</option>
-                <option value="2">z-A</option>
-                <option value="3">Last Entry Date</option>
-            </select>
-        </div>
-        <div class="mb-3 kardex-select">
-            <label for="" style="width:100%; margin-right: -20px">Search by email:</label>
-            <input type="text" class="form-control">
-        </div>
-    </div>
+    </form>
     <div class="user-list-table">
         <table class="table table-striped table-hover">
             <thead class="">
@@ -47,36 +67,27 @@
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
+            <?php if (!empty($usersList)): ?>
             <tbody>
-                <tr>
-                    <td>gandalf@gmail.com</td>
-                    <td>Active</td>
-                    <td>05/06/2024</td>
-                    <td>18/09/2024</td>
-                    <td>Instructor</td>
-                    <td>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalBan"  class="btn btn-danger" style="margin-right: 10px"><i class="bi bi-ban"></i></a>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalUnban"  class="btn btn-success"><i class="bi bi-check-circle"></i></a>
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td>frodo@gmail.com</td>
-                    <td>Active</td>
-                    <td>05/06/2024</td>
-                    <td>18/09/2024</td>
-                    <td>Student</td>
-                    <td><a class="btn btn-danger" style="margin-right: 10px"><i class="bi bi-ban"></i></a><a class="btn btn-success"><i class="bi bi-check-circle"></i></a></td>
-                </tr>
-                <tr>
-                    <td>galadriel@gmail.com</td>
-                    <td>Active</td>
-                    <td>05/06/2024</td>
-                    <td>18/09/2024</td>
-                    <td>Administrator</td>
-                    <td><a class="btn btn-danger" style="margin-right: 10px"><i class="bi bi-ban"></i></a><a class="btn btn-success"><i class="bi bi-check-circle"></i></a></td>
-                </tr>
+              <?php foreach ($usersList as $user): ?>
+                  <tr>
+                      <td><?php echo htmlspecialchars($user->email); ?></td>
+                      <td><?php echo htmlspecialchars($user->status); ?></td>
+                      <td><?php echo htmlspecialchars($user->createdAt); ?></td>
+                      <td><?php echo htmlspecialchars($user->updatedAt ?: 'none'); ?></td>
+                      <td><?php echo htmlspecialchars(mapRol($user->idRol)); ?></td>
+                      <td>
+                          <a type="button" data-bs-toggle="modal" data-bs-target="#modalBan" data-id="<?php echo $user->id; ?>" data-action="ban" class="btn btn-danger" style="margin-right: 10px"><i class="bi bi-ban"></i></a>
+                          <a type="button" data-bs-toggle="modal" data-bs-target="#modalUnban" data-id="<?php echo $user->id; ?>" data-action="unban"  class="btn btn-success"><i class="bi bi-check-circle"></i></a>
+                      </td>
+                      
+                  </tr>
+              <?php endforeach; ?>
+                
             </tbody>
+          <?php else: ?>
+              <p>No hay usuarios disponibles.</p>
+          <?php endif; ?>
         </table>
     </div>
 </div>
@@ -94,7 +105,11 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary">Yes, continue</button>
+        <form id="banForm" method="POST">
+            <input type="hidden" name="userId" id="userId" />
+            <input type="hidden" name="action" id="action" value="ban" />
+            <button type="submit" class="btn btn-primary">Yes, continue</button>
+        </form>
       </div>
     </div>
   </div>
@@ -112,8 +127,30 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary">Yes, continue</button>
+        <form id="unbanForm" method="POST">
+            <input type="hidden" name="userId" id="userIdUnban" />
+            <input type="hidden" name="action" id="actionUnban" value="unban" />
+            <button type="submit" class="btn btn-primary">Yes, continue</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
+<script>
+    // Para capturar el evento de clic y rellenar el formulario
+    var banButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
+    banButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var userId = this.getAttribute('data-id'); // Obtener el ID del usuario
+            var action = this.getAttribute('data-action'); // Obtener la acción (ban/unban)
+
+            if (action === "ban") {
+                document.getElementById('userId').value = userId; // Rellenar el ID en el formulario de ban
+                document.getElementById('action').value = action; // Rellenar la acción de ban
+            } else if (action === "unban") {
+                document.getElementById('userIdUnban').value = userId; // Rellenar el ID en el formulario de unban
+                document.getElementById('actionUnban').value = action; // Rellenar la acción de unban
+            }
+        });
+    });
+</script>

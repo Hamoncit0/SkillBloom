@@ -113,6 +113,111 @@ class UserController {
             return null;
         }
     }
+    public function getAllUsers() {
+        // Consulta para obtener todos los usuarios
+        $query = "SELECT * FROM v_users";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+    
+        // Array para almacenar los usuarios
+        $users = [];
+    
+        // Recuperar los datos de los usuarios y almacenarlos en el array
+        // Recuperar los datos de los usuarios y almacenarlos en el array
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            // Crear un nuevo objeto User con los datos de la fila
+            $users[] = new User(
+                $row['firstName'],
+                $row['lastName'],
+                $row['email'],
+                '',
+                $row['birthdate'],
+                $row['gender'],
+                $row['id'],
+                $row['idRol'],
+                $row['pfp'],
+                $row['status'],
+                $row['createdAt'],
+                $row['updatedAt'],
+                $row['deletedAt']
+            );
+        }
+    
+        return $users;
+    }
+
+    public function getFilteredUsers($status, $role, $sort, $email) {
+        // Construir la consulta con filtros dinámicos
+        $query = "SELECT * FROM v_users WHERE 1";
+        
+        if ($status) {
+            $query .= " AND status = :status";
+        }
+        if ($role) {
+            $query .= " AND idRol = :role";
+        }
+        if ($email) {
+            $query .= " AND email LIKE :email";
+        }
+        
+        // Ordenar los resultados
+        if ($sort) {
+            switch ($sort) {
+                case '1':
+                    $query .= " ORDER BY email ASC";  // A-z
+                    break;
+                case '2':
+                    $query .= " ORDER BY email DESC"; // z-A
+                    break;
+                case '3':
+                    $query .= " ORDER BY updatedAt DESC"; // Last Entry Date
+                    break;
+            }
+        }
+
+        $stmt = $this->db->prepare($query);
+        
+        // Asignar valores a los parámetros de la consulta
+        if ($status) {
+            $stmt->bindParam(':status', $status);
+        }
+        if ($role) {
+            $stmt->bindParam(':role', $role);
+        }
+        if ($email) {
+            $email = "%$email%"; // Usar LIKE
+            $stmt->bindParam(':email', $email);
+        }
+        
+        $stmt->execute();
+    
+        // Array para almacenar los usuarios
+        $users = [];
+    
+        // Recuperar los datos de los usuarios y almacenarlos en el array
+        // Recuperar los datos de los usuarios y almacenarlos en el array
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            // Crear un nuevo objeto User con los datos de la fila
+            $users[] = new User(
+                $row['firstName'],
+                $row['lastName'],
+                $row['email'],
+                '',
+                $row['birthdate'],
+                $row['gender'],
+                $row['id'],
+                $row['idRol'],
+                $row['pfp'],
+                $row['status'],
+                $row['createdAt'],
+                $row['updatedAt'],
+                $row['deletedAt']
+            );
+        }
+
+
+        return $users;
+    }
 
     public function updateUser($user) {
         $query = "CALL update_user(:id, :firstName, :lastName, :gender, :birthdate)";
@@ -162,8 +267,25 @@ class UserController {
             var_dump($stmt->errorInfo()); // Mostrar errores
             return false; 
         }
-        return true;
+        return false;
     }
+    public function changeStatus($id, $status){
+
+        $query = "CALL change_userStatus(:id, :status)";
+        $stmt = $this->db->prepare($query);
+        
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':status', $status);  // Usamos PARAM_LOB para datos binarios
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            var_dump($stmt->errorInfo()); // Mostrar errores
+            return false; 
+        }
+        return false;
+    }
+
 
     // Función para convertir Blob a Base64
     private function convertBlobToBase64($blob) {

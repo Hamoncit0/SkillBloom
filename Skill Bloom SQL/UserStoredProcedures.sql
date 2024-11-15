@@ -132,3 +132,36 @@ BEGIN
 END 
 
 DELIMITER ;
+
+CREATE VIEW v_users AS
+SELECT
+        id,
+        firstName,
+        lastName,
+        email,
+        gender,
+        birthdate,
+        pfp,
+        idRol,
+        status,
+        createdAt,
+        updatedAt,
+        deletedAt
+    FROM user;
+
+DELIMITER ;
+DELIMITER 
+
+CREATE PROCEDURE change_userStatus(
+    IN userId INT,
+    IN NewStatus VARCHAR(15)
+)
+BEGIN
+    UPDATE user
+    SET
+        status = NewStatus,
+        updatedAt = CURRENT_TIMESTAMP
+    WHERE id = userId;
+END 
+
+DELIMITER ;
