@@ -14,9 +14,12 @@ class User {
     public $createdAt;
     public $updatedAt;
     public $deletedAt;
-
+    public $tries;
     //constructor signup
-    function __construct($firstName = null, $lastName = null, $email = null, $password = null, $birthdate = null, $gender = null, $id = null, $rol = null, $pfpPath=null, $status= null, $createdAt = null, $updatedAt = null, $deletedAt = null ) {
+    function __construct($firstName = null, $lastName = null, $email = null, $password = null, 
+                         $birthdate = null, $gender = null, $id = null, $rol = null, $pfpPath=null, 
+                         $status= null, $createdAt = null, $updatedAt = null, $deletedAt = null,
+                         $tries = 0 ) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -30,6 +33,7 @@ class User {
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->deletedAt = $deletedAt;
+        $this->tries = $tries;
     }
  
 }

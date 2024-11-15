@@ -47,7 +47,7 @@ class UserController {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
  
         // Verificar si el resultado contiene el id del usuario y si está activo
-        if (isset($result['userId']) && $result['status'] === 'active') {
+        if (isset($result['userId']) ) {
             // El usuario está activo, procedemos a obtener la información completa
             $query = "CALL getinfo_user(:id);";
        
@@ -56,7 +56,6 @@ class UserController {
 
             $stmt->execute();
             $userInfo = $stmt->fetch(PDO::FETCH_ASSOC);
- 
             // Crear y devolver la instancia del usuario con la información completa
             if ($userInfo) {
                 $newUser = new User();

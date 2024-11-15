@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verificar si el usuario existe y si la contraseña es correcta
     $user = $userController->logIn($email, $password);
 
-    if ($user) {
+    if ($user && $user->status == 'active') {
         // Guardar el usuario en la sesión
         session_start();
         $_SESSION['user'] = $user;
@@ -24,7 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Redireccionar a la página principal
         header("Location: /");
         exit();
-    } else {
+    }else if($user && $user->status == 'blocked'){
+        $loginError = "This user account has been blocked.";
+    }
+    else if($user && $user->status == 'deleted'){
+        $loginError = "This user account has been deleted.";
+    }
+    else {
         $loginError = "Invalid user.";
     }
 }

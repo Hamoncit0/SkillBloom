@@ -19,6 +19,7 @@ CREATE TABLE user (
     birthdate DATE NOT NULL,
     pfp BLOB, -- cambiar a blob D:
     idRol INT NOT NULL,
+    tries TINYINT DEFAULT 0,
     status ENUM(
         'blocked',
         'active',

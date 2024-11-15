@@ -26,7 +26,7 @@ BEGIN
     DECLARE p_userId INT;
     DECLARE p_status VARCHAR(20);
     DECLARE p_message VARCHAR(255);
-
+    DECLARE intentos TINYINT;
     -- Buscar el usuario y verificar su contraseña y estado
     SELECT id, status INTO p_userId, p_status
     FROM user
@@ -36,16 +36,32 @@ BEGIN
     IF p_userId IS NOT NULL THEN
         -- Verificar el estado del usuario
         IF p_status = 'active' THEN
+            UPDATE user SET tries = 0 WHERE id = p_userId;
             SET p_message = 'Login exitoso.';
         ELSEIF p_status = 'blocked' THEN
             SET p_message = 'La cuenta está bloqueada.';
-            SET p_userId = NULL;  -- No permitir el login si está bloqueado
         ELSEIF p_status = 'deleted' THEN
             SET p_message = 'La cuenta ha sido eliminada.';
-            SET p_userId = NULL;  -- No permitir el login si la cuenta fue eliminada
         END IF;
     ELSE
         SET p_message = 'Credenciales incorrectas.';
+
+         -- Checar si el usuario existe a través del correo
+        SELECT id, tries INTO p_userId, intentos
+        FROM user
+        WHERE email = p_email;
+
+        -- Si el usuario existe, incrementar el contador de intentos
+        IF p_userId IS NOT NULL THEN
+            IF intentos < 2 THEN
+                SET intentos = intentos + 1;
+                UPDATE user SET tries = intentos WHERE id = p_userId;
+            ELSEIF intentos >=2 THEN
+                SET intentos = 3;
+                UPDATE user SET tries = intentos, status = 'blocked' WHERE id = p_userId;
+            END IF;
+        END IF;
+
         SET p_userId = NULL;
         SET p_status = NULL;
     END IF;
@@ -160,6 +176,7 @@ BEGIN
     UPDATE user
     SET
         status = NewStatus,
+        tries = 0,
         updatedAt = CURRENT_TIMESTAMP
     WHERE id = userId;
 END 

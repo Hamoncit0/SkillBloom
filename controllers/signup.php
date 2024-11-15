@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Instanciar el controlador
     $userController = new UserController();
 
-    $newUser = new User($firstName, $lastName, $email, $password, $birthdate, $gender, $rol);
+    $newUser = new User($firstName, $lastName, $email, $password, $birthdate, $gender, 0, $rol);
     // Verificar si el usuario existe y si la contraseña es correcta
     $registered = $userController->signUp($newUser);
 
