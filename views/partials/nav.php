@@ -98,7 +98,7 @@ if (isset($_SESSION['user'])) {
             <a href="/advancedSearch" class="nav-link">Advanced search</a>
           </li>
           <li class="nav-item">
-            <a href="/advancedSearch" class="btn btn-primary">Create a new course</a>
+            <a href="/newCourse" class="btn btn-primary">Create a new course</a>
           </li>
           <li>
             <div class="dropdown">
