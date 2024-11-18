@@ -197,13 +197,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('createCourse').addEventListener('submit', function (event) {
         event.preventDefault();
-        if(1==1 /*validateForm */){
-
+        if (1 == 1 /* validateForm */) {
             const formData = new FormData(this);
             const previewImageFile = formData.get('previewImage');
             const reader = new FileReader();
-
-            reader.onload = function(event) {
+    
+            reader.onload = function (event) {
                 const base64Image = event.target.result; // Imagen en base64
                 const course = {
                     title: formData.get('title'),
@@ -212,48 +211,62 @@ document.addEventListener('DOMContentLoaded', function () {
                     price: formData.get('price'),
                     previewImage: base64Image,
                 };
-
-                // const levels = [];
-                // for (let i = 1; i <= levelCount; i++) {
-                //     const levelName = document.getElementById(`levelName${i}`).value;
-                //     const levelDescription = document.getElementById(`levelDescription${i}`).value;
-                //     const levelContent = document.getElementById(`levelContent${i}`).files[0];
-
-                //     levels.push({
-                //         name: levelName,
-                //         description: levelDescription,
-                //         content: levelContent,
-                //     });
-                // }
-
-                const fullData = new FormData();
-                fullData.append('course', JSON.stringify(course));
-                fullData.append('previewVideo', formData.get('previewVideo'));
-                // levels.forEach((level, index) => {
-                //     fullData.append(`levels[${index}][name]`, level.name);
-                //     fullData.append(`levels[${index}][description]`, level.description);
-                //     fullData.append(`levels[${index}][content]`, level.content);
-                // });
-
-                fetch('/newCourse', {
-                    method: 'POST',
-                    body: fullData,
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert('Course created successfully!');
-                        console.log(data);
-                    })
-                    .catch(error => {
-                        alert('An error occurred.');
-                        console.error(error);
-                    });
+    
+                const levels = [];
+                for (let i = 1; i <= levelCount; i++) {
+                    const levelName = document.getElementById(`levelName${i}`).value;
+                    const levelDescription = document.getElementById(`levelDescription${i}`).value;
+                    const levelContentFile = document.getElementById(`levelContent${i}`).files[0];
+    
+                    // Convert file content to Base64
+                    const fileReader = new FileReader();
+                    fileReader.onload = function (fileEvent) {
+                        const base64Content = fileEvent.target.result;
+                        levels.push({
+                            name: levelName,
+                            description: levelDescription,
+                            content: base64Content,
+                        });
+    
+                        // Solo enviar cuando todos los niveles estén procesados
+                        if (levels.length === levelCount) {
+                            const fullData = new FormData();
+                            fullData.append('course', JSON.stringify(course));
+                            fullData.append('levels', JSON.stringify(levels)); // Guardar niveles como JSON
+                            fullData.append('previewVideo', formData.get('previewVideo'));
+    
+                            fetch('/newCourse', {
+                                method: 'POST',
+                                body: fullData,
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    alert('Course created successfully!');
+                                    console.log(data);
+                                })
+                                .catch(error => {
+                                    alert('An error occurred.');
+                                    console.error(error);
+                                });
+                        }
+                    };
+    
+                    if (levelContentFile) {
+                        fileReader.readAsDataURL(levelContentFile);
+                    } else {
+                        levels.push({
+                            name: levelName,
+                            description: levelDescription,
+                            content: null, // Sin contenido si no hay archivo
+                        });
+                    }
+                }
             };
-
+    
             reader.readAsDataURL(previewImageFile);
-            
-        }else{
+        } else {
             alert('Please fill out all required fields.');
         }
     });
+    
 });

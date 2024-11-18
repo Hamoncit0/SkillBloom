@@ -69,11 +69,11 @@ class CourseController {
 
         }
 
-        return false;
+        return $idLevels;
         
     }
 
-    private function bindLevelToCourse($idCourse, $idLevels) {
+    public function bindLevelToCourse($idCourse, $idLevels) {
         // Convert the levels array into a comma-separated string
         $idLevelsString = implode(',', $idLevels);
 
@@ -89,6 +89,10 @@ class CourseController {
         if (!$stmt->execute()) {
             throw new Exception("Error binding levels to the course.");
         }
+    }
+
+    public function getAllCourses(){
+        
     }
 
 }

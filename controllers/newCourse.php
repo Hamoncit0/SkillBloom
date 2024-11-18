@@ -52,7 +52,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $newCourseId = $courseController->createCourse($newCourse);
 
+    $levelsData = json_decode($_POST['levels'], true);
 
+    $courseLevels = [];
+    foreach ($levelsData as $level) {
+        $newLevel = new Level();
+        $newLevel->title = $level['name'];
+        $newLevel->description = $level['description'];
+        $newLevel->contentPath = 'contenido';
+
+        $courseLevels[] = $newLevel;
+    }
+
+    $levelsId = $courseController->createLevel($courseLevels);
+
+    $courseController->bindLevelToCourse($newCourseId, $levelsId);
     
 
     echo json_encode(['success' => true]);
