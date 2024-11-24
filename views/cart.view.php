@@ -1,6 +1,6 @@
 <?php require "partials/head.php" ?>
 <?php require "partials/nav.php" ?>
-<div class="cart bg-light">
+<div class="cart">
   <h1>Shopping Cart</h1>
   <p id="cart-count">0 courses in Cart</p>
   <hr>

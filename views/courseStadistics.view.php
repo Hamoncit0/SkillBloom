@@ -1,6 +1,6 @@
 <?php require "partials/head.php" ?>
 <?php require "partials/nav.php" ?>
-<div class="see-course-info bg-light">
+<div class="see-course-info">
     <div class="see-course-main">
         <h2>Nombre del curso</h2>
         <span>Category: Development</span>
@@ -14,14 +14,14 @@
         <h3>Total income: MX $80,000.00</h3>
         <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate magnam magni culpa? Ipsum eaque cupiditate fugit illo earum at praesentium est excepturi quae sunt quasi exercitationem sint distinctio necessitatibus ut officiis cumque debitis, ratione animi neque eos in? Dolore consequuntur quos distinctio sit. Fuga unde ipsum temporibus non? Est, a!</p>
     </div>
-    <div class="see-course-preview bg-white" style="justify-self:right;">
+    <div class="see-course-preview bg-body-tertiary" style="justify-self:right;">
         <video controls>
             <source src="../images/video.mp4" type="video/mp4">
             <source src="movie.ogg" type="video/ogg">
             Your browser does not support the video tag.
         </video>
     </div>
-    <div class="see-course-comments">
+    <div class="see-course-comments bg-body-secondary">
         <h4>Reviews</h4>
         <div class="comment-section">
             <? require "partials/comment.php" ?>

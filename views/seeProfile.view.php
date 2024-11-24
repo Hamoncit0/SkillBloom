@@ -6,7 +6,7 @@ require "partials/nav.php";
     // Asegúrate de que sea un objeto de la clase User
     if ($user instanceof User) {
         ?>
-        <div class="see-profile-public bg-light">
+        <div class="see-profile-public">
             <div class="user-data-public">
                 <!-- Imagen de perfil -->
                 <img class="rounded-circle img-fluid" src="<?= htmlspecialchars($user->pfpPath ?: 'default-image.jpg') ?>" alt="Profile Picture">

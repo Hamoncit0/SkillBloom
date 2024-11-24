@@ -1,6 +1,6 @@
 <?php require "partials/head.php" ?>
 <?php require "partials/nav.php" ?>
-<div class="student-courses bg-light">
+<div class="student-courses">
     <h1>Your courses</h1>
     <div class="dropdown">
         <button class="dropdown-toggle btn btn-outline-dark">Incompleted</button>

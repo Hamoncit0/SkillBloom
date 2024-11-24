@@ -1,4 +1,4 @@
-<div class="comment bg-white">
+<div class="comment bg-body">
     <div class="comment-admin-profile">
         
         <div class="comment-profile">

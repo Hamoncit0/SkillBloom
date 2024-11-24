@@ -1,6 +1,6 @@
 <?php require "partials/head.php" ?>
 <?php require "partials/nav.php" ?>
-<div class="exploreCourses bg-light">
+<div class="exploreCourses">
     <h1>Explore Courses</h1>
     <h3>The newest courses</h3>
     <hr>

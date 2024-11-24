@@ -7,7 +7,7 @@
         <div class="carousel-item active">
           <img src="https://i.pinimg.com/originals/34/d7/a3/34d7a3bbe7ab056f213e66c7182dd57e.gif" class="d-block w-100" alt="...">
           
-          <div class="info-box">
+          <div class="info-box  bg-body-tertiary">
             <h3>Habilidades que te llevan hacia adelante</h3>
             <p class="fs-4">Conocimiento que te impulsa a aprender más en el mundo laboral.</p>
             <a href="/login" class="btn btn-outline-primary">Log In</a>
@@ -18,7 +18,7 @@
         <div class="carousel-item">
           <img src="https://i.pinimg.com/originals/f7/19/65/f71965732082901a89adedcde2051bd7.gif" class="d-block w-100" alt="...">
 
-          <div class="info-box">
+          <div class="info-box  bg-body-tertiary">
             <h3>Conoce acerca de nuestro nuevos cursos</h3>
             <p class="fs-4">Mientras mas pronto te prepares mas rapido podras llegar al exito.</p>
             <a href="/exploreCourses" class="btn btn-outline-primary">Conoce nuestros cursos</a>
@@ -28,7 +28,7 @@
         <div class="carousel-item">
           <img src="https://i.pinimg.com/originals/50/fd/4a/50fd4a7d39b88a7fd0cc43aaaefc9649.gif" class="d-block w-100" alt="...">
 
-          <div class="info-box">
+          <div class="info-box bg-body-tertiary">
             <h3>¿Te gustaria aprender sobre lo que te gusta?</h3>
             <p class="fs-4">No te preocupes, tenemos para todos los gustos</p>
             <a href="/exploreCourses" class="btn btn-outline-primary">Conoce nuestros cursos</a>
@@ -48,7 +48,7 @@
     </div>
 
     <!-- Categorias -->
-    <div class="categories bg-light">
+    <div class="categories">
       <h2 class="h2">Top Categories</h2>
       <div class="cat-flex">
         
@@ -224,7 +224,7 @@
     </div>
       
     <!-- Conviertete en un instructor -->
-     <div class="teach bg-white">
+     <div class="teach">
       <img src="https://i.pinimg.com/564x/c1/dd/77/c1dd77948fe783c0a3e8aec69ba02c39.jpg" alt="">
       <div class="beTeacherInfo">
         <h2>Become an instructor</h2>

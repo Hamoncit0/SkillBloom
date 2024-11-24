@@ -65,7 +65,7 @@ if (isset($_SESSION['user'])) {
     else if($userRole == 2) //INSTRUCTOR
     {
       echo '
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg  bg-body-tertiary">
     <div class="container-fluid">
       <!-- Brand and Categories -->
       <a class="navbar-brand" href="/">Skill Bloom</a>
@@ -125,7 +125,7 @@ if (isset($_SESSION['user'])) {
     else if($userRole == 3) //ESTUDIANTE
     {
        echo '
-       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+       <nav class="navbar navbar-expand-lg  bg-body-tertiary">
     <div class="container-fluid">
       <!-- Brand and Categories -->
       <a class="navbar-brand" href="/">Skill Bloom</a>
@@ -171,9 +171,8 @@ if (isset($_SESSION['user'])) {
                 <div class="dropdown-menu" aria-labelledby="navAvatarDropdown">
                     <a href="/editProfile" class="dropdown-item">Edit Your Profile</a>
                     <a href="/chat" class="dropdown-item">Messages</a>
-                    <a href="/userList" class="dropdown-item">User List</a>
                     <a href="/cart" class="dropdown-item">Shopping Cart</a>
-                    <a href="/courseList" class="dropdown-item">Courses</a>
+                    <a href="/kardex" class="dropdown-item">Kardex</a>
                     <div class="dropdown-divider"></div>
                     <a href="/logout" class="dropdown-item">Log Out</a>
                 </div>
@@ -188,7 +187,7 @@ if (isset($_SESSION['user'])) {
 {
   
   echo
-  '<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  '<nav class="navbar navbar-expand-lg  bg-body-tertiary">
       <div class="container-fluid">
         <!-- Brand and Categories -->
         <a class="navbar-brand" href="/">Skill Bloom</a>

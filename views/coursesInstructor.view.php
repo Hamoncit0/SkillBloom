@@ -1,6 +1,6 @@
 <?php require 'partials/head.php' ?>
 <?php require "partials/nav.php" ?>
-<div class="user-list bg-light">
+<div class="user-list">
     <h2>My Course List</h2>
     <div class="kardex-filters">
         <div class="mb-3 kardex-select">

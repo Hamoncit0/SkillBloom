@@ -1,6 +1,6 @@
 <?php require 'partials/head.php' ?>
 <?php require "partials/nav.php" ?>
-<div class="kardex bg-light">
+<div class="kardex">
     
 <?php if ($course): ?>
     <h2><?php echo htmlspecialchars($course->title); ?></h2>
@@ -18,7 +18,7 @@
             <?php endforeach; ?>
         </ol>
     </div>
-    <div class="see-course-comments">
+    <div class="see-course-comments bg-body-secondary">
         <h2>Reviews:</h2>
         <div class="comment-section">
             <?php require 'partials/comment-admin.php' ?>

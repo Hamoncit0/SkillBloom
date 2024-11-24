@@ -1,6 +1,6 @@
 <?php require 'partials/head.php' ?>
 <?php require 'partials/nav.php' ?>
-<div class="checkout bg-light">
+<div class="checkout">
     <form id="checkoutForm">
     <div class="billing-details">
         <h2>Billing details</h2>
@@ -50,7 +50,7 @@
         <button class="btn btn-info">Place order</button>
     </div>
     </form>
-    <div class="cart-summary bg-white">
+    <div class="cart-summary bg-body-tertiary">
         <h4>Cart Summary</h4>
         <hr>
         <div id="cart-summary-products">

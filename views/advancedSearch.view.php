@@ -1,7 +1,7 @@
 <?php require 'partials/head.php' ?>
 <?php require 'partials/nav.php' ?>
-<div class="advanced-search bg-light">
-<form method="GET" class="bg-white">
+<div class="advanced-search">
+<form method="GET" class="bg-body-secondary">
     <h2>Advanced Search</h2>
     <!-- Filter by Title -->
     <div class="mb-3">

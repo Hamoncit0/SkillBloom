@@ -1,4 +1,4 @@
-<div class="comment bg-white">
+<div class="comment bg-body">
     <div class="comment-profile">
         <img src="https://img.lovepik.com/element/45016/4170.png_860.png" class="rounded-circle img-fluid comment-pfp" alt="">
         <span>

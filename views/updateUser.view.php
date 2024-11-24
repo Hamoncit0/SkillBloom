@@ -6,7 +6,7 @@
 
 if (isset($_SESSION['user'])) {
     ?>
-    <div class="user-data bg-light">
+    <div class="user-data">
         <div class="edit-container">
             <div class="leftEditProfile">
                 <!-- Imagen de perfil, si tiene una -->

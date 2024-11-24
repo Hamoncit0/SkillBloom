@@ -1,6 +1,6 @@
 <?php require 'partials/head.php' ?>
 <?php require "partials/nav.php" ?>
-<div class="kardex bg-light">
+<div class="kardex">
     <h2>Kardex</h2>
     <div class="kardex-filters">
         <div class="mb-3 kardex-select">
@@ -46,38 +46,22 @@
                     <th scope="col">Category</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Javascript the final course</td>
-                    <td>Gandalf</td>
-                    <td>75%</td>
-                    <td>05/06/2024</td>
-                    <td>18/09/2024</td>
-                    <td>Doesnt Apply</td>
-                    <td>In progress</td>
-                    <td>Development</td>
-                </tr>
-                <tr>
-                    <td>Javascript the final course</td>
-                    <td>Gandalf</td>
-                    <td>75%</td>
-                    <td>05/06/2024</td>
-                    <td>18/09/2024</td>
-                    <td>Doesnt Apply</td>
-                    <td>In progress</td>
-                    <td>Development</td>
-                </tr>
-                <tr>
-                    <td>Javascript the final course</td>
-                    <td>Gandalf</td>
-                    <td>75%</td>
-                    <td>05/06/2024</td>
-                    <td>18/09/2024</td>
-                    <td>Doesnt Apply</td>
-                    <td>In progress</td>
-                    <td>Development</td>
-                </tr>
-            </tbody>
+            <?php if (!empty($kardexList)): ?>
+                <tbody>
+                    <?php foreach ($kardexList as $kardexLine): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($kardexLine->course); ?></td>
+                            <td><?php echo htmlspecialchars($kardexLine->instructor); ?></td>
+                            <td><?php echo htmlspecialchars($kardexLine->progress); ?>%</td>
+                            <td><?php echo htmlspecialchars($kardexLine->enrolledAt); ?></td>
+                            <td><?php echo htmlspecialchars($kardexLine->lastEntry ?: 'Not started'); ?></td>
+                            <td><?php echo htmlspecialchars($kardexLine->endDate ?:'Does not Apply' ); ?></td>
+                            <td><?php echo htmlspecialchars($kardexLine->status); ?></td>
+                            <td><?php echo htmlspecialchars($kardexLine->category); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            <?php endif; ?>
         </table>
     </div>
     <button class="btn btn-primary">Export to pdf</button>

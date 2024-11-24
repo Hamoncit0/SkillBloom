@@ -2,7 +2,7 @@
 <?php require 'partials/nav.php' ?>
 
     <main>
-        <div class="h1 bg-light">
+        <div class="h1">
             Page not found
             <img src="https://api.capy.lol/v1/capybara" alt="">
         </div>

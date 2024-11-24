@@ -1,20 +1,20 @@
 <?php require "partials/head.php" ?>
 <?php require "partials/nav.php" ?>
 <?php if ($course): ?>
-<div class="see-course-info bg-light">
+<div class="see-course-info">
     <div class="see-course-main">
         <h2><?php echo htmlspecialchars($course->title); ?></h2>
         <span>Category: <?php echo htmlspecialchars($course->category); ?></span>
         <br>
         <span>4.7 <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i> (22,000) </span>
-        <p> <?php echo htmlspecialchars($course->description); ?></p>
+        <p>Description: <?php echo htmlspecialchars($course->description); ?></p>
         <span>
             Created by <?php echo htmlspecialchars($course->instructor); ?> <a href="/chat" class="btn btn-primary" style="margin-left: 10px">Send Message</a>
         </span>
         <br>
         <span>8 total hours | 72 lectures | All levels</span>
     </div>
-    <div class="see-course-preview bg-white">
+    <div class="see-course-preview bg-body-tertiary">
         <video controls>
             <source src="../images/video.mp4" type="video/mp4">
             <source src="movie.ogg" type="video/ogg">
@@ -31,7 +31,7 @@
             <?php endforeach; ?>
         </ol>
     </div>
-    <div class="see-course-comments">
+    <div class="see-course-comments bg-body-secondary">
         <h4>Comment Section</h4>
         <div class="comment-section">
             <?php require "partials/comment.php" ?>

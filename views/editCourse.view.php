@@ -1,9 +1,9 @@
 <?php require 'partials/head.php' ?>
 <?php require "partials/nav.php" ?>
-<div class="new-course  bg-light">
+<div class="new-course">
 <?php if ($course): ?>
-    <div class="bg-white new-course-container">
-        <h2>Create a new course</h2>
+    <div class="bg-body-tertiary new-course-container">
+        <h2>Edit course</h2>
         <div class="newcourse-info">
             <div class="mb-3">
                 <label for="">Title:</label>

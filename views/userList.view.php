@@ -15,7 +15,7 @@
         }
     }
     ?>
-<div class="user-list bg-light">
+<div class="user-list ">
     <h2>User List</h2>
     <form method="GET"> <!-- Cambié el formulario para enviar los datos con GET -->
         <div class="kardex-filters">

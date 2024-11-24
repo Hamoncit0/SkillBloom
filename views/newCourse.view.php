@@ -1,7 +1,7 @@
 <?php require "partials/head.php" ?>
 <?php require "partials/nav.php" ?>
-<div class="new-course  bg-light">
-    <div class="bg-white new-course-container">
+<div class="new-course">
+    <div class="bg-body-tertiary new-course-container">
         <form id="createCourse" action="POST"  enctype="multipart/form-data">
         <h2>Create a new course</h2>
         <div class="newcourse-info">

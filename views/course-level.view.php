@@ -1,6 +1,6 @@
 <?php require "partials/head.php" ?>
 <?php require "partials/nav.php" ?>
-<div class="course-level bg-light">
+<div class="course-level">
     <div class="level-content-display">
         <video controls>
                 <source src="../images/video.mp4" type="video/mp4">
@@ -8,7 +8,7 @@
                 Your browser does not support the video tag.
         </video>
     </div>
-    <div class="level-content-bar bg-white">
+    <div class="level-content-bar bg-body-tertiary">
         <h3>Course Level</h3>
         <div class="buttons">
             <button class="btn btn-dark"><i class="bi bi-caret-left-fill"></i>Previous</button>

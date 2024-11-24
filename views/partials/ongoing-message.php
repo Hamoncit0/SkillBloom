@@ -1,5 +1,5 @@
 <div class="msg-ong">
-    <div class="ongoing-message bg-light">
+    <div class="ongoing-message bg-body">
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta cupiditate ullam ea consequuntur aliquid cumque earum sunt perferendis repellendus commodi?</p>
         <p>13:46pm</p>
     </div>
