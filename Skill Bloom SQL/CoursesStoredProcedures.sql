@@ -59,3 +59,29 @@ BEGIN
         VALUES (p_idCourse, level_id, level_order);
     END IF;
 END;
+
+
+CREATE VIEW v_courses AS
+SELECT course.*, category.name, user.firstName, user.lastName
+FROM course
+JOIN category ON course.idCategory = category.id
+JOIN user ON course.idInstructor = user.id;
+
+CREATE VIEW v_courses_levels AS
+SELECT course.*, category.name as category, user.firstName, user.lastName, level.id as idLevel, level.title as levelTitle, level.description as levelDescription, level.contentPath
+FROM course_level
+JOIN course ON course_level.idCourse = course.id
+JOIN level ON course_level.idLevel = level.id
+JOIN user ON course.idInstructor = user.id
+JOIN category ON course.idCategory = category.id;
+WHERE course.id = 5;
+
+CREATE PROCEDURE deleteCourse(
+    IN p_id INT
+)
+BEGIN
+    UPDATE course
+    SET 
+        deletedAt = CURRENT_TIMESTAMP
+    WHERE id = p_id;
+END

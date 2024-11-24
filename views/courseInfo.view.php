@@ -1,14 +1,15 @@
 <?php require "partials/head.php" ?>
 <?php require "partials/nav.php" ?>
+<?php if ($course): ?>
 <div class="see-course-info bg-light">
     <div class="see-course-main">
-        <h2>Nombre del curso</h2>
-        <span>Category: Development</span>
+        <h2><?php echo htmlspecialchars($course->title); ?></h2>
+        <span>Category: <?php echo htmlspecialchars($course->category); ?></span>
         <br>
         <span>4.7 <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i> (22,000) </span>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, velit. Totam repellendus architecto dicta, soluta reprehenderit aspernatur. Unde doloremque corrupti iusto libero dicta tempore itaque quae delectus quos sunt amet, voluptatum dolor ab eum perspiciatis natus, provident numquam omnis cupiditate? Magni incidunt explicabo dolore aspernatur quos provident velit amet vel.</p>
+        <p> <?php echo htmlspecialchars($course->description); ?></p>
         <span>
-            Created by Gandalf <a href="/chat" class="btn btn-primary" style="margin-left: 10px">Send Message</a>
+            Created by <?php echo htmlspecialchars($course->instructor); ?> <a href="/chat" class="btn btn-primary" style="margin-left: 10px">Send Message</a>
         </span>
         <br>
         <span>8 total hours | 72 lectures | All levels</span>
@@ -20,19 +21,15 @@
             Your browser does not support the video tag.
         </video>
         <br>
-        <h4>MX $180.00</h4>
+        <h4>MX $<?php echo htmlspecialchars($course->price); ?></h4>
         <button class="btn btn-primary">Add to Cart</button>
     </div>
     <div class="see-course-levels">
-        <ol class="list-group list-group-numbered">
-            <li class="list-group-item">Inicializar variables</li>
-            <li class="list-group-item">Ciclos</li>
-            <li class="list-group-item">Funciones</li>
-            <li class="list-group-item">Clases</li>
-            <li class="list-group-item">Collections</li>
-            <li class="list-group-item">Herencia</li>
-            <li class="list-group-item">Promesas</li>
-        </ol>
+        <?php foreach ($course->levels as $level): ?>
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item"><?php echo htmlspecialchars($level->title); ?> </li>
+            </ol>
+        <?php endforeach; ?>
     </div>
     <div class="see-course-comments">
         <h4>Comment Section</h4>
@@ -53,4 +50,5 @@
         </nav>
     </div>
 </div>
+<?php endif; ?>
 <?php require "partials/footer.php" ?>

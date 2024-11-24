@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('createCourse').addEventListener('submit', function (event) {
         event.preventDefault();
-        if (1 == 1 /* validateForm */) {
+        if ( validateForm) {
             const formData = new FormData(this);
             const previewImageFile = formData.get('previewImage');
             const reader = new FileReader();

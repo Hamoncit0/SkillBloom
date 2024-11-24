@@ -12,10 +12,13 @@ class Course {
     public $idCategory;
     public $idInstructor;
     public $createdAt;
+    public $deletedAt;
     public $levels;
+    public $instructor;
+    public $category;
 
     public function __construct($id = null, $title = null, $description = null, $previewImage = null, $previewVideoPath = null, $price = null,
-                                $idCategory = null, $idInstructor = null, $createdAt = null,  $levels = null) 
+                                $idCategory = null, $idInstructor = null, $createdAt = null,  $levels = null, $instructor = null, $category = null, $deletedAt = null) 
     {
         $this->id = $id ;
         $this->title = $title ;
@@ -27,6 +30,9 @@ class Course {
         $this->idInstructor = $idInstructor;
         $this->createdAt = $createdAt;
         $this->levels = $levels;
+        $this->instructor = $instructor;
+        $this->category = $category;
+        $this->deletedAt = $deletedAt;
     }
 
 }

@@ -137,12 +137,14 @@
 
 .course{
     width: fit-content;
+    max-width: 300px;
     height: fit-content;
     padding: 1.5rem;
     border-radius: 10px;
     margin: 1rem;
     box-shadow: 0.2rem 0.2rem 10px #dbdbdb;
     transition: box-shadow 0.3s ease;
+    text-wrap:pretty;
 }
 .course:hover{
     box-shadow: 0.5rem 0.5rem 10px #b1b1b1;

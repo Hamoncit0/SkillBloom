@@ -46,39 +46,22 @@
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>How to become evil</td>
-                    <td>Active</td>
-                    <td>05/06/2024</td>
-                    <td>Sauron</td>
-                    <td>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalBan"  class="btn btn-danger"><i class="bi bi-trash3"></i></a>
-                        <a type="button" href="editCourse" class="btn btn-secondary"><i class="bi bi-pencil"></i></a>
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td>How to be an elf</td>
-                    <td>Active</td>
-                    <td>05/06/2024</td>
-                    <td>Elrond</td>
-                    <td>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalBan"  class="btn btn-danger"><i class="bi bi-trash3"></i></a>
-                        <a type="button" href="editCourse" class="btn btn-secondary"><i class="bi bi-pencil"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>How to make fireworks</td>
-                    <td>Active</td>
-                    <td>05/06/2024</td>
-                    <td>Gandalf</td>
-                    <td>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalBan"  class="btn btn-danger"><i class="bi bi-trash3"></i></a>
-                        <a type="button" href="editCourse" class="btn btn-secondary"><i class="bi bi-pencil"></i></a>
-                    </td>
-                </tr>
-            </tbody>
+            <?php if (!empty($courseList)): ?>
+                <tbody>
+                    <?php foreach ($courseList as $course): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($course->title); ?></td>
+                            <td><?php echo htmlspecialchars($course->deletedAt ?  'deleted' : 'active'); ?></td>
+                            <td>05/06/2024</td>
+                            <td><?php echo htmlspecialchars($course->instructor); ?></td>
+                            <td>
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#modalBan" data-id="<?php echo $course->id; ?>" data-action="ban"   class="btn btn-danger"><i class="bi bi-trash3"></i></a>
+                                <a type="button" href="editCourse?id=<?php echo htmlspecialchars($course->id); ?>" class="btn btn-secondary"><i class="bi bi-pencil"></i></a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            <?php endif; ?>
         </table>
     </div>
 </div>
@@ -96,8 +79,45 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary">Yes, continue</button>
+        <form id="banForm" method="POST">
+            <input type="hidden" name="categoryId" id="categoryId" />
+            <input type="hidden" name="action" id="action" value="ban" />
+            <button type="submit" class="btn btn-primary">Yes, continue</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+     // Capturar el evento de clic en los botones de edición
+     var editButtons = document.querySelectorAll('[data-action="edit"]');
+    editButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var categoryId = this.getAttribute('data-id'); // ID de la categoría
+            var categoryName = this.getAttribute('data-name'); // Nombre de la categoría
+            var categoryDescription = this.getAttribute('data-description'); // Descripción de la categoría
+
+            // Rellenar los campos del modal de edición
+            document.querySelector('#modalEditCat input[name="name"]').value = categoryName;
+            document.querySelector('#modalEditCat textarea[name="description"]').value = categoryDescription;
+            document.querySelector('#modalEditCat input[name="categoryId"]').value = categoryId;
+        });
+    });
+    
+    // Para capturar el evento de clic y rellenar el formulario
+    var banButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
+    banButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var categoryId = this.getAttribute('data-id'); // Obtener el ID del usuario
+            var action = this.getAttribute('data-action'); // Obtener la acción (ban/unban)
+
+            if (action === "ban") {
+                document.getElementById('categoryId').value = categoryId; // Rellenar el ID en el formulario de ban
+                document.getElementById('action').value = action; // Rellenar la acción de ban
+            } else if (action === "edit") {
+                document.getElementById('categoryIdEdit').value = categoryId; // Rellenar el ID en el formulario de unban
+            }
+        });
+    });
+</script>
