@@ -1,11 +1,7 @@
 <?php
 
-require 'clases/controllers/CategoryController.php';
 require 'clases/controllers/CourseController.php';
 require 'clases/entities/User.php';
-
-$categoryController = new CategoryController();
-$categoryList = $categoryController->getCategories();
 
 
 // Capturar el ID del curso desde la URL

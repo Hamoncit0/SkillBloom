@@ -234,6 +234,24 @@ class CourseController {
 
     }
 
+    public function reviveCoure($id){
+        $query = "CALL reviveCourse(:id)";
+
+        $stmt = $this->db->prepare($query);
+
+        // Bind the parameters
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            var_dump($stmt->errorInfo()); // Mostrar errores
+            return false; 
+        }
+        return false;
+
+    }
+
     public function getFilteredCourses($title, $category, $review, $priceMax, $priceMin){
         // Construir la consulta con filtros dinámicos
         $query = "SELECT * FROM v_courses WHERE deletedAt IS NULL ";
@@ -298,6 +316,59 @@ class CourseController {
 
 
         return $users;
+    }
+
+    public function getAllCoursesAdmin(){
+         // Consulta para obtener todos los usuarios
+         $query = "SELECT * FROM v_courses";
+         $stmt = $this->db->prepare($query);
+         $stmt->execute();
+     
+         // Array para almacenar los usuarios
+         $courses = [];
+     
+         // Recuperar los datos de los usuarios y almacenarlos en el array
+         // Recuperar los datos de los usuarios y almacenarlos en el array
+         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+             // Crear un nuevo objeto User con los datos de la fila
+             $instructor =  $row['firstName'] . ' ' . $row['lastName'];
+             
+             $courses[] = new Course(
+                 $row['id'],
+                 $row['title'],
+                 $row['description'],
+                 $row['previewImage'],
+                 $row['previewVideoPath'],
+                 $row['price'],
+                 $row['idCategory'],
+                 $row['idInstructor'],
+                 $row['createdAt'],
+                 '',
+                 $instructor,
+                 '',
+                 $row['deletedAt']
+             );
+        }
+     
+        return $courses;
+    }
+
+    public function buyCourse($userId, $total, $paymentMethod, $idCourses){
+        $query = "CALL makeASale(:userId, :total, :paymentMethod, 
+        :idCourses)";
+
+        $stmt = $this->db->prepare($query);
+
+        $stmt->bindParam(':userId', $userId);
+        $stmt->bindParam(':total', $total);
+        $stmt->bindParam(':paymentMethod', $paymentMethod);
+        $stmt->bindParam(':idCourses', $idCourses);
+
+        if ($stmt->execute()) {
+           return true;
+        } else {
+            return false; 
+        }
     }
 
     // Función para convertir Blob a Base64

@@ -1,12 +1,7 @@
 <?php
 //session_start(); // Asegúrate de que la sesión esté iniciada
-require 'clases/controllers/UserController.php';
 require 'partials/head.php';
 require "partials/nav.php";
-
-// Verifica si el usuario está en la sesión
-if (isset($_SESSION['user'])) {
-    $user = $_SESSION['user']; // Asignar la información del usuario a $user
 
     // Asegúrate de que sea un objeto de la clase User
     if ($user instanceof User) {
@@ -19,7 +14,7 @@ if (isset($_SESSION['user'])) {
                 <div>
                     <!-- Muestra el nombre y apellidos del usuario -->
                     <h4><?= htmlspecialchars($user->firstName) ?> </h4>
-                    <h5>Last Name: <?= htmlspecialchars($user->lastName) ?></h5>
+                    <h5><?= htmlspecialchars($user->lastName) ?></h5>
                     
                     <!-- Mostrar el rol, fecha de nacimiento y fecha de inscripción -->
                     <p>Rol: <?= htmlspecialchars($user->idRol) ?></p>
@@ -47,11 +42,6 @@ if (isset($_SESSION['user'])) {
         <?php require "partials/course-profile.php" ?>
     </div>
 </div>
-<?php 
-} else {
-    // Si no hay usuario en la sesión, muestra un error o redirecciona
-    die('User not found in session.');
-}
-?>
+
 
 <?php require 'partials/footer.php' ?>

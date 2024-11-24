@@ -1,23 +1,21 @@
 <?php require 'partials/head.php' ?>
 <?php require "partials/nav.php" ?>
 <div class="kardex bg-light">
-    <h2>Course Title</h2>
-    <p>Category: Development</p>
-    <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia non, blanditiis dolorum laboriosam adipisci eum impedit error dolores deserunt, aliquam fuga fugit tenetur culpa commodi recusandae rerum, quia distinctio libero neque sunt? Ab quia, velit, corrupti pariatur mollitia quo asperiores possimus aliquid voluptas itaque porro repellendus. Ab libero nesciunt odio?</p>
-    <p>Created by Gandalf</p>
-    <h4>Price: MX $200.00</h4>
+    
+<?php if ($course): ?>
+    <h2><?php echo htmlspecialchars($course->title); ?></h2>
+    <p>Category: <?php echo htmlspecialchars($course->category); ?></p>
+    <p>Description: <?php echo htmlspecialchars($course->description); ?></p>
+    <p>Created by <?php echo htmlspecialchars($course->instructor); ?></p>
+    <h4>Price: MX $<?php echo htmlspecialchars($course->price); ?></h4>
     <span>Score: 4.7 <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
     <hr>
     <h4>Levels:</h4>
     <div class="see-course-levels">
         <ol class="list-group list-group-numbered">
-            <li class="list-group-item">Inicializar variables</li>
-            <li class="list-group-item">Ciclos</li>
-            <li class="list-group-item">Funciones</li>
-            <li class="list-group-item">Clases</li>
-            <li class="list-group-item">Collections</li>
-            <li class="list-group-item">Herencia</li>
-            <li class="list-group-item">Promesas</li>
+            <?php foreach ($course->levels as $level): ?>
+                    <li class="list-group-item"><?php echo htmlspecialchars($level->title); ?> </li>
+            <?php endforeach; ?>
         </ol>
     </div>
     <div class="see-course-comments">
@@ -38,5 +36,6 @@
         </nav>
 
     </div>
+<?php endif; ?>
 </div>
 <?php require 'partials/footer.php' ?>

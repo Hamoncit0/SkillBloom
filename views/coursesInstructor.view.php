@@ -52,7 +52,7 @@
                         <tr>
                             <td><?php echo htmlspecialchars($course->title); ?></td>
                             <td><?php echo htmlspecialchars($course->deletedAt ?  'deleted' : 'active'); ?></td>
-                            <td>05/06/2024</td>
+                            <td><?php echo htmlspecialchars($course->createdAt); ?></td>
                             <td><?php echo htmlspecialchars($course->instructor); ?></td>
                             <td>
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#modalBan" data-id="<?php echo $course->id; ?>" data-action="ban"   class="btn btn-danger"><i class="bi bi-trash3"></i></a>

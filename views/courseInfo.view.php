@@ -25,11 +25,11 @@
         <button class="btn btn-primary">Add to Cart</button>
     </div>
     <div class="see-course-levels">
-        <?php foreach ($course->levels as $level): ?>
-            <ol class="list-group list-group-numbered">
-                <li class="list-group-item"><?php echo htmlspecialchars($level->title); ?> </li>
-            </ol>
-        <?php endforeach; ?>
+        <ol class="list-group list-group-numbered">
+            <?php foreach ($course->levels as $level): ?>
+            <li class="list-group-item"><?php echo htmlspecialchars($level->title); ?> </li>
+            <?php endforeach; ?>
+        </ol>
     </div>
     <div class="see-course-comments">
         <h4>Comment Section</h4>

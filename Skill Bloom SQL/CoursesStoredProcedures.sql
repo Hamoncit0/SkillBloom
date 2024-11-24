@@ -74,7 +74,6 @@ JOIN course ON course_level.idCourse = course.id
 JOIN level ON course_level.idLevel = level.id
 JOIN user ON course.idInstructor = user.id
 JOIN category ON course.idCategory = category.id;
-WHERE course.id = 5;
 
 CREATE PROCEDURE deleteCourse(
     IN p_id INT
@@ -83,5 +82,15 @@ BEGIN
     UPDATE course
     SET 
         deletedAt = CURRENT_TIMESTAMP
+    WHERE id = p_id;
+END
+
+CREATE PROCEDURE reviveCourse(
+    IN p_id INT
+)
+BEGIN
+    UPDATE course
+    SET 
+        deletedAt = NULL
     WHERE id = p_id;
 END

@@ -46,42 +46,24 @@
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>How to become evil</td>
-                    <td>Active</td>
-                    <td>05/06/2024</td>
-                    <td>Sauron</td>
-                    <td>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalBan"  class="btn btn-danger"><i class="bi bi-ban"></i></a>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalUnban"  class="btn btn-success"><i class="bi bi-check-circle"></i></a>
-                        <a type="button" href="courseAdmin" class="btn btn-secondary"><i class="bi bi-three-dots"></i></a>
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td>How to be immortal</td>
-                    <td>Active</td>
-                    <td>05/06/2024</td>
-                    <td>Elrond</td>
-                    <td>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalBan"  class="btn btn-danger"><i class="bi bi-ban"></i></a>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalUnban"  class="btn btn-success"><i class="bi bi-check-circle"></i></a>
-                        <a type="button" href="courseAdmin" class="btn btn-secondary"><i class="bi bi-three-dots"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>How to make fireworks</td>
-                    <td>Active</td>
-                    <td>05/06/2024</td>
-                    <td>Gandalf</td>
-                    <td>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalBan"  class="btn btn-danger"><i class="bi bi-ban"></i></a>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalUnban"  class="btn btn-success"><i class="bi bi-check-circle"></i></a>
-                        <a type="button" href="courseAdmin" class="btn btn-secondary"><i class="bi bi-three-dots"></i></a>
-                    </td>
-                </tr>
-            </tbody>
+            <?php if (!empty($courseList)): ?>
+              <tbody>
+                <?php foreach ($courseList as $course): ?>
+                  <tr>
+                      <td><?php echo htmlspecialchars($course->title); ?></td>
+                      <td><?php echo htmlspecialchars($course->deletedAt ?  'deleted' : 'active'); ?></td>
+                      <td><?php echo htmlspecialchars($course->createdAt); ?></td>
+                      <td><?php echo htmlspecialchars($course->instructor); ?></td>
+                      <td>
+                          <a type="button" data-bs-toggle="modal" data-bs-target="#modalBan" data-id="<?php echo $course->id; ?> "data-action="ban"  class="btn btn-danger"><i class="bi bi-ban"></i></a>
+                          <a type="button" data-bs-toggle="modal" data-bs-target="#modalUnban" data-id="<?php echo $course->id; ?>" data-action="unban" class="btn btn-success"><i class="bi bi-check-circle"></i></a>
+                          <a type="button" href="courseAdmin?id=<?php echo htmlspecialchars($course->id); ?>" class="btn btn-secondary"><i class="bi bi-three-dots"></i></a>
+                      </td>
+                      
+                  </tr>
+                 <?php endforeach; ?>
+              </tbody>
+            <?php endif; ?>
         </table>
     </div>
 </div>
@@ -99,7 +81,11 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary">Yes, continue</button>
+        <form id="banForm" method="POST">
+            <input type="hidden" name="userId" id="userId" />
+            <input type="hidden" name="action" id="action" value="ban" />
+            <button type="submit" class="btn btn-primary">Yes, continue</button>
+        </form>
       </div>
     </div>
   </div>
@@ -117,8 +103,31 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary">Yes, continue</button>
+        <form id="unbanForm" method="POST">
+            <input type="hidden" name="userId" id="userIdUnban" />
+            <input type="hidden" name="action" id="actionUnban" value="unban" />
+            <button type="submit" class="btn btn-primary">Yes, continue</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+    // Para capturar el evento de clic y rellenar el formulario
+    var banButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
+    banButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var userId = this.getAttribute('data-id'); // Obtener el ID del usuario
+            var action = this.getAttribute('data-action'); // Obtener la acción (ban/unban)
+
+            if (action === "ban") {
+                document.getElementById('userId').value = userId; // Rellenar el ID en el formulario de ban
+                document.getElementById('action').value = action; // Rellenar la acción de ban
+            } else if (action === "unban") {
+                document.getElementById('userIdUnban').value = userId; // Rellenar el ID en el formulario de unban
+                document.getElementById('actionUnban').value = action; // Rellenar la acción de unban
+            }
+        });
+    });
+</script>
