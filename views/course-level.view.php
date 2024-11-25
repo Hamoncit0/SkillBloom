@@ -13,7 +13,7 @@
           <h3><?php echo htmlspecialchars($level->title); ?></h3>
           <div class="buttons">
               <button class="btn btn-dark" onclick="window.location.assign('/courseLevel?course=<?php echo htmlspecialchars($courseId);?>&level=<?php echo htmlspecialchars($idLevelOrder-1); ?>')" <?php echo htmlspecialchars($idLevelOrder!=1?:'disabled'); ?>><i class="bi bi-caret-left-fill"></i>Previous</button>
-              <button class="btn btn-dark" onclick="window.location.assign('/courseLevel?course=<?php echo htmlspecialchars($courseId);?>&level=<?php echo htmlspecialchars($idLevelOrder+1); ?>')">Next<i class="bi bi-caret-right-fill"></i></button>
+              <button class="btn btn-dark" onclick="window.location.assign('/courseLevel?course=<?php echo htmlspecialchars($courseId);?>&level=<?php echo htmlspecialchars($idLevelOrder+1); ?>')" <?php echo htmlspecialchars($idLevelOrder < $totalLevels ? '' : 'disabled'); ?> >Next<i class="bi bi-caret-right-fill"></i></button>
           </div>
       </div>
       <div class="level-description">

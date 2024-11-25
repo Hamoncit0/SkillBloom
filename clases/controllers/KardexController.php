@@ -43,4 +43,53 @@ class KardexController {
        return $kardex;
     }
 
+    public function updateKardex($idCourse, $idUser, $lastLevel){
+        $query = "CALL update_kardex(:idCourse, :idUser, :lastLevel)";
+        $stmt = $this->db->prepare($query);
+ 
+        $stmt->bindParam(':idCourse', $idCourse);
+        $stmt->bindParam(':idUser', $idUser);
+        $stmt->bindParam(':lastLevel', $lastLevel);
+
+        if($stmt->execute()){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+        return false;
+    }
+    public function getTotalLevels($id){
+        $query = "SELECT COUNT(id) AS total FROM course_level WHERE idCourse = :id";
+        $stmt = $this->db->prepare($query);
+ 
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $kardex = [];
+     
+        // Recuperar los datos de los usuarios y almacenarlos en el array
+       $count = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    
+       return $count['total'];
+    }
+    public function getLastLevel($id, $idCourse){
+        $query = "SELECT lastLevel FROM v_kardex WHERE idUser = :id and idCourse = :idCourse;";
+        $stmt = $this->db->prepare($query);
+ 
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':idCourse', $idCourse);
+
+        $stmt->execute();
+        $kardex = [];
+     
+        // Recuperar los datos de los usuarios y almacenarlos en el array
+       $count = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    
+       return $count['lastLevel'];
+    }
+
+
 }
