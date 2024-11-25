@@ -9,7 +9,7 @@ if (isset($_SESSION['user'])) {
     if ($userRole == 1) //ADMINISTRADOR
     {
       echo 
-          '<nav class="navbar navbar-expand-lg navbar-light bg-light">
+          '<nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <!-- Brand and Categories -->
           <a class="navbar-brand" href="/">Skill Bloom</a>

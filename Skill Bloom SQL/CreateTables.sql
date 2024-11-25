@@ -104,7 +104,7 @@ CREATE TABLE kardex (
     progress DECIMAL(5, 2) DEFAULT 0.00,
     idUser INT,
     idCourse INT,
-    lastLevel INT,
+    lastLevel INT DEFAULT 1,
     FOREIGN KEY (idUser) REFERENCES user (id) ON DELETE CASCADE,
     FOREIGN KEY (idCourse) REFERENCES course (id) ON DELETE CASCADE,
     FOREIGN KEY (lastLevel) REFERENCES level (id) ON DELETE SET NULL

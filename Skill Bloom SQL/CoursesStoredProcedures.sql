@@ -94,3 +94,27 @@ BEGIN
         deletedAt = NULL
     WHERE id = p_id;
 END
+
+ -- muestra los cursos que no tiene el usuario
+-- CREATE VIEW v_courses_for_user
+-- AS
+-- SELECT course.*, category.name as category, user.firstName, user.lastName
+-- FROM course
+-- JOIN category ON course.idCategory = category.id
+-- JOIN user ON course.idInstructor = user.id
+-- LEFT JOIN kardex ON course.id = kardex.idCourse and kardex.idUser = 65
+-- WHERE kardex.id IS NULL  ;
+
+
+
+
+SELECT *, kardex.idUser
+FROM v_courses
+LEFT JOIN kardex ON v_courses.id = kardex.idCourse AND kardex.idUser = 0 WHERE kardex.id IS NULL AND deletedAt IS NULL;
+
+CREATE VIEW v_getLevelContent
+AS
+SELECT level.*, course_level.levelOrder, course_level.idCourse, course.idInstructor
+FROM course_level
+JOIN level ON course_level.idLevel = level.id
+JOIN course ON course_level.idCourse = course.id ;

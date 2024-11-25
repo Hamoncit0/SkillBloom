@@ -27,7 +27,7 @@
             <?php endforeach; ?>
         </div>
     <?php else: ?>
-        <p>No hay usuarios disponibles.</p>
+        <p>There aren't any new courses.</p>
     <?php endif; ?>
 
 </div>

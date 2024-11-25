@@ -16,7 +16,7 @@
     </div>
     <div class="see-course-preview bg-body-tertiary">
         <video controls>
-            <source src="../images/video.mp4" type="video/mp4">
+            <source src="./controllers/<?php echo htmlspecialchars($course->previewVideoPath); ?>" type="video/mp4">
             <source src="movie.ogg" type="video/ogg">
             Your browser does not support the video tag.
         </video>

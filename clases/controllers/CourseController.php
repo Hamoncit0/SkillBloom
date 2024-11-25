@@ -91,6 +91,38 @@ class CourseController {
         }
     }
 
+    public function getAllCoursesNotInKardex($id){
+         // Consulta para obtener todos los usuarios
+         $query = " SELECT v_courses.* FROM v_courses LEFT JOIN kardex ON v_courses.id = kardex.idCourse AND kardex.idUser = :id WHERE kardex.id IS NULL AND deletedAt IS NULL;";
+         $stmt = $this->db->prepare($query);
+         $stmt->bindParam(':id', $id);
+         $stmt->execute();
+     
+         // Array para almacenar los usuarios
+         $courses = [];
+     
+         // Recuperar los datos de los usuarios y almacenarlos en el array
+         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+             // Crear un nuevo objeto User con los datos de la fila
+             $instructor =  $row['firstName'] . ' ' . $row['lastName'];
+             $courses[] = new Course(
+                 $row['id'],
+                 $row['title'],
+                 $row['description'],
+                 $row['previewImage'],
+                 $row['previewVideoPath'],
+                 $row['price'],
+                 $row['idCategory'],
+                 $row['idInstructor'],
+                 $row['createdAt'],
+                 '',
+                 $instructor
+             );
+        }
+     
+        return $courses;
+    }
+
     public function getAllCourses(){
          // Consulta para obtener todos los usuarios
          $query = "SELECT * FROM v_courses WHERE deletedAt IS NULL";
@@ -252,9 +284,9 @@ class CourseController {
 
     }
 
-    public function getFilteredCourses($title, $category, $review, $priceMax, $priceMin){
+    public function getFilteredCourses($title, $category, $review, $priceMax, $priceMin, $idUser = 0){
         // Construir la consulta con filtros dinámicos
-        $query = "SELECT * FROM v_courses WHERE deletedAt IS NULL ";
+        $query = "SELECT v_courses.* FROM v_courses LEFT JOIN kardex ON v_courses.id = kardex.idCourse AND kardex.idUser = :idUser WHERE  kardex.id IS NULL AND deletedAt IS NULL ";
         
         if ($category) {
             $query .= " AND idCategory = :category";
@@ -281,6 +313,8 @@ class CourseController {
         if ($priceMin) {
             $stmt->bindParam(':priceMin', $priceMin);
         }
+        $stmt->bindParam(':idUser', $idUser);
+        
         if ($title) {
             $title = "%$title%"; // Usar LIKE
             $stmt->bindParam(':title', $title);
@@ -297,7 +331,7 @@ class CourseController {
             $instructor = $row['firstName'] . ' ' . $row['lastName'];
 
             // Crear un nuevo objeto User con los datos de la fila
-            $users[] = new Course(
+            $courses[] = new Course(
                 $row['id'],
                 $row['title'],
                 $row['description'],
@@ -315,7 +349,7 @@ class CourseController {
         }
 
 
-        return $users;
+        return $courses;
     }
 
     public function getAllCoursesAdmin(){
@@ -371,6 +405,68 @@ class CourseController {
         }
     }
 
+    public function getMyCourses($id){
+        $query = "SELECT * FROM v_course_with_progress WHERE idUser = :id";
+        $stmt = $this->db->prepare($query);
+ 
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $courses = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            // Crear un nuevo objeto User con los datos de la fila
+            $instructor =  $row['firstName'] . ' ' . $row['lastName'];
+            
+            $courses[] = new Course(
+                $row['id'],
+                $row['title'],
+                $row['description'],
+                $row['previewImage'],
+                $row['previewVideoPath'],
+                $row['price'],
+                $row['idCategory'],
+                $row['idInstructor'],
+                $row['createdAt'],
+                '',
+                $instructor,
+                '',
+                $row['deletedAt'],
+                $row['progress'],
+                $row['lastLevel']
+            );
+        }
+        
+        return $courses;
+    }
+
+    public function getLevelInfo($levelOrder, $idCourse) {
+        $query = "SELECT * FROM v_getLevelContent WHERE levelOrder = :levelOrder AND idCourse = :idCourse";
+        $stmt = $this->db->prepare($query);
+    
+        $stmt->bindParam(':levelOrder', $levelOrder, PDO::PARAM_INT);
+        $stmt->bindParam(':idCourse', $idCourse, PDO::PARAM_INT);
+        $stmt->execute();
+       
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        // Verificar si se encontró un resultado
+        if (!$result) {
+            // Aquí puedes manejar la situación según sea necesario
+            // Por ejemplo, lanzar una excepción o devolver null
+            throw new Exception("No se encontró información para el nivel con levelOrder={$levelOrder} e idCourse={$idCourse}");
+        }
+        
+        // Crear la instancia del nivel si se encontró el resultado
+        $level = new Level(
+            $result['title'],
+            $result['description'],
+            $result['contentPath'],
+            $result['id'],
+            $result['idInstructor'],
+        );
+    
+        return $level;
+    }
+    
     // Función para convertir Blob a Base64
     private function convertBlobToBase64($blob) {
         if ($blob) {

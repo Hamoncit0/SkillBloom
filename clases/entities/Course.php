@@ -16,9 +16,12 @@ class Course {
     public $levels;
     public $instructor;
     public $category;
+    public $progress;
+    public $lastLevel;
 
     public function __construct($id = null, $title = null, $description = null, $previewImage = null, $previewVideoPath = null, $price = null,
-                                $idCategory = null, $idInstructor = null, $createdAt = null,  $levels = null, $instructor = null, $category = null, $deletedAt = null) 
+                                $idCategory = null, $idInstructor = null, $createdAt = null,  $levels = null, $instructor = null, $category = null, 
+                                $deletedAt = null, $progress = null, $lastLevel = null) 
     {
         $this->id = $id ;
         $this->title = $title ;
@@ -33,6 +36,8 @@ class Course {
         $this->instructor = $instructor;
         $this->category = $category;
         $this->deletedAt = $deletedAt;
+        $this->progress = $progress;
+        $this->lastLevel = $lastLevel;
     }
 
 }

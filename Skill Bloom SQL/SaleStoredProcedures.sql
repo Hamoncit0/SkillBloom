@@ -38,3 +38,19 @@ BEGIN
         VALUES (sale_id, course_id, (SELECT price FROM course WHERE id = course_id));
     END IF;
 END 
+
+
+CREATE TRIGGER after_sale_detail_insert
+AFTER INSERT ON sale_detail
+FOR EACH ROW
+BEGIN
+    -- Insertar un registro en la tabla `kardex` para el usuario y el curso
+    INSERT INTO kardex (
+        idUser,
+        idCourse
+    )
+    VALUES (
+        (SELECT idUser FROM sale WHERE id = NEW.idSale), -- Obtener el usuario desde la tabla `sale`
+        NEW.idCourse                                    -- ID del curso desde la tabla `sale_detail`
+    );
+END 
