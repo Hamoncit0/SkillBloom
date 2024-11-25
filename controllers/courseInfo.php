@@ -2,6 +2,7 @@
 
 require 'clases/controllers/CourseController.php';
 require 'clases/entities/User.php';
+require 'clases/controllers/ReviewController.php';
 
 // Capturar el ID del curso desde la URL
 $courseId = $_GET['id'] ?? null;
@@ -12,9 +13,11 @@ if (!$courseId) {
 }
 
 $courseController = new CourseController();
+$reviewController = new ReviewController();
 
 // Obtener los detalles del curso
 $course = $courseController->getCourseById($courseId);
+$reviews = $reviewController->getReviews($courseId);
 
 if (!$course) {
     // Manejar el caso en el que no se encuentra el curso

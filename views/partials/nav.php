@@ -1,4 +1,8 @@
 <?php
+require_once 'clases/controllers/CategoryController.php';
+
+$categoryController = new CategoryController();
+$categories = $categoryController->getCategories();
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
@@ -7,9 +11,8 @@ if (isset($_SESSION['user'])) {
     $userAvatar = isset($_SESSION['user_avatar']) ? $_SESSION['user_avatar'] : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgYN6WeHs6tndhVLPPLjId5KiXOlZ26pLLig&s'; // Asegúrate de obtener la URL de la imagen
 
     if ($userRole == 1) //ADMINISTRADOR
-    {
-      echo 
-          '<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    {?>
+          <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <!-- Brand and Categories -->
           <a class="navbar-brand" href="/">Skill Bloom</a>
@@ -22,17 +25,19 @@ if (isset($_SESSION['user'])) {
               <button class="btn nav-link" data-bs-toggle="dropdown" aria-expanded="false">
                 Categories
               </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Development</a></li>
-                <li><a class="dropdown-item" href="#">Music</a></li>
-                <li><a class="dropdown-item" href="#">Photography</a></li>
-              </ul>
+              <?php if (!empty($categories)): ?>
+                <ul class="dropdown-menu">
+                  <?php foreach ($categories as $category): ?>
+                    <li><a class="dropdown-item" href="/advancedSearch?category=<?php echo htmlspecialchars($category->id); ?>"><?php echo htmlspecialchars($category->name); ?></a></li>
+                  <?php endforeach; ?>
+                </ul>
+              <?php endif; ?>
             </li>
           </ul>
       
             <!-- Search Bar in the Middle -->
-            <form class="d-flex mx-auto col-7">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form  method="GET" action="/advancedSearch" class="d-flex mx-auto col-7">
+              <input class="form-control me-2" type="search" placeholder="Search" name="title" aria-label="Search">
               <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search" style="font-size: 1.2rem; font-weight: bolder;"></i></button>
             </form>
       
@@ -44,7 +49,7 @@ if (isset($_SESSION['user'])) {
               <li>
                 <div class="dropdown">
                     <a data-bs="dropdown" id="navAvatarDropdown" role="button" href="/editProfile">
-                        <img class="rounded-circle nav-avatar" src="' . $userAvatar . '" alt="User Avatar" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle nav-avatar" src="<?php echo htmlspecialchars($userAvatar); ?>" alt="User Avatar" style="width: 40px; height: 40px;">
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navAvatarDropdown">
                         <a href="/editProfile" class="dropdown-item">Edit Your Profile</a>
@@ -60,11 +65,11 @@ if (isset($_SESSION['user'])) {
             </ul>
           </div>
         </div>
-      </nav>';
+      </nav><?php
     }
     else if($userRole == 2) //INSTRUCTOR
     {
-      echo '
+      ?>
       <nav class="navbar navbar-expand-lg  bg-body-tertiary">
     <div class="container-fluid">
       <!-- Brand and Categories -->
@@ -78,17 +83,19 @@ if (isset($_SESSION['user'])) {
           <button class="btn nav-link" data-bs-toggle="dropdown" aria-expanded="false">
             Categories
           </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Development</a></li>
-            <li><a class="dropdown-item" href="#">Music</a></li>
-            <li><a class="dropdown-item" href="#">Photography</a></li>
-          </ul>
+          <?php if (!empty($categories)): ?>
+                <ul class="dropdown-menu">
+                  <?php foreach ($categories as $category): ?>
+                    <li><a class="dropdown-item" href="/advancedSearch?category=<?php echo htmlspecialchars($category->id); ?>"><?php echo htmlspecialchars($category->name); ?></a></li>
+                  <?php endforeach; ?>
+                </ul>
+              <?php endif; ?>
         </li>
       </ul>
   
         <!-- Search Bar in the Middle -->
-        <form class="d-flex mx-auto col-7">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form  method="GET" action="/advancedSearch" class="d-flex mx-auto col-7">
+          <input class="form-control me-2" type="search" placeholder="Search" name="title" aria-label="Search">
           <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search" style="font-size: 1.2rem; font-weight: bolder;"></i></button>
         </form>
   
@@ -103,7 +110,7 @@ if (isset($_SESSION['user'])) {
           <li>
             <div class="dropdown">
                 <a data-bs="dropdown" id="navAvatarDropdown" role="button" href="/editProfile">
-                    <img class="rounded-circle nav-avatar" src="' . $userAvatar . '" alt="User Avatar" style="width: 40px; height: 40px;">
+                    <img class="rounded-circle nav-avatar" src="<?php echo htmlspecialchars($userAvatar); ?>" alt="User Avatar" style="width: 40px; height: 40px;">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navAvatarDropdown">
                     <a href="/editProfile" class="dropdown-item">Edit Your Profile</a>
@@ -120,11 +127,11 @@ if (isset($_SESSION['user'])) {
       </div>
     </div>
   </nav>
-      ';
+      <?php
     }
     else if($userRole == 3) //ESTUDIANTE
     {
-       echo '
+       ?> 
        <nav class="navbar navbar-expand-lg  bg-body-tertiary">
     <div class="container-fluid">
       <!-- Brand and Categories -->
@@ -138,17 +145,19 @@ if (isset($_SESSION['user'])) {
           <button class="btn nav-link" data-bs-toggle="dropdown" aria-expanded="false">
             Categories
           </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Development</a></li>
-            <li><a class="dropdown-item" href="#">Music</a></li>
-            <li><a class="dropdown-item" href="#">Photography</a></li>
-          </ul>
+          <?php if (!empty($categories)): ?>
+                <ul class="dropdown-menu">
+                  <?php foreach ($categories as $category): ?>
+                    <li><a class="dropdown-item" href="/advancedSearch?category=<?php echo htmlspecialchars($category->id); ?>"><?php echo htmlspecialchars($category->name); ?></a></li>
+                  <?php endforeach; ?>
+                </ul>
+              <?php endif; ?>
         </li>
       </ul>
   
         <!-- Search Bar in the Middle -->
-        <form class="d-flex mx-auto col-7">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form  method="GET" action="/advancedSearch" class="d-flex mx-auto col-7">
+          <input class="form-control me-2" type="search" placeholder="Search" name="title" aria-label="Search">
           <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search" style="font-size: 1.2rem; font-weight: bolder;"></i></button>
         </form>
   
@@ -166,7 +175,7 @@ if (isset($_SESSION['user'])) {
           <li>
             <div class="dropdown">
                 <a data-bs="dropdown" id="navAvatarDropdown" role="button" href="/editProfile">
-                    <img class="rounded-circle nav-avatar" src="' . $userAvatar . '" alt="User Avatar" style="width: 40px; height: 40px;">
+                    <img class="rounded-circle nav-avatar" src="<?php echo htmlspecialchars($userAvatar); ?>" alt="User Avatar" style="width: 40px; height: 40px;">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navAvatarDropdown">
                     <a href="/editProfile" class="dropdown-item">Edit Your Profile</a>
@@ -181,13 +190,13 @@ if (isset($_SESSION['user'])) {
         </ul>
       </div>
     </div>
-  </nav>';
+  </nav>
+  <?php
     }
 }else //NO ESTA LOGGEADO
 {
-  
-  echo
-  '<nav class="navbar navbar-expand-lg  bg-body-tertiary">
+  ?>
+  <nav class="navbar navbar-expand-lg  bg-body-tertiary">
       <div class="container-fluid">
         <!-- Brand and Categories -->
         <a class="navbar-brand" href="/">Skill Bloom</a>
@@ -200,19 +209,21 @@ if (isset($_SESSION['user'])) {
             <button class="btn nav-link" data-bs-toggle="dropdown" aria-expanded="false">
               Categories
             </button>
-            <ul class="dropdown-menu dropdown-menu">
-              <li><a class="dropdown-item" href="/exploreCourses">Development</a></li>
-              <li><a class="dropdown-item" href="/exploreCourses">Music</a></li>
-              <li><a class="dropdown-item" href="/exploreCourses">Photography</a></li>
-            </ul>
+            <?php if (!empty($categories)): ?>
+                <ul class="dropdown-menu">
+                  <?php foreach ($categories as $category): ?>
+                    <li><a class="dropdown-item" href="/advancedSearch?category=<?php echo htmlspecialchars($category->id); ?>"><?php echo htmlspecialchars($category->name); ?></a></li>
+                  <?php endforeach; ?>
+                </ul>
+              <?php endif; ?>
           </li>
         </ul>
     
           <!-- Search Bar in the Middle -->
-          <form class="d-flex mx-auto col-7">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <a class="btn btn-outline-primary" type="submit" href="/exploreCourses"><i class="bi bi-search" style="font-size: 1.2rem; font-weight: bolder;"></i></a>
-          </form>
+        <form  method="GET" action="/advancedSearch" class="d-flex mx-auto col-7">
+          <input class="form-control me-2" type="search" placeholder="Search" name="title" aria-label="Search">
+          <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search" style="font-size: 1.2rem; font-weight: bolder;"></i></button>
+        </form>
     
           <!-- Login and Sign Up on the Right -->
           <ul class="navbar-nav ms-auto col-4">
@@ -231,7 +242,7 @@ if (isset($_SESSION['user'])) {
           </ul>
         </div>
       </div>
-    </nav>';
-
+    </nav>
+<?php
 }
 ?>

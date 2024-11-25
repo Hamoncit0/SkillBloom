@@ -33,7 +33,7 @@
 
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <form action="" id="reviewForm">
+      <form method="POST" action="/courseLevel?course=<?php echo htmlspecialchars($courseId); ?>&level=<?php echo htmlspecialchars($idLevelOrder); ?>" id="reviewForm">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="staticBackdropLabel">Review Course</h1>
@@ -47,7 +47,7 @@
               </div>
               <div class="mb-3" style="display:flex; align-items: center;">
                   <label for="score">Review score:</label>
-                  <input name="score" id="reviewScore" type="number" class="form-control" max=5 min=0 style="width: 5rem; margin-left: 0.5rem"> <i class="bi bi-star-fill"></i>
+                  <input name="rating" id="reviewScore" type="number" class="form-control" max=5 min=0 style="width: 5rem; margin-left: 0.5rem"> <i class="bi bi-star-fill"></i>
                   
                 </div>
                 <small class="text-danger" id="reviewScoreError"></small>

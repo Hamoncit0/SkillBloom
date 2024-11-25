@@ -307,10 +307,11 @@
 .comment-pfp{
     width: 4rem;
     height: 4rem;
+    margin: 10px;
 }
 .comment-profile{
     display: flex;
-    align-items:self-end
+    align-items:center;
 }
 .comment-admin-profile{
     display: flex;
@@ -318,7 +319,7 @@
 }
 .comment-profile > span{
     text-align: justify;
-    line-height: 0.1;
+    line-height: 0.4;
 }
 .see-course-info{
     min-height: 100vh;
