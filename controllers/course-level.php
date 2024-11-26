@@ -40,22 +40,20 @@ if(isset($_SESSION['user'])){
     }
     //checar que el level que esta viendo sea +1 del last level para q sea valido el progreso
     $lastLevel = $kardexController->getLastLevel($userId, $courseId);
-    if($idLevelOrder >= $lastLevel+1 && $lastLevel <= $totalLevels){
+    if($idLevelOrder >= $lastLevel+1 && $lastLevel <= $totalLevels || $lastLevel == 1){
         $updated = $kardexController->updateKardex($courseId, $userId, $idLevelOrder);
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $reviewController = new ReviewController();
+        $reviewController = new ReviewController();
 
-            // Recuperar los valores del formulario
-            $review = $_POST['review'];
-            $rating = $_POST['rating'];
-            $newReview = new Review(0, $userId, $courseId, $review, $rating);
+        // Recuperar los valores del formulario
+        $review = $_POST['review'];
+        $rating = $_POST['rating'];
+        $newReview = new Review(0, $userId, $courseId, $review, $rating);
 
-            // Actualizar el usuario en la base de datos
-            $updated = $reviewController->createReview($newReview);
-            
-        
+        // Actualizar el usuario en la base de datos
+        $updated = $reviewController->createReview($newReview);
         
     }
 

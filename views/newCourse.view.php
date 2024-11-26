@@ -48,6 +48,9 @@
             <h2>Levels</h2>
             <div id="levels-container">
             </div>
+            <div id="loading" class="spinner-border text-primary" role="status" hidden>
+                <span class="visually-hidden">Loading...</span>
+            </div>
             
             <button class="btn btn-secondary" id="addLevelBtn">Create Level</button>
             <button type="submit" class="btn btn-primary" id="createCourseBtn">Create Course</button>

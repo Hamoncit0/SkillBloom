@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newCourse->idInstructor = $userId;
 
     // Manejar la imagen y el video
-    $newCourse->previewImage = $courseData['previewImage'];
+    $newCourse->previewImage = $_POST['previewImage'];
 
     if (isset($_FILES['previewVideo']) && $_FILES['previewVideo']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = __DIR__ . '/uploads/videos/'; // Carpeta donde se guardarán los videos
@@ -52,14 +52,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $newCourseId = $courseController->createCourse($newCourse);
 
-    $levelsData = json_decode($_POST['levels'], true);
 
     $courseLevels = [];
-    foreach ($levelsData as $level) {
+    foreach ($_POST['levels'] as $index => $level) {
         $newLevel = new Level();
         $newLevel->title = $level['name'];
         $newLevel->description = $level['description'];
-        $newLevel->contentPath = 'contenido';
+
+        // Manejar archivo de contenido
+        if (isset($_FILES["levels"]["name"][$index]["content"]) && $_FILES["levels"]["error"][$index]["content"] === UPLOAD_ERR_OK) {
+            $levelsDir = __DIR__ . '/uploads/levels/';
+            if (!is_dir($levelsDir)) {
+                mkdir($levelsDir, 0777, true);
+            }
+
+            $levelFileName = uniqid('level_', true) . '.' . pathinfo($_FILES["levels"]["name"][$index]["content"], PATHINFO_EXTENSION);
+            $levelFilePath = $levelsDir . $levelFileName;
+
+            if (move_uploaded_file($_FILES["levels"]["tmp_name"][$index]["content"], $levelFilePath)) {
+                $newLevel->contentPath = '/uploads/levels/' . $levelFileName;
+            } else {
+                echo json_encode(['error' => 'Failed to save level content.']);
+                exit;
+            }
+        }
 
         $courseLevels[] = $newLevel;
     }
@@ -69,15 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $courseController->bindLevelToCourse($newCourseId, $levelsId);
     
 
-    echo json_encode(['success' => true]);
-}
-
-function debug_to_console($data) {
-    $output = $data;
-    if (is_array($output))
-        $output = implode(',', $output);
-
-    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+    echo json_encode(['success' => true, 'message' => 'Course created successfully.']);
+    exit;
 }
 
 require 'views/newCourse.view.php';

@@ -15,7 +15,7 @@
         <?php if (!empty($courseList)): ?>
             <?php foreach ($courseList as $course): ?>
                 <div class="course bg-light-subtle">
-                    <img src="<?php echo $course->previewImage ?: 'SkillBloom_icon.png' ?>" alt="">
+                    <img src="<?php echo $course->previewImage ?: './images/SkillBloom_icon.png' ?>" alt="">
                     <h3><?php echo htmlspecialchars($course->title); ?></h3>
                     <p><?php echo htmlspecialchars($course->instructor); ?></p>
                     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuemin="0" aria-valuemax="100" style="margin: 0.5rem; background-color: #0000006b">

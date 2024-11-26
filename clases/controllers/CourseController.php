@@ -15,6 +15,9 @@ class CourseController {
     }
 
     public function createCourse($course){
+
+        $binaryImage = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $course->previewImage));
+
         $query = "CALL register_course(:title, :description, :previewImage, 
                 :previewVideoPath, :price, :idCategory, :idInstructor)";
  
@@ -22,7 +25,7 @@ class CourseController {
  
         $stmt->bindParam(':title', $course->title);
         $stmt->bindParam(':description', $course->description);
-        $stmt->bindParam(':previewImage', $course->previewImage);
+        $stmt->bindParam(':previewImage', $binaryImage, PDO::PARAM_LOB);
         $stmt->bindParam(':previewVideoPath', $course->previewVideoPath);
         $stmt->bindParam(':price', $course->price);
         $stmt->bindParam(':idCategory', $course->idCategory);
@@ -111,7 +114,7 @@ class CourseController {
                  $row['id'],
                  $row['title'],
                  $row['description'],
-                 $row['previewImage'],
+                 $this->convertBlobToBase64($row['previewImage']),
                  $row['previewVideoPath'],
                  $row['price'],
                  $row['idCategory'],
@@ -149,7 +152,7 @@ class CourseController {
                  $row['id'],
                  $row['title'],
                  $row['description'],
-                 $row['previewImage'],
+                 $this->convertBlobToBase64($row['previewImage']),
                  $row['previewVideoPath'],
                  $row['price'],
                  $row['idCategory'],
@@ -190,7 +193,7 @@ class CourseController {
                  $row['id'],
                  $row['title'],
                  $row['description'],
-                 $row['previewImage'],
+                 $this->convertBlobToBase64($row['previewImage']),
                  $row['previewVideoPath'],
                  $row['price'],
                  $row['idCategory'],
@@ -373,7 +376,7 @@ class CourseController {
                 $row['id'],
                 $row['title'],
                 $row['description'],
-                $row['previewImage'],
+                $this->convertBlobToBase64($row['previewImage']),
                 $row['previewVideoPath'],
                 $row['price'],
                 $row['idCategory'],
@@ -412,7 +415,7 @@ class CourseController {
                  $row['id'],
                  $row['title'],
                  $row['description'],
-                 $row['previewImage'],
+                 $this->convertBlobToBase64($row['previewImage']),
                  $row['previewVideoPath'],
                  $row['price'],
                  $row['idCategory'],
@@ -461,7 +464,7 @@ class CourseController {
                 $row['id'],
                 $row['title'],
                 $row['description'],
-                $row['previewImage'],
+                $this->convertBlobToBase64($row['previewImage']),
                 $row['previewVideoPath'],
                 $row['price'],
                 $row['idCategory'],
