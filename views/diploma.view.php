@@ -1,5 +1,5 @@
 <?php require "partials/head.php" ?>
-<?php require "partials/nav.php" ?>
+<?php require "partials/nav.php"; ?>
 <div class="diploma">
     <div class="diploma-content bg-light-subtle">
         <h2>Certificate of Completion</h2>
@@ -14,7 +14,7 @@
         <h3>Gandalf</h3>
         <div class="buttons">
 
-            <button class="btn btn-primary">Export to pdf</button>
+        <button class="btn btn-primary" onclick="window.location.href='/exportPDF'">Export to PDF</button>
             <button class="btn btn-primary">Go Back</button>
         </div>
     </div>
