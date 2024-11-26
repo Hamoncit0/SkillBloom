@@ -60,7 +60,36 @@
                     <img src="<?php echo $course->previewImage ?: 'SkillBloom_icon.png' ?>" alt="huh">
                     <h3><?php echo htmlspecialchars($course->title); ?></h3>
                     <p><?php echo htmlspecialchars($course->instructor); ?></p>
-                    <span>4.7 <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i> (22,000) </span>
+                    <span>
+                            <?php 
+                            echo $course->rating 
+                                ? htmlspecialchars(number_format($course->rating, $course->rating == floor($course->rating) ? 0 : 1)) 
+                                : ''; 
+                            ?>
+                      <?php 
+                          if ($course->rating === null) {
+                              echo 'No reviews'; // Mostrar mensaje cuando no hay calificación
+                          } else {
+                              $fullStars = floor($course->rating); // Número de estrellas completas
+                              $halfStar = ($course->rating - $fullStars >= 0.5) ? true : false; // Verificar si hay media estrella
+                              $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0); // Estrellas vacías
+
+                              // Estrellas completas
+                              for ($i = 0; $i < $fullStars; $i++) {
+                                  echo '<i class="bi bi-star-fill"></i>';
+                              }
+
+                              // Media estrella
+                              if ($halfStar) {
+                                  echo '<i class="bi bi-star-half"></i>';
+                              }
+
+                              // Estrellas vacías
+                              for ($i = 0; $i < $emptyStars; $i++) {
+                                  echo '<i class="bi bi-star"></i>';
+                              }
+                          }
+                          ?></span>
                     <p class="fs-4 fw-bold">MX$<?php echo htmlspecialchars($course->price); ?></p>
                     <button 
                         class="btn btn-primary add-to-cart" 

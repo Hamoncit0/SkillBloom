@@ -18,6 +18,7 @@ $reviewController = new ReviewController();
 // Obtener los detalles del curso
 $course = $courseController->getCourseById($courseId);
 $reviews = $reviewController->getReviews($courseId);
+$stadistics = $courseController->getCourseStadistics($courseId);
 
 if (!$course) {
     // Manejar el caso en el que no se encuentra el curso

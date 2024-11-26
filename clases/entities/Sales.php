@@ -9,6 +9,7 @@ class Sales {
     public $price;
     public $month;
     public $total;
+    public $finishedStudents;
 
     public function __construct($id = null, $course = null, $students = null, $rating = null, $price = null, $month = null, $total = null) 
     {

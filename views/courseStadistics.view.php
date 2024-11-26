@@ -6,13 +6,18 @@
         <h2><?php echo htmlspecialchars($course->title); ?></h2>
         <span>Category: <?php echo htmlspecialchars($course->category); ?></span>
         <h4>Review Score:</h4>
-        <h6>4.5/5</h6>
-        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar" style="width: 90%"></div>
+        <h6>  <?php 
+                            echo $stadistics->rating 
+                                ? htmlspecialchars(number_format($stadistics->rating, $stadistics->rating == floor($stadistics->rating) ? 0 : 1)) . ' <i class="bi bi-star-fill"></i>' 
+                                : 'No reviews'; 
+                            ?></h6>
+
+        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="<?php echo htmlspecialchars($stadistics->rating ? $stadistics->rating / 5 * 100 : 0); ?>" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: <?php echo $stadistics->rating ? htmlspecialchars($stadistics->rating / 5 * 100) . '%' : '0%'; ?>"></div>
         </div>
-        <h3>Enrolled Students: 80</h3>
-        <h4>Students who completed this course: 65</h4>
-        <h3>Total income: MX $80,000.00</h3>
+        <h3>Enrolled Students: <?php echo htmlspecialchars($stadistics->students); ?></h3>
+        <h4>Students who completed this course: <?php echo htmlspecialchars($stadistics->finishedStudents); ?></h4>
+        <h3>Total income: MX $<?php echo htmlspecialchars($stadistics->total); ?></h3>
         <p>Description: <?php echo htmlspecialchars($course->description); ?></p>
     </div>
     <div class="see-course-preview bg-body-tertiary" style="justify-self:right;">

@@ -18,10 +18,11 @@ class Course {
     public $category;
     public $progress;
     public $lastLevel;
+    public $rating;
 
     public function __construct($id = null, $title = null, $description = null, $previewImage = null, $previewVideoPath = null, $price = null,
                                 $idCategory = null, $idInstructor = null, $createdAt = null,  $levels = null, $instructor = null, $category = null, 
-                                $deletedAt = null, $progress = null, $lastLevel = null) 
+                                $deletedAt = null, $progress = null, $lastLevel = null, $rating = null) 
     {
         $this->id = $id ;
         $this->title = $title ;
@@ -38,7 +39,8 @@ class Course {
         $this->deletedAt = $deletedAt;
         $this->progress = $progress;
         $this->lastLevel = $lastLevel;
-    }
+        $this->rating = $rating;
+    }   
 
 }
 ?>

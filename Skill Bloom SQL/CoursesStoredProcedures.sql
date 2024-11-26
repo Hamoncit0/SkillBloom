@@ -62,10 +62,12 @@ END;
 
 
 CREATE VIEW v_courses AS
-SELECT course.*, category.name, user.firstName, user.lastName
+SELECT course.*, category.name, user.firstName, user.lastName, AVG(review.rating) as rating
 FROM course
 JOIN category ON course.idCategory = category.id
-JOIN user ON course.idInstructor = user.id;
+JOIN user ON course.idInstructor = user.id
+LEFT JOIN review ON review.idCourse = course.id
+GROUP BY course.id;
 
 CREATE VIEW v_courses_levels AS
 SELECT course.*, category.name as category, user.firstName, user.lastName, level.id as idLevel, level.title as levelTitle, level.description as levelDescription, level.contentPath
@@ -147,6 +149,7 @@ GROUP BY course.id;
 
 
 CREATE VIEW v_courses_bought AS
+
 SELECT 
     sale_detail.idCourse, 
     SUM(sale_detail.price) AS total_price, 
@@ -175,3 +178,13 @@ LEFT JOIN kardex ON course.id = kardex.idCourse
 LEFT JOIN review ON course.id = review.idCourse
 LEFT JOIN v_courses_bought ON course.id = v_courses_bought.idCourse
 GROUP BY course.id, course.idInstructor, course.title, course.price;
+
+
+CREATE VIEW v_course_stadistics
+AS
+SELECT course.id, AVG(review.rating) as rating, COUNT(DISTINCT kardex.id) as enrolledStudents, COUNT(DISTINCT case when kardex.progress = 100 then kardex.id end) as finishedStudents, v_courses_bought.total_price AS total
+FROM course
+LEFT JOIN review ON review.idCourse = course.id
+JOIN kardex ON kardex.idCourse = course.id
+JOIN v_courses_bought ON v_courses_bought.idCourse = course.id
+GROUP BY course.id;

@@ -56,7 +56,8 @@
                             <td><?php echo htmlspecialchars($course->instructor); ?></td>
                             <td>
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#modalBan" data-id="<?php echo $course->id; ?>" data-action="ban"   class="btn btn-danger"><i class="bi bi-trash3"></i></a>
-                                <a type="button" href="editCourse?id=<?php echo htmlspecialchars($course->id); ?>" class="btn btn-secondary"><i class="bi bi-pencil"></i></a>
+                                <a type="button" href="editCourse?id=<?php echo htmlspecialchars($course->id); ?>" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
+                                <a type="button" href="courseStadistics?id=<?php echo htmlspecialchars($course->id); ?>" class="btn btn-secondary"><i class="bi bi-three-dots"></i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

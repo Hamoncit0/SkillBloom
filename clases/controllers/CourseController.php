@@ -118,7 +118,12 @@ class CourseController {
                  $row['idInstructor'],
                  $row['createdAt'],
                  '',
-                 $instructor
+                 $instructor,
+                 '',
+                 '',
+                 '',
+                 '',
+                 $row['rating']
              );
         }
      
@@ -151,7 +156,12 @@ class CourseController {
                  $row['idInstructor'],
                  $row['createdAt'],
                  '',
-                 $instructor
+                 $instructor,
+                 '',
+                 '',
+                 '',
+                 '',
+                 $row['rating']
              );
         }
      
@@ -245,6 +255,32 @@ class CourseController {
        if ($course !== null) {
             $course->levels = $levels;
         }
+
+        return $course;
+
+    }
+
+    public function getCourseStadistics($id){
+        // SQL query for calling the stored procedure
+        $query = "SELECT * FROM v_course_stadistics WHERE id = :id";
+
+        $stmt = $this->db->prepare($query);
+
+        // Bind the parameters
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        //cambiar esto para conseguir cada level
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $course = new Sales();
+
+        $course->id = $row['id'];
+        $course->rating = $row['rating'];
+        $course->students = $row['enrolledStudents'];
+        $course->finishedStudents = $row['finishedStudents'];
+        $course->total = $row['total'];
+       
 
         return $course;
 
@@ -347,6 +383,9 @@ class CourseController {
                 $instructor,
                 $row['name'],
                 $row['deletedAt'],
+                '',
+                '',
+                $row['rating']
             );
         }
 
