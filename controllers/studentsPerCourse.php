@@ -1,6 +1,18 @@
 <?php
 
-$heading = 'Students per course';
+require 'clases/controllers/CourseController.php';
+require 'clases/entities/User.php';
 
+// Verifica si el usuario está logueado// Iniciar la sesión si no está ya iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-require 'views/studentsPerCourse.view.php';
+if(isset($_SESSION['user'])){
+    $userId = $_SESSION['user']->id;
+    $courseController = new CourseController();
+    
+    $studentsPerCourse= $courseController->getStudentsPerCourse($userId);
+    
+    require 'views/studentsPerCourse.view.php';
+}

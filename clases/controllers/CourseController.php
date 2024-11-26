@@ -2,7 +2,9 @@
 include_once 'clases/Database.php';
 include_once 'clases/entities/Course.php';
 include_once 'clases/entities/Level.php';
- 
+include_once 'clases/entities/Sales.php';
+include_once 'clases/entities/StudentsPC.php';
+
 
 class CourseController {
     private $db;
@@ -438,6 +440,55 @@ class CourseController {
         return $courses;
     }
 
+    public function getStudentsPerCourse($id){
+        $query = "SELECT * FROM v_students_per_course WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+ 
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $studentsPerCourse = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            // Crear un nuevo objeto User con los datos de la fila
+            $name =  $row['firstName'] . ' ' . $row['lastName'];
+            
+            $studentsPerCourse[] = new StudentsPC(
+                $row['id'],
+                $name,
+                $row['title'],
+                $row['progress'],
+                $row['enrolledAt'],
+                $row['status'],
+                $row['price'],
+                $row['name']
+            );
+        }
+        
+        return $studentsPerCourse;
+    }
+
+    public function getSalesSummary($id){
+        $query = "SELECT * FROM v_sales_summary WHERE idInstructor = :id";
+        $stmt = $this->db->prepare($query);
+ 
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $sales = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            
+            $sales[] = new Sales(
+                $row['idInstructor'],
+                $row['title'],
+                $row['students'],
+                $row['rating'],
+                $row['price'],
+                $row['per_month'],
+                $row['total']
+            );
+        }
+        
+        return $sales;
+    }
+
     public function getLevelInfo($levelOrder, $idCourse) {
         $query = "SELECT * FROM v_getLevelContent WHERE levelOrder = :levelOrder AND idCourse = :idCourse";
         $stmt = $this->db->prepare($query);
@@ -466,6 +517,7 @@ class CourseController {
     
         return $level;
     }
+
     
     // Función para convertir Blob a Base64
     private function convertBlobToBase64($blob) {

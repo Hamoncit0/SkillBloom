@@ -45,36 +45,23 @@
                     <th scope="col">Payment Method</th>
                 </tr>
             </thead>
+            <?php if (!empty($studentsPerCourse)): ?>
             <tbody>
+            <?php foreach ($studentsPerCourse as $course): ?>
                 <tr>
-                    <td>Gandalf</td>
-                    <td>Javascript the final course</td>
-                    <td>75%</td>
-                    <td>05/06/2024</td>
-                    <td>In progress</td>
-                    <td>MX $500.0</td>
-                    <td>Paypal</td>
+                    <td><?php echo htmlspecialchars($course->name); ?></td>
+                    <td><?php echo htmlspecialchars($course->course); ?></td>
+                    <td><?php echo htmlspecialchars($course->progress); ?>%</td>
+                    <td><?php echo htmlspecialchars($course->inscriptionDate); ?></td>
+                    <td><?php echo htmlspecialchars($course->state); ?></td>
+                    <td>MX $<?php echo htmlspecialchars($course->total); ?></td>
+                    <td><?php echo htmlspecialchars($course->paymentMethod); ?></td>
                 </tr>
-                <tr>
-                    <td>Gandalf</td>
-                    <td>Javascript the final course</td>
-                    <td>75%</td>
-                    <td>05/06/2024</td>
-                    <td>In progress</td>
-                    <td>MX $500.0</td>
-                    <td>Paypal</td>
-                </tr>
-                <tr>
-                    <td>Gandalf</td>
-                    <td>Javascript the final course</td>
-                    <td>75%</td>
-                    <td>05/06/2024</td>
-                    <td>In progress</td>
-                    <td>MX $500.0</td>
-                    <td>Paypal</td>
-                </tr>
-                
+            <?php endforeach; ?>
             </tbody>
+          <?php else: ?>
+              <p>No hay usuarios disponibles.</p>
+          <?php endif; ?>
         </table>
     </div>
     <button class="btn btn-primary">Export to pdf</button>

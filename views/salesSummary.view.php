@@ -29,31 +29,27 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Javascript the final course</td>
-                    <td>80</td>
-                    <td>4.7 <i class="bi bi-star-fill"></i></td>
-                    <td>MX $500.00</td>
-                    <td>MX $2500.00</td>
-                    <td>MX $40,000.00</td>
-                </tr>
-                <tr>
-                    <td>Javascript the final course</td>
-                    <td>80</td>
-                    <td>4.7 <i class="bi bi-star-fill"></i></td>
-                    <td>MX $500.00</td>
-                    <td>MX $2500.00</td>
-                    <td>MX $40,000.00</td>
-                </tr>
-                <tr>
-                    <td>Javascript the final course</td>
-                    <td>80</td>
-                    <td>4.7 <i class="bi bi-star-fill"></i></td>
-                    <td>MX $500.00</td>
-                    <td>MX $2500.00</td>
-                    <td>MX $40,000.00</td>
-                </tr>
                 
+            <?php if (!empty($sales)): ?>
+                <?php foreach ($sales as $sale): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($sale->course); ?></td>
+                        <td><?php echo htmlspecialchars($sale->students); ?></td>
+                        <td>
+                            <?php 
+                            echo $sale->rating 
+                                ? htmlspecialchars(number_format($sale->rating, $sale->rating == floor($sale->rating) ? 0 : 1)) . ' <i class="bi bi-star-fill"></i>' 
+                                : 'No reviews'; 
+                            ?>
+                        </td>
+                        <td>MX $<?php echo htmlspecialchars($sale->price); ?></td>
+                        <td>MX $<?php echo htmlspecialchars($sale->month); ?></td>
+                        <td>MX $<?php echo htmlspecialchars($sale->total); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No hay usuarios disponibles.</p>
+            <?php endif; ?>
                 
             </tbody>
         </table>

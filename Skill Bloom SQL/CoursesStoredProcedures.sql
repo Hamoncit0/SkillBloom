@@ -118,3 +118,60 @@ SELECT level.*, course_level.levelOrder, course_level.idCourse, course.idInstruc
 FROM course_level
 JOIN level ON course_level.idLevel = level.id
 JOIN course ON course_level.idCourse = course.id ;
+
+CREATE VIEW v_students_per_course
+AS
+SELECT DISTINCT user.id, Student.firstName, Student.lastName, course.title, kardex.progress, kardex.enrolledAt, kardex.status, sale_detail.price, payment_method.name
+FROM course
+JOIN user ON course.idInstructor = user.id
+JOIN kardex ON course.id = kardex.idCourse
+JOIN sale_detail ON sale_detail.idCourse = course.id
+JOIN sale ON sale_detail.idSale = sale.id
+JOIN payment_method ON sale.idPaymentMethod = payment_method.id
+JOIN user as Student ON Student.id = kardex.idUser;
+
+CREATE VIEW v_sales_summary
+AS
+SELECT course.idInstructor, course.title, COUNT(DISTINCT kardex.id) as students, AVG(review.rating) as rating, course.price, SUM(CASE 
+            WHEN MONTH(sale.createdAt) = MONTH(CURDATE()) 
+            AND YEAR(sale.createdAt) = YEAR(CURDATE()) 
+            THEN sale_detail.price 
+            ELSE 0 
+        END) AS per_month, SUM(sale_detail.price) as total
+FROM course
+JOIN kardex ON course.id = kardex.idCourse
+LEFT JOIN review ON course.id = review.idCourse
+JOIN sale_detail ON course.id = sale_detail.idCourse
+JOIN sale ON sale.id = sale_detail.idSale
+GROUP BY course.id;
+
+
+CREATE VIEW v_courses_bought AS
+SELECT 
+    sale_detail.idCourse, 
+    SUM(sale_detail.price) AS total_price, 
+    SUM(CASE 
+            WHEN MONTH(sale.createdAt) = MONTH(CURDATE()) 
+            AND YEAR(sale.createdAt) = YEAR(CURDATE()) 
+            THEN sale_detail.price 
+            ELSE 0 
+        END) AS total_per_month
+FROM sale_detail
+JOIN sale ON sale_detail.idSale = sale.id
+GROUP BY sale_detail.idCourse;
+
+CREATE VIEW v_sales_summary
+AS
+SELECT 
+    course.idInstructor, 
+    course.title, 
+    COUNT(DISTINCT kardex.id) AS students, 
+    AVG(review.rating) AS rating, 
+    course.price, 
+    COALESCE(v_courses_bought.total_per_month, 0) AS per_month, 
+    COALESCE(v_courses_bought.total_price, 0) AS total
+FROM course
+LEFT JOIN kardex ON course.id = kardex.idCourse
+LEFT JOIN review ON course.id = review.idCourse
+LEFT JOIN v_courses_bought ON course.id = v_courses_bought.idCourse
+GROUP BY course.id, course.idInstructor, course.title, course.price;
