@@ -18,7 +18,7 @@
       <div class="level-description">
 
           <div class="comment-profile">
-              <img src="https://img.lovepik.com/element/45016/4170.png_860.png" class="rounded-circle img-fluid comment-pfp" alt="">
+              <img src="<?php echo htmlspecialchars($user->pfpPath ?: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgYN6WeHs6tndhVLPPLjId5KiXOlZ26pLLig&s'); ?>" class="rounded-circle img-fluid comment-pfp" alt="">
               <span>
                   <p class="fw-bold"><?php echo htmlspecialchars($user->firstName . ' ' . $user->lastName); ?></p>
                   <form class="d-flex" method="POST" action="/courseLevel">

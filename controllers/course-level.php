@@ -16,18 +16,6 @@ if(isset($_SESSION['user'])){
     $userId = $_SESSION['user']->id;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if(isset($_POST['rating'])){
-
-            $reviewController = new ReviewController();
-            
-            // Recuperar los valores del formulario
-            $review = $_POST['review'];
-            $rating = $_POST['rating'];
-            $newReview = new Review(0, $userId, $courseId, $review, $rating);
-            
-            // Actualizar el usuario en la base de datos
-            $updated = $reviewController->createReview($newReview);
-        }
         if(isset($_POST['idInstructor'])){
             $chatController = new ChatController();
             // Recuperar los valores del formulario
@@ -83,7 +71,21 @@ if(isset($_SESSION['user'])){
         $updated = $kardexController->updateKardex($courseId, $userId, $idLevelOrder);
     }
 
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+        
+        if(isset($_POST['rating'])){
 
+            $reviewController = new ReviewController();
+            
+            // Recuperar los valores del formulario
+            $review = $_POST['review'];
+            $rating = $_POST['rating'];
+            $newReview = new Review(0, $userId, $courseId, $review, $rating);
+            
+            // Actualizar el usuario en la base de datos
+            $updated = $reviewController->createReview($newReview);
+        }
+    }
 
     require 'views/course-level.view.php';
 
