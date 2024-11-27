@@ -5,17 +5,16 @@
         <h2>Certificate of Completion</h2>
         <img src="../images/SkillBloom_icon.png" alt="" style="width:5rem; height:5rem">
         <p>It is certified that</p>
-        <h3>Nombre</h3>
+        <h3><?php echo htmlspecialchars($user->firstName . ' ' . $user->lastName); ?></h3>
         <p>has successfully completed the course</p>
-        <h3>Java the final course</h3>
+        <h3><?php echo htmlspecialchars($kardex->course ?: ''); ?></h3>
         <p>Termination Date</p>
-        <h5>10/10/2003</h5>
+        <h5><?php echo htmlspecialchars($kardex->endDate ?: ''); ?></h5>
         <p>Certified by:</p>
-        <h3>Gandalf</h3>
+        <h3><?php echo htmlspecialchars($kardex->instructor ?: ''); ?></h3>
         <div class="buttons">
 
-        <button class="btn btn-primary" onclick="window.location.href='/exportPDF'">Export to PDF</button>
-            <button class="btn btn-primary">Go Back</button>
+        <button class="btn btn-primary" onclick="window.location.href='/exportPDF?id=<?php echo htmlspecialchars($kardex->id ?: ''); ?>'">Export to PDF</button>
         </div>
     </div>
 </div>

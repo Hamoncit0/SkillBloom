@@ -44,6 +44,7 @@
                     <th scope="col">Completion date</th>
                     <th scope="col">State</th>
                     <th scope="col">Category</th>
+                    <th scope="col">Diploma</th>
                 </tr>
             </thead>
             <?php if (!empty($kardexList)): ?>
@@ -58,6 +59,7 @@
                             <td><?php echo htmlspecialchars($kardexLine->endDate ?:'Does not Apply' ); ?></td>
                             <td><?php echo htmlspecialchars($kardexLine->status); ?></td>
                             <td><?php echo htmlspecialchars($kardexLine->category); ?></td>
+                            <td><button class="btn btn-primary" onclick="window.location.assign('/diploma?id=<?php echo htmlspecialchars($kardexLine->id);?>')" <?php echo htmlspecialchars($kardexLine->progress == 100 ?:'disabled'); ?>>Get diploma</button></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

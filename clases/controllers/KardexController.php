@@ -60,6 +60,7 @@ class KardexController {
 
         return false;
     }
+
     public function getTotalLevels($id){
         $query = "SELECT COUNT(id) AS total FROM course_level WHERE idCourse = :id";
         $stmt = $this->db->prepare($query);
@@ -74,6 +75,7 @@ class KardexController {
     
        return $count['total'];
     }
+
     public function getLastLevel($id, $idCourse){
         $query = "SELECT lastLevel FROM v_kardex WHERE idUser = :id and idCourse = :idCourse;";
         $stmt = $this->db->prepare($query);
@@ -89,6 +91,36 @@ class KardexController {
 
     
        return $count['lastLevel'];
+    }
+
+    public function getDiploma($id){
+        $query = "SELECT * FROM v_kardex WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+ 
+        $stmt->bindParam(':id', $id);
+
+        $stmt->execute();
+     
+        // Recuperar los datos de los usuarios y almacenarlos en el array
+       $info = $stmt->fetch(PDO::FETCH_ASSOC);
+
+       $instructor =  $info['firstName'] . ' ' . $info['lastName'];
+       $kardex = new KardexLine(
+            $info['id'],
+            $info['title'],
+            $instructor,
+            $info['category'],
+            $info['progress'],
+            $info['enrolledAt'],
+            $info['lastEntry'],
+            $info['endDate'],
+            $info['status'],
+            $info['idCourse'],
+            $info['lastLevel'],
+            $info['idUser']
+       );
+
+       return $kardex;
     }
 
 
