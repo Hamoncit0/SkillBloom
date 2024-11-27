@@ -1,9 +1,9 @@
 <?php
 class Database {
     private $host = "localhost:3306";
-    private $db_name = "db_skillbloom";
+    private $db_name = "db_skillbloom2";
     private $username = "root";
-    private $password = "root";
+    private $password = "AAAaaa12*";
     public $conn;
 
     public function getConnection() {

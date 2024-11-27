@@ -38,4 +38,6 @@
         </form>
     </div>
 </div>
-<?php require "partials/footer.php" ?>
+
+<?php require "partials/footer.php"; ?>
+<script src="scripts/chats.js"></script>

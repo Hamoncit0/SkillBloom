@@ -20,6 +20,7 @@ $routes = [
     '/salesSummary' => 'controllers/salesSummary.php',
     '/courseStadistics' => 'controllers/courseStadistics.php',
     '/diploma' => 'controllers/diploma.php',
+    '/exportPDF' => 'views/export_pdf.php',
     '/advancedSearch' => 'controllers/advancedSearch.php',
     '/checkout' => 'controllers/checkout.php',
     '/paymentCompleted' => 'controllers/paymentCompleted.php',
