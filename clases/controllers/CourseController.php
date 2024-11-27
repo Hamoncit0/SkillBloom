@@ -101,6 +101,23 @@ class CourseController {
         return false;
         
     }
+    public function deleteLevel($id){
+        $query = "CALL delete_level(:id)";
+
+        $stmt = $this->db->prepare($query);
+
+        $stmt->bindParam(':id', $id);
+    
+        if ($stmt->execute()) {
+            // Fetch the last inserted ID from the procedure's output
+           return true;
+        } else {
+            return false; // Handle error if needed
+        }
+
+        return false;
+        
+    }
 
     public function createLevel($levels){
         $idLevels = [];

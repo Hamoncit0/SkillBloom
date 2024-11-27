@@ -222,3 +222,24 @@ BEGIN
         updatedAt = CURRENT_TIMESTAMP
     WHERE id = p_id;
 END 
+
+CREATE PROCEDURE delete_level(
+    IN p_id INT
+)
+BEGIN
+    DELETE FROM level WHERE id = p_id;
+END 
+
+CREATE TRIGGER after_delete_course_level
+AFTER DELETE ON course_level
+FOR EACH ROW
+BEGIN
+    -- Actualizar el lastLevel en kardex si es mayor al nivel eliminado
+    UPDATE kardex
+    SET lastLevel = 1,
+        progress = 0,
+        status = 'uninitiated'
+        WHERE idCourse = OLD.idCourse
+      AND lastLevel > OLD.levelOrder;
+END
+DROP TRIGGER after_delete_course_level;

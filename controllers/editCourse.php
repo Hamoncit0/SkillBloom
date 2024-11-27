@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Eliminar niveles sobrantes
     if (count($newLevels) < count($existingLevels)) {
         for ($i = count($newLevels); $i < count($existingLevels); $i++) {
-            $courseController->deleteLevel($existingLevels[$i]['id']);
+            $courseController->deleteLevel($existingLevels[$i]->id);
         }
     }
 

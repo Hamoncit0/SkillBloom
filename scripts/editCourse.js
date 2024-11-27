@@ -1,37 +1,71 @@
 document.addEventListener('DOMContentLoaded', function () {
     let levelCount = 0;
-    
     function checkLevels() {
         const levelsContainer = document.getElementById('levels-container');
         const levels = levelsContainer.querySelectorAll('.new-level');
-
+    
         if (levels.length === 0) {
             levelsContainer.innerHTML = `<p class="text-muted">No levels added yet. Click "Add Level" to start creating levels.</p>`;
         } else {
             levelCount = levels.length;
+    
             // Eliminar mensaje si hay niveles
             const noLevelsMessage = levelsContainer.querySelector('.text-muted');
             if (noLevelsMessage) {
                 noLevelsMessage.remove();
             }
+    
+            // Asignar funcionalidad a los botones de eliminar de cada nivel existente
+            levels.forEach((level, index) => {
+                const deleteButton = level.querySelector('.remove-level');
+    
+                // Asegurarse de no duplicar eventos en el botón
+                if (!deleteButton.dataset.bound) {
+                    deleteButton.addEventListener('click', function (e) {
+                        e.preventDefault(); // Prevenir comportamiento predeterminado
+                        level.remove(); // Eliminar el nivel del DOM
+                        updateLevelIds(); // Actualizar los índices de los niveles
+                        checkLevels(); // Verificar si quedan niveles
+                    });
+    
+                    // Marcar el botón como ya enlazado
+                    deleteButton.dataset.bound = true;
+                }
+            });
         }
     }
-
-
+    
     function updateLevelIds() {
         const levels = document.querySelectorAll('.new-level');
+    
         levels.forEach((level, index) => {
-            const newIndex = index + 1;
+            const newIndex = index + 1; // Nuevo índice basado en la posición actual del nivel
+    
+            // Actualizar título del nivel
             level.querySelector('h4').textContent = `Level ${newIndex}`;
-            level.querySelector(`#levelName${level.dataset.index}`).id = `levelName${newIndex}`;
-            level.querySelector(`#levelDescription${level.dataset.index}`).id = `levelDescription${newIndex}`;
-            level.querySelector(`#levelContent${level.dataset.index}`).id = `levelContent${newIndex}`;
-            level.querySelector(`#levelNameError${level.dataset.index}`).id = `levelNameError${newIndex}`;
-            level.querySelector(`#levelDescriptionError${level.dataset.index}`).id = `levelDescriptionError${newIndex}`;
-            level.querySelector(`#levelContentError${level.dataset.index}`).id = `levelContentError${newIndex}`;
-            level.dataset.index = newIndex; // Actualiza el índice del nivel
+    
+            // Actualizar IDs de los elementos dentro del nivel
+            const levelName = level.querySelector('input[type="text"]');
+            const levelDescription = level.querySelector('textarea');
+            const levelContent = level.querySelector('input[type="file"]');
+            const levelNameError = level.querySelector('.text-danger:nth-of-type(1)');
+            const levelDescriptionError = level.querySelector('.text-danger:nth-of-type(2)');
+            const levelContentError = level.querySelector('.text-danger:nth-of-type(3)');
+    
+            // Cambiar los IDs usando el nuevo índice
+            if (levelName) levelName.id = `levelName${newIndex}`;
+            if (levelDescription) levelDescription.id = `levelDescription${newIndex}`;
+            if (levelContent) levelContent.id = `levelContent${newIndex}`;
+            if (levelNameError) levelNameError.id = `levelNameError${newIndex}`;
+            if (levelDescriptionError) levelDescriptionError.id = `levelDescriptionError${newIndex}`;
+            if (levelContentError) levelContentError.id = `levelContentError${newIndex}`;
+    
+            // Actualizar dataset.index
+            level.dataset.index = newIndex;
         });
-        levelCount = levels.length; // Actualiza el contador
+    
+        // Actualizar el contador global
+        levelCount = levels.length;
     }
 
     function addLevel() {
@@ -216,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    document.getElementById('createCourse').addEventListener('submit', function (event) {
+    document.getElementById('createCourse').addEventListener('submit', async function (event) {
         event.preventDefault();
 
         if (1==1) {
@@ -248,33 +282,32 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             const previewImageFile = document.getElementById('previewImage')?.files[0];
-            const previewImageDeleted = document.getElementById('previewImageDeleted')?.value === 'true';
-
             const previewVideoFile = document.getElementById('previewVideo')?.files[0];
-            const previewVideoDeleted = document.getElementById('previewVideoDeleted')?.value === 'true';
     
-                    // Preparar los datos finales para enviar
-                    const fullData = new FormData();
-                    fullData.append('course', JSON.stringify(course));
-                    // Agregar estado de la previewImage
-                    if (previewImageDeleted) {
-                        fullData.append('previewImageStatus', 'deleted');
-                    } else if (previewImageFile) {
-                        fullData.append('previewImageStatus', 'updated');
-                        fullData.append('previewImage', previewImageFile);
-                    } else {
-                        fullData.append('previewImageStatus', 'unchanged');
-                    }
-                    
-                    // Agregar estado del previewVideo
-                    if (previewVideoDeleted) {
-                        fullData.append('previewVideoStatus', 'deleted');
-                    } else if (previewVideoFile) {
-                        fullData.append('previewVideoStatus', 'updated');
-                        fullData.append('previewVideo', previewVideoFile);
-                    } else {
-                        fullData.append('previewVideoStatus', 'unchanged');
-                    }
+            // Convertir imagen a base64 si existe
+            let previewImageBase64 = null;
+            if (previewImageFile) {
+                previewImageBase64 = await convertFileToBase64(previewImageFile);
+            }
+
+            // Preparar los datos finales para enviar
+            const fullData = new FormData();
+            fullData.append('course', JSON.stringify(course));
+            // Agregar estado de la previewImage
+            if (previewImageFile) {
+                fullData.append('previewImageStatus', 'updated');
+                fullData.append('previewImage', previewImageBase64);
+            } else {
+                fullData.append('previewImageStatus', 'unchanged');
+            }
+            
+            // Agregar estado del previewVideo
+            if (previewVideoFile) {
+                fullData.append('previewVideoStatus', 'updated');
+                fullData.append('previewVideo', previewVideoFile);
+            } else {
+                fullData.append('previewVideoStatus', 'unchanged');
+            }
 
     
                     // Adjuntar niveles
@@ -334,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Reemplaza el botón con un input file y marca el contenido como eliminado
             wrapper.innerHTML = `
-                <input type="file" id="${targetId}" class="form-control" accept="video/*">
+                <input type="file" id="${targetId}" class="form-control" accept="image/*">
                 <input type="hidden" id="${targetId}Deleted" value="true">
             `;
         });
@@ -348,9 +381,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Reemplaza el botón con un input file y marca el contenido como eliminado
             wrapper.innerHTML = `
-                <input type="file" id="${targetId}" class="form-control" accept="image/*">
+                <input type="file" id="${targetId}" class="form-control" accept="video/*">
                 <input type="hidden" id="${targetId}Deleted" value="true">
             `;
         });
     });
+
+    
+    // Función para convertir archivo a base64
+    function convertFileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result.split(',')[1]); // Extraer solo la base64
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(file);
+        });
+    }
 });

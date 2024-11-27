@@ -98,7 +98,7 @@
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <button class="btn btn-danger remove-level">Delete level</button>
+                        <button type="button" class="btn btn-danger remove-level">Delete level</button>
                     </div>
                     <?php $levelCount++; // Incrementamos la variable en cada iteración ?>
                 <?php endforeach; ?>
