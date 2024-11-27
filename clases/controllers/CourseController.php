@@ -53,6 +53,55 @@ class CourseController {
         }
     }
 
+    public function editCourse($course){
+
+        $binaryImage = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $course->previewImage));
+
+        $query = "CALL UpdateCourse(:id, :title, :description, :previewImage, 
+                :previewVideoPath, :price, :idCategory)";
+ 
+        $stmt = $this->db->prepare($query);
+ 
+        $stmt->bindParam(':id', $course->id);
+        $stmt->bindParam(':title', $course->title);
+        $stmt->bindParam(':description', $course->description);
+        $stmt->bindParam(':previewImage', $binaryImage, PDO::PARAM_LOB);
+        $stmt->bindParam(':previewVideoPath', $course->previewVideoPath);
+        $stmt->bindParam(':price', $course->price);
+        $stmt->bindParam(':idCategory', $course->idCategory);
+        
+        if ($stmt->execute()) {
+            // Fetch the last inserted ID from the procedure's output
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+            return true;
+
+        } else {
+            return false; // Handle error if needed
+        }
+    }
+    public function editLevel($level){
+        $query = "CALL UpdateLevel(:id, :title, :description, :contentPath)";
+
+        $stmt = $this->db->prepare($query);
+
+        $stmt->bindParam(':id', $level->id);
+        $stmt->bindParam(':title', $level->title);
+        $stmt->bindParam(':description', $level->description);
+        $stmt->bindParam(':contentPath', $level->contentPath);
+    
+        if ($stmt->execute()) {
+            // Fetch the last inserted ID from the procedure's output
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+           return true;
+        } else {
+            return false; // Handle error if needed
+        }
+
+        return false;
+        
+    }
+
     public function createLevel($levels){
         $idLevels = [];
         $query = "CALL register_level(:title, :description, :contentPath)";
@@ -78,6 +127,29 @@ class CourseController {
         
     }
 
+    public function createLevelSingle($level){
+        $query = "CALL register_level(:title, :description, :contentPath)";
+
+            $stmt = $this->db->prepare($query);
+
+            $stmt->bindParam(':title', $level->title);
+            $stmt->bindParam(':description', $level->description);
+            $stmt->bindParam(':contentPath', $level->contentPath);
+    
+            if ($stmt->execute()) {
+                // Fetch the last inserted ID from the procedure's output
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                $idLevel = $result['levelId']; // Return the course ID
+            } else {
+                return false; // Handle error if needed
+            }
+
+
+        return $idLevel;
+        
+    }
+
+
     public function bindLevelToCourse($idCourse, $idLevels) {
         // Convert the levels array into a comma-separated string
         $idLevelsString = implode(',', $idLevels);
@@ -90,6 +162,21 @@ class CourseController {
         // Bind the parameters
         $stmt->bindParam(':idCourse', $idCourse, PDO::PARAM_INT);
         $stmt->bindParam(':idLevels', $idLevelsString, PDO::PARAM_STR);
+
+        if (!$stmt->execute()) {
+            throw new Exception("Error binding levels to the course.");
+        }
+    }
+
+    public function deleteOrder($idCourse) {
+
+        // SQL query for calling the stored procedure
+        $query = "CALL delete_order(:idCourse)";
+
+        $stmt = $this->db->prepare($query);
+
+        // Bind the parameters
+        $stmt->bindParam(':idCourse', $idCourse, PDO::PARAM_INT);
 
         if (!$stmt->execute()) {
             throw new Exception("Error binding levels to the course.");

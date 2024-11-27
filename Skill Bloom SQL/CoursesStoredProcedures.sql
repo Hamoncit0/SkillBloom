@@ -31,6 +31,14 @@ END
 
 DELIMITER;
 
+CREATE PROCEDURE delete_order(
+    IN p_idCourse INT
+)
+BEGIN
+    DELETE FROM course_level WHERE idCourse = p_idCourse;
+END;
+
+
 CREATE PROCEDURE register_course_level(
     IN p_idCourse INT,
     IN p_idLevels VARCHAR(255)  -- Comma-separated list of level IDs (e.g., '1,2,3')
@@ -213,34 +221,4 @@ BEGIN
         contentPath = p_contentPath,
         updatedAt = CURRENT_TIMESTAMP
     WHERE id = p_id;
-END 
-
-CREATE PROCEDURE UpdateCourseLevelOrder(
-    IN p_idCourse INT,
-    IN p_idLevel INT,
-    IN p_levelOrder INT
-)
-BEGIN
-    UPDATE course_level
-    SET levelOrder = p_levelOrder
-    WHERE idCourse = p_idCourse AND idLevel = p_idLevel;
-END 
-
-CREATE PROCEDURE AddLevelToCourse(
-    IN p_idCourse INT,
-    IN p_idLevel INT,
-    IN p_levelOrder INT
-)
-BEGIN
-    INSERT INTO course_level (idCourse, idLevel, levelOrder)
-    VALUES (p_idCourse, p_idLevel, p_levelOrder);
-END 
-
-CREATE PROCEDURE RemoveLevelFromCourse(
-    IN p_idCourse INT,
-    IN p_idLevel INT
-)
-BEGIN
-    DELETE FROM course_level
-    WHERE idCourse = p_idCourse AND idLevel = p_idLevel;
 END 
