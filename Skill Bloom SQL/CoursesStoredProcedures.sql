@@ -97,18 +97,6 @@ BEGIN
     WHERE id = p_id;
 END
 
- -- muestra los cursos que no tiene el usuario
--- CREATE VIEW v_courses_for_user
--- AS
--- SELECT course.*, category.name as category, user.firstName, user.lastName
--- FROM course
--- JOIN category ON course.idCategory = category.id
--- JOIN user ON course.idInstructor = user.id
--- LEFT JOIN kardex ON course.id = kardex.idCourse and kardex.idUser = 65
--- WHERE kardex.id IS NULL  ;
-
-
-
 
 SELECT *, kardex.idUser
 FROM v_courses
@@ -188,3 +176,71 @@ LEFT JOIN review ON review.idCourse = course.id
 JOIN kardex ON kardex.idCourse = course.id
 JOIN v_courses_bought ON v_courses_bought.idCourse = course.id
 GROUP BY course.id;
+
+CREATE PROCEDURE UpdateCourse(
+    IN p_id INT,
+    IN p_title VARCHAR(100),
+    IN p_description TEXT,
+    IN p_previewImage BLOB,
+    IN p_previewVideoPath VARCHAR(255),
+    IN p_price DECIMAL(10,2),
+    IN p_idCategory INT
+)
+BEGIN
+    UPDATE course
+    SET
+        title = p_title,
+        description = p_description,
+        previewImage = p_previewImage,
+        previewVideoPath = p_previewVideoPath,
+        price = p_price,
+        idCategory = p_idCategory,
+        updatedAt = CURRENT_TIMESTAMP
+    WHERE id = p_id;
+END 
+
+CREATE PROCEDURE UpdateLevel(
+    IN p_id INT,
+    IN p_title VARCHAR(100),
+    IN p_description TEXT,
+    IN p_contentPath VARCHAR(255)
+)
+BEGIN
+    UPDATE level
+    SET
+        title = p_title,
+        description = p_description,
+        contentPath = p_contentPath,
+        updatedAt = CURRENT_TIMESTAMP
+    WHERE id = p_id;
+END 
+
+CREATE PROCEDURE UpdateCourseLevelOrder(
+    IN p_idCourse INT,
+    IN p_idLevel INT,
+    IN p_levelOrder INT
+)
+BEGIN
+    UPDATE course_level
+    SET levelOrder = p_levelOrder
+    WHERE idCourse = p_idCourse AND idLevel = p_idLevel;
+END 
+
+CREATE PROCEDURE AddLevelToCourse(
+    IN p_idCourse INT,
+    IN p_idLevel INT,
+    IN p_levelOrder INT
+)
+BEGIN
+    INSERT INTO course_level (idCourse, idLevel, levelOrder)
+    VALUES (p_idCourse, p_idLevel, p_levelOrder);
+END 
+
+CREATE PROCEDURE RemoveLevelFromCourse(
+    IN p_idCourse INT,
+    IN p_idLevel INT
+)
+BEGIN
+    DELETE FROM course_level
+    WHERE idCourse = p_idCourse AND idLevel = p_idLevel;
+END 

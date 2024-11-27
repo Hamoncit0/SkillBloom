@@ -21,8 +21,10 @@
               <img src="https://img.lovepik.com/element/45016/4170.png_860.png" class="rounded-circle img-fluid comment-pfp" alt="">
               <span>
                   <p class="fw-bold"><?php echo htmlspecialchars($user->firstName . ' ' . $user->lastName); ?></p>
-                  <a href="" class="btn btn-primary">Send Message</a>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Review Course</button>
+                  <form class="d-flex" method="POST" action="/courseLevel">
+                    <button type="submit" name="idInstructor" value="<?php echo htmlspecialchars($level->idInstructor); ?>" class="btn btn-primary me-3">Send Message</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Review Course</button>
+                  </form>
               </span>
           </div>
           <p><?php echo htmlspecialchars($level->description); ?></p>

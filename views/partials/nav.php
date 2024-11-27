@@ -53,7 +53,7 @@ if (isset($_SESSION['user'])) {
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navAvatarDropdown">
                         <a href="/editProfile" class="dropdown-item">Edit Your Profile</a>
-                        <a href="/chat" class="dropdown-item">Messages</a>
+                        <a href="/chatlist" class="dropdown-item">Messages</a>
                         <a href="/userList" class="dropdown-item">User List</a>
                         <a href="/courseList" class="dropdown-item">Course list</a>
                         <a href="/category" class="dropdown-item">Edit categories</a>
@@ -114,7 +114,7 @@ if (isset($_SESSION['user'])) {
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navAvatarDropdown">
                     <a href="/editProfile" class="dropdown-item">Edit Your Profile</a>
-                    <a href="/chat" class="dropdown-item">Messages</a>
+                    <a href="/chatlist" class="dropdown-item">Messages</a>
                     <a href="/salesSummary" class="dropdown-item">Sales Summary</a>
                     <a href="/myCourses" class="dropdown-item">My Courses</a>
                     <a href="/studentsPerCourse" class="dropdown-item">Enrolled Students</a>
@@ -179,7 +179,7 @@ if (isset($_SESSION['user'])) {
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navAvatarDropdown">
                     <a href="/editProfile" class="dropdown-item">Edit Your Profile</a>
-                    <a href="/chat" class="dropdown-item">Messages</a>
+                    <a href="/chatlist" class="dropdown-item">Messages</a>
                     <a href="/cart" class="dropdown-item">Shopping Cart</a>
                     <a href="/kardex" class="dropdown-item">Kardex</a>
                     <div class="dropdown-divider"></div>

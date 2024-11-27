@@ -449,6 +449,8 @@
    cursor: pointer;
 }
 .messages{
+    display: flex;
+    flex-direction: column;
     height: 100%;
     width: 100%;
     background-color: #d3ded0;
@@ -460,6 +462,10 @@
     position: sticky;
     top: 0;
     align-items: center;
+}
+.message-container{
+    flex-grow: 1;
+    overflow-y: scroll;
 }
 .msg-inc{
     display: flex;
@@ -473,7 +479,7 @@
     color: white;
     max-width: 50%;
     border-radius: 10px;
-    margin: 2rem;
+    margin: 0.5rem;
     padding: 1rem;
     padding-bottom: .5rem;
 }
@@ -481,7 +487,7 @@
     justify-self: right;
     max-width: 50%;
     border-radius: 10px;
-    margin: 2rem;
+    margin: 0.5rem;
     padding: 1rem;
     padding-bottom: .5rem;
 }
@@ -490,8 +496,6 @@
     padding: 0.5rem;
     display: flex;
     justify-content: space-evenly;
-    position: sticky;
-    bottom: 0;
 }
 .kardex{
     min-height: 100vh;
@@ -643,4 +647,18 @@
         width: auto;
         height: 100%;
     }
+}
+
+.chat-list-page{
+    padding: 3%;
+    display:  flex;
+    max-height: 90vh;
+}
+.chat-list{
+    height: 75vh;
+    margin: 1rem;
+    border: 1px solid;
+    padding: 2%;
+    width: 50%;
+    overflow-y: scroll;
 }

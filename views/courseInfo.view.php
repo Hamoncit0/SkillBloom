@@ -9,7 +9,9 @@
         <span>4.7 <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i> (22,000) </span>
         <p>Description: <?php echo htmlspecialchars($course->description); ?></p>
         <span>
-            Created by <?php echo htmlspecialchars($course->instructor); ?> <a href="/chat" class="btn btn-primary" style="margin-left: 10px">Send Message</a>
+            <form action="/courseInfo" method="POST">
+                Created by <?php echo htmlspecialchars($course->instructor); ?> <button type="submit" name="idInstructor" value="<?php echo htmlspecialchars($course->idInstructor); ?>" class="btn btn-primary" style="margin-left: 10px">Send Message</button>
+            </form>
         </span>
         <br>
         <span>8 total hours | 72 lectures | All levels</span>

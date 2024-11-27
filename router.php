@@ -31,6 +31,7 @@ $routes = [
     '/editCourse' => 'controllers/editCourse.php',
     '/seeProfile' => 'controllers/seeProfile.php',
     '/logout' => 'controllers/logout.php',
+    '/chatlist' => 'controllers/chatlist.php',
 ];
 
 function abort($code = 404)
