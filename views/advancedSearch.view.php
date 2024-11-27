@@ -37,6 +37,7 @@
             <option value="5" <?php echo isset($_GET['review']) && $_GET['review'] == '5' ? 'selected' : ''; ?>>5 stars</option>
         </select>
     </div>
+
     <!-- Filter by Price Range -->
     <div class="mb-3">
         <label class="h5">Price Range:</label>
@@ -49,6 +50,18 @@
             <input type="number" name="price_max" id="price_max" class="form-control" value="<?php echo isset($_GET['price_max']) ? htmlspecialchars($_GET['price_max']) : ''; ?>">
         </div>
     </div>
+
+            <!-- Filter More -->
+            <div class="mb-3">
+        <label for="review" class="h5">More:</label>
+        <select name="review" id="review" class="form-select">
+            <option value="">Select</option>
+            <option value="1">Best sellers</option>
+            <option value="2">The most recent</option>
+            <option value="3">Top Rated Courses</option>
+        </select>
+    </div>
+
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
