@@ -57,9 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="cart-course-info">
                     <h5>${product.title}</h5>
                     <p>By ${product.instructor}</p>
-                    <span>4.7 <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i> (22,000) </span>
-                    <br>
-                    <span>8 total hours | 72 lectures | All levels</span>
                 </div>
             </div>
 

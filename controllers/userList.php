@@ -23,6 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: /userList");
         }
     }
+    else if($action == "password"){
+        $password = $userController->generateAndChangePassword($userId, 'active');
+    }
 
 }
     $userController = new UserController();

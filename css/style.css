@@ -135,15 +135,16 @@
 }
 
 .course{
-    width: fit-content;
+    flex: 1 1 300px;
+    width: auto;
     max-width: 300px;
-    height: fit-content;
     padding: 1.5rem;
     border-radius: 10px;
     margin: 1rem;
     box-shadow: 0.2rem 0.2rem 10px #0000006b;
     transition: box-shadow 0.3s ease;
     text-wrap:pretty;
+    align-content: end;
 }
 .course:hover{
     box-shadow: 0.5rem 0.5rem 10px #0000008a;
@@ -164,6 +165,8 @@
 .coursesContainer{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 3%;
 }
 .dropdown:hover .dropdown-menu {
     display: block;

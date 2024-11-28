@@ -78,12 +78,29 @@ LEFT JOIN review ON review.idCourse = course.id
 GROUP BY course.id;
 
 CREATE VIEW v_courses_levels AS
-SELECT course.*, category.name as category, user.firstName, user.lastName, level.id as idLevel, level.title as levelTitle, level.description as levelDescription, level.contentPath
+SELECT course.*, 
+       category.name as category, 
+       user.firstName, user.lastName, 
+       level.id as idLevel, 
+       level.title as levelTitle, 
+       level.description as levelDescription, 
+       level.contentPath,  
+       AVG(review.rating) as rating
 FROM course_level
 JOIN course ON course_level.idCourse = course.id
 JOIN level ON course_level.idLevel = level.id
 JOIN user ON course.idInstructor = user.id
-JOIN category ON course.idCategory = category.id;
+JOIN category ON course.idCategory = category.id
+LEFT JOIN review ON review.idCourse = course.id
+GROUP BY 
+    course.id, 
+    category.name, 
+    user.firstName, 
+    user.lastName, 
+    level.id, 
+    level.title, 
+    level.description, 
+    level.contentPath;
 
 CREATE PROCEDURE deleteCourse(
     IN p_id INT

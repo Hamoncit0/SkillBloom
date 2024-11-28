@@ -79,6 +79,7 @@
                       <td>
                           <a type="button" data-bs-toggle="modal" data-bs-target="#modalBan" data-id="<?php echo $user->id; ?>" data-action="ban" class="btn btn-danger" style="margin-right: 10px"><i class="bi bi-ban"></i></a>
                           <a type="button" data-bs-toggle="modal" data-bs-target="#modalUnban" data-id="<?php echo $user->id; ?>" data-action="unban"  class="btn btn-success"><i class="bi bi-check-circle"></i></a>
+                          <a type="button" data-bs-toggle="modal" data-bs-target="#modalPassword" data-id="<?php echo $user->id; ?>" data-action="password"  class="btn btn-warning ms-2"><i class="bi bi-key-fill"></i></a>
                       </td>
                       
                   </tr>
@@ -136,6 +137,55 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="modalPassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Generate new password?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to generate a new password for this user?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <form id="passwordForm" method="POST">
+            <input type="hidden" name="userId" id="userIdPassword" />
+            <input type="hidden" name="action" id="actionPassword" value="password" />
+            <button type="submit" class="btn btn-primary">Yes, continue</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<?php if (!empty($password)): ?>
+<div class="modal fade" id="modalPasswordGotten" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Generate new password?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>New generated password:</p>
+        <input type="text" class="form-control" value="<?php echo htmlspecialchars($password); ?>" disabled>
+        <small>Don't share it with anyone else :)</small>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endif; ?>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const myModal = new bootstrap.Modal(document.getElementById('modalPasswordGotten'));
+      myModal.show();
+    });
+  </script>
 <script>
     // Para capturar el evento de clic y rellenar el formulario
     var banButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
@@ -150,6 +200,9 @@
             } else if (action === "unban") {
                 document.getElementById('userIdUnban').value = userId; // Rellenar el ID en el formulario de unban
                 document.getElementById('actionUnban').value = action; // Rellenar la acción de unban
+            } else if (action === "password") {
+                document.getElementById('userIdPassword').value = userId; // Rellenar el ID en el formulario de unban
+                document.getElementById('actionPassword').value = action; // Rellenar la acción de unban
             }
         });
     });

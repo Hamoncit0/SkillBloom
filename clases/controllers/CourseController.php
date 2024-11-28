@@ -346,7 +346,11 @@ class CourseController {
                     $row['createdAt'],
                     '', // Este campo parece vacío
                     $instructor,
-                    $row['category']
+                    $row['category'],
+                    '',
+                    '',
+                    '',
+                    $row['rating']
                 );
             }
 

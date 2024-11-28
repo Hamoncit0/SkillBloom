@@ -285,6 +285,21 @@ class UserController {
         return false;
     }
 
+    public function generateAndChangePassword($idUser){
+        $query = "CALL generate_and_change_password(:idUser)";
+        $stmt = $this->db->prepare($query);
+        
+        $stmt->bindParam(':idUser', $idUser);
+        
+        if ($stmt->execute()) {
+            $password = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $password['newPassword'];
+        } else {
+            var_dump($stmt->errorInfo()); // Mostrar errores
+            return false; 
+        }
+        return false;
+    }
 
     // Función para convertir Blob a Base64
     private function convertBlobToBase64($blob) {
