@@ -238,8 +238,8 @@ BEGIN
     UPDATE kardex
     SET lastLevel = 1,
         progress = 0,
+        endDate = NULL,
         status = 'uninitiated'
         WHERE idCourse = OLD.idCourse
       AND lastLevel > OLD.levelOrder;
 END
-DROP TRIGGER after_delete_course_level;

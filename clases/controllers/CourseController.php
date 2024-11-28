@@ -677,25 +677,13 @@ class CourseController {
 
     public function getMostSoldCourses() {
         // Consulta para obtener los cursos más vendidos
-        $query = "SELECT 
-                c.id, 
-                c.title AS course_title, 
-                c.description AS course_description, 
-                c.price, 
-                c.createdAt AS creation_date, 
-                COUNT(sd.idCourse) AS sales_count,
-                u.firstName, 
-                u.lastName, 
-                c.previewImage,
-                c.previewVideoPath,
-                c.idCategory,
-                c.idInstructor
-            FROM course c
-            LEFT JOIN sale_detail sd ON c.id = sd.idCourse
-            LEFT JOIN user u ON c.idInstructor = u.id AND u.idRol = 2  -- 2 podría ser el ID del rol de 'instructor' según tu tabla de roles
-            GROUP BY c.id, c.title, c.description, c.price, c.createdAt, u.firstName, u.lastName, c.previewImage, c.previewVideoPath, c.idCategory, c.idInstructor
-            ORDER BY sales_count DESC
-            LIMIT 5;";
+        $query = "  SELECT v_courses.*, COUNT(sale_detail.idCourse)
+                    FROM v_courses
+                    JOIN sale_detail ON sale_detail.idCourse = v_courses.id
+                    WHERE deletedAt IS NULL
+                    GROUP BY v_courses.id
+                    ORDER BY rating DESC
+                    LIMIT 5;";
         
         $stmt = $this->db->prepare($query);
         $stmt->execute();
@@ -703,34 +691,29 @@ class CourseController {
         // Array para almacenar los cursos
         $courses = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            // Verificar si las claves existen antes de usarlas
-            $instructor = isset($row['firstName']) && isset($row['lastName']) ? $row['firstName'] . ' ' . $row['lastName'] : 'Instructor desconocido';
-            $previewImage = isset($row['previewImage']) ? $this->convertBlobToBase64($row['previewImage']) : '';
-            $previewVideoPath = isset($row['previewVideoPath']) ? $row['previewVideoPath'] : '';
-            $idCategory = isset($row['idCategory']) ? $row['idCategory'] : null;
-            $idInstructor = isset($row['idInstructor']) ? $row['idInstructor'] : null;
-            $createdAt = isset($row['createdAt']) ? $row['createdAt'] : null;
-            $rating = isset($row['rating']) ? $row['rating'] : 0;
-    
-            // Crear un nuevo objeto Course con los datos de la fila
-            $courses[] = new Course(
-                $row['id'],
-                $row['course_title'],
-                $row['course_description'],
-                $previewImage,
-                $previewVideoPath,
-                $row['price'],
-                $idCategory,
-                $idInstructor,
-                $createdAt,
-                '',
-                $instructor,
-                '',
-                '',
-                '',
-                '',
-                $rating
-            );
+             // Verificar si las claves existen antes de usarlas
+             $instructor =  $row['firstName'] . ' ' . $row['lastName'];
+
+            
+             // Crear un nuevo objeto Course con los datos de la fila
+             $courses[] = new Course(
+                 $row['id'],
+                 $row['title'],
+                 $row['description'],
+                 $this->convertBlobToBase64($row['previewImage']),
+                 $row['previewVideoPath'],
+                 $row['price'],
+                 $row['idCategory'],
+                 $row['idInstructor'],
+                 $row['createdAt'],
+                 '',
+                 $instructor,
+                 '',
+                 '',
+                 '',
+                 '',
+                 $row['rating']
+             );
         }
     
         return $courses;
@@ -740,25 +723,10 @@ class CourseController {
 
     public function getBestRatedCourses() {
         // Consulta para obtener los cursos mejor calificados
-        $query = "SELECT 
-            c.id, 
-            c.title AS course_title, 
-            c.description AS course_description, 
-            c.previewImage, 
-            c.previewVideoPath, 
-            c.price, 
-            c.idCategory, 
-            c.idInstructor, 
-            c.createdAt AS creation_date, 
-            AVG(r.rating) AS average_rating,
-            u.firstName AS instructor_first_name,
-            u.lastName AS instructor_last_name,
-            u.pfp AS instructor_image
-        FROM course c
-        LEFT JOIN review r ON c.id = r.idCourse
-        LEFT JOIN user u ON c.idInstructor = u.id
-        GROUP BY c.id, c.title, c.description, c.previewImage, c.previewVideoPath, c.price, c.idCategory, c.idInstructor, c.createdAt, u.firstName, u.lastName, u.pfp
-        ORDER BY average_rating DESC
+        $query = "SELECT v_courses.*
+        FROM v_courses
+        WHERE deletedAt IS NULL AND rating IS NOT NULL
+        ORDER BY rating DESC
         LIMIT 5;";
         
         $stmt = $this->db->prepare($query);
@@ -768,32 +736,27 @@ class CourseController {
         $courses = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             // Verificar si las claves existen antes de usarlas
-            $instructor = isset($row['firstName']) && isset($row['lastName']) ? $row['firstName'] . ' ' . $row['lastName'] : 'Instructor desconocido';
-            $previewImage = isset($row['previewImage']) ? $this->convertBlobToBase64($row['previewImage']) : '';
-            $previewVideoPath = isset($row['previewVideoPath']) ? $row['previewVideoPath'] : '';
-            $idCategory = isset($row['idCategory']) ? $row['idCategory'] : null;
-            $idInstructor = isset($row['idInstructor']) ? $row['idInstructor'] : null;
-            $createdAt = isset($row['createdAt']) ? $row['createdAt'] : null;
-            $rating = isset($row['rating']) ? $row['rating'] : 0;
-    
+            $instructor =  $row['firstName'] . ' ' . $row['lastName'];
+
+           
             // Crear un nuevo objeto Course con los datos de la fila
             $courses[] = new Course(
                 $row['id'],
-                $row['course_title'],
-                $row['course_description'],
-                $previewImage,
-                $previewVideoPath,
+                $row['title'],
+                $row['description'],
+                $this->convertBlobToBase64($row['previewImage']),
+                $row['previewVideoPath'],
                 $row['price'],
-                $idCategory,
-                $idInstructor,
-                $createdAt,
+                $row['idCategory'],
+                $row['idInstructor'],
+                $row['createdAt'],
                 '',
                 $instructor,
                 '',
                 '',
                 '',
                 '',
-                $rating
+                $row['rating']
             );
         }
     
@@ -802,25 +765,13 @@ class CourseController {
     
         //funcion para buscar los mas nuevos
 
-        public function getNewestCourses() {
+    public function getNewestCourses() {
             // Consulta para obtener los cursos más vendidos
-            $query = "SELECT 
-                c.id, 
-                c.title AS course_title, 
-                c.description AS course_description, 
-                c.price, 
-                c.createdAt AS creation_date,
-                u.firstName AS instructor_first_name,
-                u.lastName AS instructor_last_name,
-                u.pfp AS instructor_image,
-                c.previewImage, -- Si tienes este campo en la tabla course
-                c.previewVideoPath, -- Si tienes este campo en la tabla course
-                c.idCategory, 
-                c.idInstructor
-            FROM course c
-            LEFT JOIN user u ON c.idInstructor = u.id
-            ORDER BY c.createdAt DESC
-            LIMIT 5;";
+            $query = "SELECT v_courses.*
+                    FROM v_courses
+                    WHERE deletedAt IS NULL
+                    ORDER BY createdAt DESC
+                    LIMIT 10;";
    
        $stmt = $this->db->prepare($query);
        $stmt->execute();
@@ -828,37 +779,32 @@ class CourseController {
        // Array para almacenar los cursos
        $courses = [];
        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        // Verificar si las claves existen antes de usarlas
-        $instructor = isset($row['firstName']) && isset($row['lastName']) ? $row['firstName'] . ' ' . $row['lastName'] : 'Instructor desconocido';
-        $previewImage = isset($row['previewImage']) ? $this->convertBlobToBase64($row['previewImage']) : '';
-        $previewVideoPath = isset($row['previewVideoPath']) ? $row['previewVideoPath'] : '';
-        $idCategory = isset($row['idCategory']) ? $row['idCategory'] : null;
-        $idInstructor = isset($row['idInstructor']) ? $row['idInstructor'] : null;
-        $createdAt = isset($row['createdAt']) ? $row['createdAt'] : null;
-        $rating = isset($row['rating']) ? $row['rating'] : 0;
+            // Verificar si las claves existen antes de usarlas
+            $instructor =  $row['firstName'] . ' ' . $row['lastName'];
 
-        // Crear un nuevo objeto Course con los datos de la fila
-        $courses[] = new Course(
-            $row['id'],
-            $row['course_title'],
-            $row['course_description'],
-            $previewImage,
-            $previewVideoPath,
-            $row['price'],
-            $idCategory,
-            $idInstructor,
-            $createdAt,
-            '',
-            $instructor,
-            '',
-            '',
-            '',
-            '',
-            $rating
-        );
-    }
-   
-       return $courses;
+            
+            // Crear un nuevo objeto Course con los datos de la fila
+            $courses[] = new Course(
+                $row['id'],
+                $row['title'],
+                $row['description'],
+                $this->convertBlobToBase64($row['previewImage']),
+                $row['previewVideoPath'],
+                $row['price'],
+                $row['idCategory'],
+                $row['idInstructor'],
+                $row['createdAt'],
+                '',
+                $instructor,
+                '',
+                '',
+                '',
+                '',
+                $row['rating']
+            );
+        }
+    
+        return $courses;
    }
         
 }

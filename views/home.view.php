@@ -5,7 +5,7 @@
     <div id="carouselHome" class="carousel slide home-carousel" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="https://i.pinimg.com/originals/34/d7/a3/34d7a3bbe7ab056f213e66c7182dd57e.gif" class="d-block w-100" alt="...">
+          <img src="https://i.pinimg.com/originals/34/d7/a3/34d7a3bbe7ab056f213e66c7182dd57e.gif" class="d-block w-100" alt="..."/>
           
           <div class="info-box  bg-body-tertiary">
             <h3>Habilidades que te llevan hacia adelante</h3>
@@ -16,7 +16,7 @@
 
         </div>
         <div class="carousel-item">
-          <img src="https://i.pinimg.com/originals/f7/19/65/f71965732082901a89adedcde2051bd7.gif" class="d-block w-100" alt="...">
+          <img src="https://i.pinimg.com/originals/f7/19/65/f71965732082901a89adedcde2051bd7.gif" class="d-block w-100" alt="..."/>
 
           <div class="info-box  bg-body-tertiary">
             <h3>Conoce acerca de nuestro nuevos cursos</h3>
@@ -26,7 +26,7 @@
 
         </div>
         <div class="carousel-item">
-          <img src="https://i.pinimg.com/originals/50/fd/4a/50fd4a7d39b88a7fd0cc43aaaefc9649.gif" class="d-block w-100" alt="...">
+          <img src="https://i.pinimg.com/originals/50/fd/4a/50fd4a7d39b88a7fd0cc43aaaefc9649.gif" class="d-block w-100" alt="..."/>
 
           <div class="info-box bg-body-tertiary">
             <h3>¿Te gustaria aprender sobre lo que te gusta?</h3>
@@ -222,65 +222,50 @@
         </button>
       </div>
     </div>
-
-      <!-- Filtro de cursos -->
-    <div class="explore-courses bg-light-subtle">
-  <h2>Explora nuestros mejores cursos</h2>
-
-  <div id="carouselCourses" class="carousel slide home-carousel" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      
-      <!-- Más Vendidos -->
-      <div class="carousel-item active">
-        <div class="card-wrapper">
-        <img src="https://i.pinimg.com/originals/0c/7b/7b/0c7b7bd6de1525cecb762d4f3de34ea1.gif" class="d-block w-100" alt="...">
-
-          <div class="info-box bg-body-tertiary">
-            <h3>Mas Vendidos</h3>
-            <p class="fs-4">Conoce nuestros cursos mas populares en el mercado</p>
-            <a href="/exploreCourses" class="btn btn-outline-primary">Conoce nuestros cursos</a>
+    <div id="carouselCourses" class="carousel slide home-carousel" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://i.pinimg.com/originals/0c/7b/7b/0c7b7bd6de1525cecb762d4f3de34ea1.gif" class="d-block w-100" alt="..."/>
+          
+          <div class="info-box  bg-body-tertiary">
+            <h3>Más Vendidos</h3>
+            <p class="fs-4">Conoce nuestros cursos mas populares en el mercado.</p>
+            <a href="/exploreCourses?filter=most_sold" class="btn btn-outline-primary">Conoce nuestros cursos</a>
           </div>
+
         </div>
-      </div>
+        <div class="carousel-item">
+          <img src="https://i.pinimg.com/originals/b6/76/dc/b676dc712d7ea4c837e0993a30156f26.gif" class="d-block w-100" alt="..."/>
 
-      <!-- Mejor Calificados -->
-      <div class="carousel-item active">
-        <div class="card-wrapper">
-        <img src="https://i.pinimg.com/originals/b6/76/dc/b676dc712d7ea4c837e0993a30156f26.gif" class="d-block w-100" alt="...">
-
-          <div class="info-box bg-body-tertiary">
+          <div class="info-box  bg-body-tertiary">
             <h3>Mejor Calificados</h3>
-            <p class="fs-4">Explora nuestros cursos mejor calificados</p>
-            <a href="/exploreCourses" class="btn btn-outline-primary">Conoce nuestros cursos</a>
+            <p class="fs-4">Explora nuestros cursos mejor calificados.</p>
+            <a href="/exploreCourses?filter=best_rated" class="btn btn-outline-primary">Conoce nuestros cursos</a>
           </div>
-        </div>
-      </div>
 
-      <!-- Más Recientes -->
-      <div class="carousel-item active">
-        <div class="card-wrapper">
-        <img src="https://i.pinimg.com/originals/3d/d2/86/3dd286a8c85ad38a5d7e0aa60139ac08.gif" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="https://i.pinimg.com/originals/3d/d2/86/3dd286a8c85ad38a5d7e0aa60139ac08.gif" class="d-block w-100" alt="..."/>
 
           <div class="info-box bg-body-tertiary">
             <h3>Mas Recientes</h3>
-            <p class="fs-4">Decubre todo lo nuevo que tenemos para ti</p>
-            <a href="/exploreCourses" class="btn btn-outline-primary">Conoce nuestros cursos</a>
+            <p class="fs-4">Decubre todo lo nuevo que tenemos para tí.</p>
+            <a href="/exploreCourses?filter=newest" class="btn btn-outline-primary">Conoce nuestros cursos</a>
           </div>
+
         </div>
       </div>
-
+    
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselCourses" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselCourses" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCourses" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselCourses" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-</div>
 
 
       

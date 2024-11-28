@@ -1,52 +1,63 @@
 <?php require "partials/head.php" ?>
 <?php require "partials/nav.php" ?>
 <div class="exploreCourses">
-    <h1>Explore Courses</h1>
-    <h3>Filter by:</h3>
+    <h1><?php echo $header ?></h1>
+    <hr>
+
+    <h4>Filter by:</h4>
     <form method="GET" >
-        <select name="filter" class="form-select" onchange="this.form.submit()">
+        <select name="filter" class="form-select w-25" onchange="this.form.submit()">
         <option value="">Select</option>
         <option value="most_sold" <?php echo isset($_GET['filter']) && $_GET['filter'] === 'most_sold' ? 'selected' : ''; ?>>Most Sold</option>
         <option value="best_rated" <?php echo isset($_GET['filter']) && $_GET['filter'] === 'best_rated' ? 'selected' : ''; ?>>Best Rated</option>
         <option value="newest" <?php echo isset($_GET['filter']) && $_GET['filter'] === 'newest' ? 'selected' : ''; ?>>Newest</option>
         </select>
-        <button type="submit" class="btn btn-primary">Show</button>
     </form>
-    <hr>
-
-    <?php if (!empty($courseList)): ?>
+<?php if (!empty($courseList)): ?>
         <div class="coursesContainer">
             <?php foreach ($courseList as $course): ?>
                 <div class="course bg-light-subtle">
-                    <img src="<?php echo $course->previewImage ?: 'SkillBloom_icon.png' ?>" alt="Course image">
+                    <img src="<?php echo $course->previewImage ?: 'SkillBloom_icon.png' ?>" alt="huh">
                     <h3><?php echo htmlspecialchars($course->title); ?></h3>
                     <p><?php echo htmlspecialchars($course->instructor); ?></p>
-                    <span><h6>
-                        <?php
-                        echo $course->rating 
-                            ? htmlspecialchars(number_format($course->rating, $course->rating == floor($course->rating) ? 0 : 1)) 
-                            : '';
-                        if ($course->rating === null) {
-                            echo 'No reviews'; 
-                        } else {
-                            $fullStars = floor($course->rating);
-                            $halfStar = ($course->rating - $fullStars >= 0.5);
-                            $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
+                    <span>
+                            <?php 
+                            echo $course->rating 
+                                ? htmlspecialchars(number_format($course->rating, $course->rating == floor($course->rating) ? 0 : 1)) 
+                                : ''; 
+                            ?>
+                      <?php 
+                          if ($course->rating === null) {
+                              echo 'No reviews'; // Mostrar mensaje cuando no hay calificación
+                          } else {
+                              $fullStars = floor($course->rating); // Número de estrellas completas
+                              $halfStar = ($course->rating - $fullStars >= 0.5) ? true : false; // Verificar si hay media estrella
+                              $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0); // Estrellas vacías
 
-                            for ($i = 0; $i < $fullStars; $i++) {
-                                echo '<i class="bi bi-star-fill"></i>';
-                            }
-                            if ($halfStar) {
-                                echo '<i class="bi bi-star-half"></i>';
-                            }
-                            for ($i = 0; $i < $emptyStars; $i++) {
-                                echo '<i class="bi bi-star"></i>';
-                            }
-                        }
-                        ?>
-                    </h6></span>
+                              // Estrellas completas
+                              for ($i = 0; $i < $fullStars; $i++) {
+                                  echo '<i class="bi bi-star-fill"></i>';
+                              }
+
+                              // Media estrella
+                              if ($halfStar) {
+                                  echo '<i class="bi bi-star-half"></i>';
+                              }
+
+                              // Estrellas vacías
+                              for ($i = 0; $i < $emptyStars; $i++) {
+                                  echo '<i class="bi bi-star"></i>';
+                              }
+                          }
+                          ?></span>
                     <p class="fs-4 fw-bold">MX$<?php echo htmlspecialchars($course->price); ?></p>
-                    <button class="btn btn-primary add-to-cart" data-id="<?php echo $course->id; ?>" data-title="<?php echo htmlspecialchars($course->title); ?>" data-price="<?php echo htmlspecialchars($course->price); ?>" data-instructor="<?php echo htmlspecialchars($course->instructor); ?>" data-image="<?php echo $course->previewImage ?: 'SkillBloom_icon.png'; ?>">
+                    <button 
+                        class="btn btn-primary add-to-cart" 
+                        data-id="<?php echo $course->id; ?>" 
+                        data-title="<?php echo htmlspecialchars($course->title); ?>" 
+                        data-price="<?php echo htmlspecialchars($course->price); ?>" 
+                        data-instructor="<?php echo htmlspecialchars($course->instructor); ?>" 
+                        data-image="<?php echo $course->previewImage ?: 'SkillBloom_icon.png'; ?>">
                         Add to cart
                     </button>
                     <a href="/courseInfo?id=<?php echo urlencode($course->id); ?>" class="btn btn-outline-primary">See more</a>
@@ -54,8 +65,10 @@
             <?php endforeach; ?>
         </div>
     <?php else: ?>
-        <p>There aren't any courses available.</p>
+        <p>There aren't any new courses.</p>
     <?php endif; ?>
+</div>
+<?php require 'partials/footer.php' ?>
 </div>
 
 <?php require "partials/footer.php" ?>
