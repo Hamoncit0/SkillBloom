@@ -305,14 +305,82 @@ class CourseController {
                  $row['createdAt'],
                  '',
                  $instructor,
-                 '',
+                 $row['name'],
                  $row['deletedAt']
              );
         }
      
         return $courses;
     }
-
+    public function getFilteredCoursesByInstructor($id, $filters = []) {
+        // Construir la consulta base
+        $query = "SELECT * FROM v_courses WHERE idInstructor = :id";
+        $params = [':id' => $id];
+    
+        // Aplicar filtros si están definidos
+        if (!empty($filters['status'])) {
+            if ($filters['status'] === 'active') {
+                $query .= " AND deletedAt IS NULL";
+            } elseif ($filters['status'] === 'deleted') {
+                $query .= " AND deletedAt IS NOT NULL";
+            }
+        }
+    
+        if (!empty($filters['category'])) {
+            $query .= " AND idCategory = :category";
+            $params[':category'] = $filters['category'];
+        }
+    
+        if (!empty($filters['search'])) {
+            $query .= " AND title LIKE :search";
+            $params[':search'] = '%' . $filters['search'] . '%';
+        }
+    
+        // Aplicar orden si está definido
+        if (!empty($filters['sort'])) {
+            if ($filters['sort'] === 'az') {
+                $query .= " ORDER BY title ASC";
+            } elseif ($filters['sort'] === 'za') {
+                $query .= " ORDER BY title DESC";
+            } elseif ($filters['sort'] === 'date') {
+                $query .= " ORDER BY createdAt DESC";
+            }
+        }
+    
+        $stmt = $this->db->prepare($query);
+    
+        // Bind de parámetros
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+    
+        $stmt->execute();
+    
+        // Procesar los resultados
+        $courses = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $instructor = $row['firstName'] . ' ' . $row['lastName'];
+    
+            $courses[] = new Course(
+                $row['id'],
+                $row['title'],
+                $row['description'],
+                $this->convertBlobToBase64($row['previewImage']),
+                $row['previewVideoPath'],
+                $row['price'],
+                $row['idCategory'],
+                $row['idInstructor'],
+                $row['createdAt'],
+                '',
+                $instructor,
+                $row['name'],
+                $row['deletedAt']
+            );
+        }
+    
+        return $courses;
+    }
+    
 
     public function getCourseById($id){
         // SQL query for calling the stored procedure
@@ -531,14 +599,76 @@ class CourseController {
                  $row['createdAt'],
                  '',
                  $instructor,
-                 '',
+                 $row['name'],
                  $row['deletedAt']
              );
         }
      
         return $courses;
     }
-
+    public function getFilteredCoursesAdmin($status, $category, $sort, $search) {
+        $query = "SELECT * FROM v_courses WHERE 1=1";
+    
+        // Aplicar filtros condicionalmente
+        if (!empty($status)) {
+            $query .= $status === 'active' ? " AND deletedAt IS NULL" : " AND deletedAt IS NOT NULL";
+        }
+    
+        if (!empty($category)) {
+            $query .= " AND idCategory = :category";
+        }
+    
+        if (!empty($search)) {
+            $query .= " AND title LIKE :search";
+        }
+    
+        // Aplicar orden
+        if (!empty($sort)) {
+            if ($sort === 'az') {
+                $query .= " ORDER BY title ASC";
+            } elseif ($sort === 'za') {
+                $query .= " ORDER BY title DESC";
+            } elseif ($sort === 'date') {
+                $query .= " ORDER BY createdAt DESC";
+            }
+        }
+    
+        $stmt = $this->db->prepare($query);
+    
+        // Enlazar parámetros condicionalmente
+        if (!empty($category)) {
+            $stmt->bindValue(':category', $category, PDO::PARAM_INT);
+        }
+        if (!empty($search)) {
+            $stmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
+        }
+    
+        $stmt->execute();
+    
+        // Procesar resultados
+        $courses = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $instructor = $row['firstName'] . ' ' . $row['lastName'];
+            $courses[] = new Course(
+                $row['id'],
+                $row['title'],
+                $row['description'],
+                $this->convertBlobToBase64($row['previewImage']),
+                $row['previewVideoPath'],
+                $row['price'],
+                $row['idCategory'],
+                $row['idInstructor'],
+                $row['createdAt'],
+                '',
+                $instructor,
+                $row['name'],
+                $row['deletedAt']
+            );
+        }
+    
+        return $courses;
+    }
+    
     public function buyCourse($userId, $total, $paymentMethod, $idCourses){
         $query = "CALL makeASale(:userId, :total, :paymentMethod, 
         :idCourses)";
@@ -609,12 +739,74 @@ class CourseController {
                 $row['enrolledAt'],
                 $row['status'],
                 $row['price'],
-                $row['name']
+                $row['name'],
+                $row['lastEntry']
             );
         }
         
         return $studentsPerCourse;
     }
+
+    public function getFilteredStudents($userId, $filters = [])
+    {
+        $query = "SELECT * FROM v_students_per_course WHERE id = :id";
+
+        // Condiciones dinámicas según los filtros
+        if (!empty($filters['course'])) {
+            $query .= " AND course_id = :course";
+        }
+        if (!empty($filters['state'])) {
+            $query .= " AND status = :state";
+        }
+        if (!empty($filters['sort'])) {
+            switch ($filters['sort']) {
+                case '1':
+                    $query .= " ORDER BY title ASC";
+                    break;
+                case '2':
+                    $query .= " ORDER BY title DESC";
+                    break;
+                case '3':
+                    $query .= " ORDER BY progress DESC";
+                    break;
+                case '4':
+                    $query .= " ORDER BY lastEntry DESC";
+                    break;
+            }
+        }
+
+        $stmt = $this->db->prepare($query);
+
+        // Bind obligatorio
+        $stmt->bindParam(':id', $userId);
+
+        // Bind para los filtros
+        if (!empty($filters['course'])) {
+            $stmt->bindParam(':course', $filters['course']);
+        }
+        if (!empty($filters['state'])) {
+            $stmt->bindParam(':state', $filters['state']);
+        }
+
+        $stmt->execute();
+        $studentsPerCourse = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $name = $row['firstName'] . ' ' . $row['lastName'];
+            $studentsPerCourse[] = new StudentsPC(
+                $row['id'],
+                $name,
+                $row['title'],
+                $row['progress'],
+                $row['enrolledAt'],
+                $row['status'],
+                $row['price'],
+                $row['name'],
+                $row['lastEntry']
+            );
+        }
+        return $studentsPerCourse;
+    }
+
 
     public function getSalesSummary($id){
         $query = "SELECT * FROM v_sales_summary WHERE idInstructor = :id";
@@ -638,6 +830,53 @@ class CourseController {
         
         return $sales;
     }
+    public function getSalesSummaryFilters($id, $sort = null)
+    {
+        $query = "SELECT * FROM v_sales_summary WHERE idInstructor = :id";
+
+        // Agregar la cláusula ORDER BY según el parámetro de sort
+        if (!empty($sort)) {
+            switch ($sort) {
+                case '1':
+                    $query .= " ORDER BY title ASC"; // A-z
+                    break;
+                case '2':
+                    $query .= " ORDER BY title DESC"; // z-A
+                    break;
+                case '3':
+                    $query .= " ORDER BY students DESC"; // Más estudiantes
+                    break;
+                case '4':
+                    $query .= " ORDER BY per_month DESC"; // Ingresos del mes
+                    break;
+                case '5':
+                    $query .= " ORDER BY rating DESC"; // Mejor calificación
+                    break;
+                default:
+                    // Sin orden si el valor es inválido
+                    break;
+            }
+        }
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        $sales = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $sales[] = new Sales(
+                $row['idInstructor'],
+                $row['title'],
+                $row['students'],
+                $row['rating'],
+                $row['price'],
+                $row['per_month'],
+                $row['total']
+            );
+        }
+        return $sales;
+    }
+
 
     public function getLevelInfo($levelOrder, $idCourse) {
         $query = "SELECT * FROM v_getLevelContent WHERE levelOrder = :levelOrder AND idCourse = :idCourse";

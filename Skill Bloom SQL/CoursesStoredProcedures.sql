@@ -136,7 +136,7 @@ JOIN course ON course_level.idCourse = course.id ;
 
 CREATE VIEW v_students_per_course
 AS
-SELECT DISTINCT user.id, Student.firstName, Student.lastName, course.title, kardex.progress, kardex.enrolledAt, kardex.status, sale_detail.price, payment_method.name
+SELECT DISTINCT user.id, Student.firstName, Student.lastName, course.title, course.id as course_id, kardex.progress, kardex.enrolledAt, kardex.status, kardex.lastEntry, sale_detail.price, payment_method.name
 FROM course
 JOIN user ON course.idInstructor = user.id
 JOIN kardex ON course.id = kardex.idCourse

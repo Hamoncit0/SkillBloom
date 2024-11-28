@@ -8,11 +8,23 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if(isset($_SESSION['user'])){
+// if(isset($_SESSION['user'])){
+//     $userId = $_SESSION['user']->id;
+//     $courseController = new CourseController();
+    
+//     $sales= $courseController->getSalesSummary($userId);
+    
+//     require 'views/salesSummary.view.php';  
+// }
+if (isset($_SESSION['user'])) {
     $userId = $_SESSION['user']->id;
     $courseController = new CourseController();
-    
-    $sales= $courseController->getSalesSummary($userId);
-    
-    require 'views/salesSummary.view.php';  
+
+    // Obtener el parámetro de ordenamiento de la solicitud
+    $sort = isset($_GET['sort']) ? $_GET['sort'] : null;
+
+    // Pasar el parámetro al modelo
+    $sales = $courseController->getSalesSummaryFilters($userId, $sort);
+
+    require 'views/salesSummary.view.php';
 }

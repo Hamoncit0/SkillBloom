@@ -3,19 +3,21 @@
 <div class="kardex">
     <h2>Sales Summary</h2>
     <div class="kardex-filters">
-        
-        <div class="mb-3 kardex-select">
-            <label for="">Sort:</label>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Select</option>
-                <option value="1">A-z</option>
-                <option value="2">z-A</option>
-                <option value="3">Students</option>
-                <option value="3">Incomes</option>
-                <option value="3">Review score</option>
-            </select>
-        </div>
+        <form id="sort-form" method="GET" action="">
+            <div class="mb-3 kardex-select">
+                <label for="sort-select">Sort:</label>
+                <select class="form-select" id="sort-select" name="sort" onchange="document.getElementById('sort-form').submit();">
+                    <option value="" selected>Select</option>
+                    <option value="1" <?php echo isset($_GET['sort']) && $_GET['sort'] == '1' ? 'selected' : ''; ?>>A-z</option>
+                    <option value="2" <?php echo isset($_GET['sort']) && $_GET['sort'] == '2' ? 'selected' : ''; ?>>z-A</option>
+                    <option value="3" <?php echo isset($_GET['sort']) && $_GET['sort'] == '3' ? 'selected' : ''; ?>>Students</option>
+                    <option value="4" <?php echo isset($_GET['sort']) && $_GET['sort'] == '4' ? 'selected' : ''; ?>>Incomes</option>
+                    <option value="5" <?php echo isset($_GET['sort']) && $_GET['sort'] == '5' ? 'selected' : ''; ?>>Review score</option>
+                </select>
+            </div>
+        </form>
     </div>
+
     <div class="kadex-info">
         <table class="table table-striped table-hover">
             <thead class="">

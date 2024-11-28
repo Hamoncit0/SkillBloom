@@ -10,8 +10,9 @@ class StudentsPC {
     public $state;
     public $total;
     public $paymentMethod;
+    public $lastEntry;
 
-    public function __construct($id = null, $name = null, $course = null, $progress = null, $inscriptionDate = null, $state = null, $total = null, $paymentMethod = null) 
+    public function __construct($id = null, $name = null, $course = null, $progress = null, $inscriptionDate = null, $state = null, $total = null, $paymentMethod = null, $lastEntry = null) 
     {
         $this->id = $id ;
         $this->name = $name ;
@@ -21,6 +22,7 @@ class StudentsPC {
         $this->state = $state;
         $this->total = $total;
         $this->paymentMethod = $paymentMethod;
+        $this->lastEntry = $lastEntry;
     }
 
 }

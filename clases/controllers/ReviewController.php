@@ -92,10 +92,11 @@ class ReviewController {
         return $reviews;
     }
     
-    public function getReviewsAdmin(){
+    public function getReviewsAdmin($idCourse){
         // Consulta para obtener todos los usuarios
-        $query = "SELECT * FROM v_reviews";
+        $query = "SELECT * FROM v_reviews WHERE idCourse = :idCourse";
         $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':idCourse', $idCourse);
         $stmt->execute();
     
         // Array para almacenar los usuarios
