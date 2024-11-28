@@ -17,7 +17,7 @@
         <div class="coursesContainer">
             <?php foreach ($courseList as $course): ?>
                 <div class="course bg-light-subtle">
-                    <img src="<?php echo $course->previewImage ?: 'SkillBloom_icon.png' ?>" alt="huh">
+                    <img src="<?php echo $course->previewImage ?: 'images/SkillBloom_icon.png' ?>" alt="huh">
                     <h3><?php echo htmlspecialchars($course->title); ?></h3>
                     <p><?php echo htmlspecialchars($course->instructor); ?></p>
                     <span>
@@ -57,7 +57,7 @@
                         data-title="<?php echo htmlspecialchars($course->title); ?>" 
                         data-price="<?php echo htmlspecialchars($course->price); ?>" 
                         data-instructor="<?php echo htmlspecialchars($course->instructor); ?>" 
-                        data-image="<?php echo $course->previewImage ?: 'SkillBloom_icon.png'; ?>">
+                        data-image="<?php echo $course->previewImage ?: 'images/SkillBloom_icon.png'; ?>">
                         Add to cart
                     </button>
                     <a href="/courseInfo?id=<?php echo urlencode($course->id); ?>" class="btn btn-outline-primary">See more</a>

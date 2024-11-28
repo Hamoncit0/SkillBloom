@@ -7,6 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
 if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
     $userRole = $_SESSION['user_role']; // Recupera el rol del usuario
     $userAvatar = isset($_SESSION['user_avatar']) ? $_SESSION['user_avatar'] : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgYN6WeHs6tndhVLPPLjId5KiXOlZ26pLLig&s'; // Asegúrate de obtener la URL de la imagen
     $userid=$_SESSION['user_id'];
