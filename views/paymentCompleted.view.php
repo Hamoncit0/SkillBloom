@@ -1,7 +1,7 @@
 <?php require 'partials/head.php' ?>
 <?php require 'partials/nav.php' ?>
 
-<div class="payment-success bg-light text-center" style="height: 100vh">
+<div class="payment-success text-center" style="height: 100vh">
     <div class="success-container  p-5" >
         <h1 class="text-success">Payment Completed!</h1>
         <p class="mt-3">Thank you for your purchase. Your payment was successful and your order is being processed.</p>

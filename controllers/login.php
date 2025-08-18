@@ -19,8 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Guardar el usuario en la sesión
         session_start();
         $_SESSION['user'] = $user;
+        $_SESSION['user_id'] = $user->id;
         $_SESSION['user_role'] = $user->idRol; 
         $_SESSION['user_avatar']= $user->pfpPath;
+
+        //$_SESSION['user_id']= $user->id;
         // Redireccionar a la página principal
         header("Location: /");
         exit();

@@ -1,5 +1,4 @@
 document.getElementById("reviewForm").addEventListener('submit', function(event){
-    event.preventDefault();
     let isValid = true;
 
     const review = document.getElementById("review");
@@ -26,7 +25,8 @@ document.getElementById("reviewForm").addEventListener('submit', function(event)
     // Si todas las validaciones pasan, muestra el mensaje de éxito y limpia el formulario
     if (isValid) {
         alert('Review uploaded successfully');
-        this.reset();
-        window.location.href = '/'; 
+    }
+    else{
+        event.preventDefault();
     }
 });

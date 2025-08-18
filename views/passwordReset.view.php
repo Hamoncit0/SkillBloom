@@ -1,6 +1,6 @@
 <?php require "partials/head.php" ?>
 <?php require "partials/nav.php" ?>
-<div class="password-background bg-light">
+<div class="password-background">
     <div class="forgot-password">
         <form action="" class="card password-reset-card">
             <h3>Forgot Password?</h3>

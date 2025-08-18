@@ -1,4 +1,3 @@
-DELIMITER
 
 CREATE PROCEDURE register_user (
     IN p_firstName VARCHAR(50),
@@ -13,10 +12,6 @@ BEGIN
     INSERT INTO user (firstName, lastName, email, gender, password, birthdate, idRol)
     VALUES (p_firstName, p_lastName, p_email, p_gender, p_password, p_birthdate, p_idRol);
 END
-
-DELIMITER;
-
-DELIMITER
 
 CREATE PROCEDURE login_user (
     IN p_email VARCHAR(50),
@@ -70,9 +65,6 @@ BEGIN
     SELECT p_userId AS userId, p_status AS status, p_message AS message;
 END
 
-DELIMITER;
-DELIMITER 
-
 CREATE PROCEDURE update_user(
     IN userId INT,
     IN firstName VARCHAR(50),
@@ -91,9 +83,6 @@ BEGIN
     WHERE id = userId;
 END 
 
-DELIMITER ;
-DELIMITER 
-
 CREATE PROCEDURE change_password(
     IN userId INT,
     IN newPassword VARCHAR(20)
@@ -105,10 +94,6 @@ BEGIN
         updatedAt = CURRENT_TIMESTAMP
     WHERE id = userId;
 END 
-
-DELIMITER ;
-
-DELIMITER 
 
 CREATE PROCEDURE change_pfp(
     IN userId INT,
@@ -122,9 +107,6 @@ BEGIN
     WHERE id = userId;
 END 
 
-DELIMITER ;
-
-DELIMITER 
 
 CREATE PROCEDURE getinfo_user(
     IN userId INT
@@ -147,7 +129,6 @@ BEGIN
     WHERE id = userId;
 END 
 
-DELIMITER ;
 
 CREATE VIEW v_users AS
 SELECT
@@ -165,9 +146,6 @@ SELECT
         deletedAt
     FROM user;
 
-DELIMITER ;
-DELIMITER 
-
 CREATE PROCEDURE change_userStatus(
     IN userId INT,
     IN NewStatus VARCHAR(15)
@@ -181,4 +159,37 @@ BEGIN
     WHERE id = userId;
 END 
 
-DELIMITER ;
+
+CREATE FUNCTION generarContrasena()
+RETURNS VARCHAR(8)
+DETERMINISTIC
+BEGIN
+    DECLARE caracteres VARCHAR(100) DEFAULT 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+';
+    DECLARE contrasena VARCHAR(8) DEFAULT '';
+    DECLARE i INT DEFAULT 1;
+
+    WHILE i <= 8 DO
+        SET contrasena = CONCAT(contrasena, SUBSTRING(caracteres, FLOOR(1 + RAND() * LENGTH(caracteres)), 1));
+        SET i = i + 1;
+    END WHILE;
+
+    RETURN contrasena;
+END 
+
+select generarContrasena() as password;
+CREATE PROCEDURE generate_and_change_password
+(
+    IN userId INT
+)
+BEGIN
+
+    DECLARE newpassword VARCHAR(10);
+
+    SELECT generarContrasena() INTO newpassword;
+
+    UPDATE user
+    SET password = newpassword
+    WHERE id = userId;
+    
+    SELECT newPassword as newPassword;
+END

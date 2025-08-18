@@ -23,13 +23,12 @@
     position: absolute;
     top: 20%;
     left: 15%;
-    background-color: white;
     padding: 20px;
     width: 30%;
     min-height: 20vh;
     min-width: 300px;
     max-height: 40vh;
-    box-shadow: 0px 4px 8px rgba(107, 123, 80, 0.19);
+    box-shadow: 0px 4px 8px rgba(174, 184, 156, 0.64);
     z-index: 10; /* Para asegurarse de que esté sobre las imágenes */
 }
 
@@ -60,16 +59,16 @@
     padding: 2rem;
 }
 .category{
-    background-color: rgb(238, 238, 238);
+    /* background-color: rgb(238, 238, 238); */
     padding: 2rem;
     margin: 2rem;
-    box-shadow: 0.2rem 0.2rem 10px #dbdbdb;
+    box-shadow: 0.2rem 0.2rem 10px #0000008a;
     transition: box-shadow 0.3s ease;
 
 }
 .category:hover{
     cursor: pointer;
-    box-shadow: 0.5rem 0.5rem 10px #b1b1b1;
+    box-shadow: 0.5rem 0.5rem 10px #0000008a;
 }
 
 .category svg{
@@ -136,16 +135,19 @@
 }
 
 .course{
-    width: fit-content;
-    height: fit-content;
+    flex: 1 1 300px;
+    width: auto;
+    max-width: 300px;
     padding: 1.5rem;
     border-radius: 10px;
     margin: 1rem;
-    box-shadow: 0.2rem 0.2rem 10px #dbdbdb;
+    box-shadow: 0.2rem 0.2rem 10px #0000006b;
     transition: box-shadow 0.3s ease;
+    text-wrap:pretty;
+    align-content: end;
 }
 .course:hover{
-    box-shadow: 0.5rem 0.5rem 10px #b1b1b1;
+    box-shadow: 0.5rem 0.5rem 10px #0000008a;
 
 }
 .course img{
@@ -163,6 +165,8 @@
 .coursesContainer{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 3%;
 }
 .dropdown:hover .dropdown-menu {
     display: block;
@@ -256,8 +260,6 @@
     display: flex;
 }
 .new-course{
-    min-height: 100vh;
-    height: 100%;
     padding: 2%;
     padding-right: 5%;
     padding-left: 8%;
@@ -269,7 +271,7 @@
     padding: 2rem;
     padding-bottom: 0;
     border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(107, 123, 80, 0.19);
+    box-shadow: 0px 4px 8px rgba(64, 72, 50, 0.393);
 }
 .levels{
     display: flex;
@@ -306,10 +308,11 @@
 .comment-pfp{
     width: 4rem;
     height: 4rem;
+    margin: 10px;
 }
 .comment-profile{
     display: flex;
-    align-items:self-end
+    align-items:center;
 }
 .comment-admin-profile{
     display: flex;
@@ -317,7 +320,7 @@
 }
 .comment-profile > span{
     text-align: justify;
-    line-height: 0.1;
+    line-height: 0.4;
 }
 .see-course-info{
     min-height: 100vh;
@@ -340,6 +343,8 @@
     padding: 2rem;
     height: fit-content;
     border-radius: 8px;
+    width: fit-content;
+    justify-self: end;
 }
 .see-course-preview > video{
     min-width: 250px;
@@ -353,7 +358,6 @@
     grid-area: comments;
     display: flex;
     flex-direction: column;
-    background-color: #f0f0f0;
     border-radius: 10px;
     padding: 1.5rem;
     padding-bottom: .5rem;
@@ -431,7 +435,6 @@
     background-color: #b1b1b1;
 }
 .user-box-message{
-    background-color: #f0f0f0;
     display: flex;
     align-items: center;
     height: 10vh;
@@ -447,6 +450,8 @@
    cursor: pointer;
 }
 .messages{
+    display: flex;
+    flex-direction: column;
     height: 100%;
     width: 100%;
     background-color: #d3ded0;
@@ -458,6 +463,10 @@
     position: sticky;
     top: 0;
     align-items: center;
+}
+.message-container{
+    flex-grow: 1;
+    overflow-y: scroll;
 }
 .msg-inc{
     display: flex;
@@ -471,7 +480,7 @@
     color: white;
     max-width: 50%;
     border-radius: 10px;
-    margin: 2rem;
+    margin: 0.5rem;
     padding: 1rem;
     padding-bottom: .5rem;
 }
@@ -479,7 +488,7 @@
     justify-self: right;
     max-width: 50%;
     border-radius: 10px;
-    margin: 2rem;
+    margin: 0.5rem;
     padding: 1rem;
     padding-bottom: .5rem;
 }
@@ -488,8 +497,6 @@
     padding: 0.5rem;
     display: flex;
     justify-content: space-evenly;
-    position: sticky;
-    bottom: 0;
 }
 .kardex{
     min-height: 100vh;
@@ -616,6 +623,29 @@
 .user-data-public .btn{
     opacity: 100%;
 }
+.aichat{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+.aichat-msg{
+    padding: 5px;
+    background-color: #ececec;
+    box-shadow: 0px 4px 4px rgba(175, 176, 172, 0.3);
+    margin: 3px;
+}
+.user-msg{
+    padding: 5px;
+    margin: 3px;
+}
+.aicontainer{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   height: 100%;
+}
 
 @media only screen and (max-width: 600px) {
     .see-course-info{
@@ -641,4 +671,18 @@
         width: auto;
         height: 100%;
     }
+}
+
+.chat-list-page{
+    padding: 3%;
+    display:  flex;
+    max-height: 90vh;
+}
+.chat-list{
+    height: 75vh;
+    margin: 1rem;
+    border: 1px solid;
+    padding: 2%;
+    width: 50%;
+    overflow-y: scroll;
 }

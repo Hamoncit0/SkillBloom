@@ -1,6 +1,6 @@
 <?php require "partials/head.php" ?>
 <?php require "partials/nav.php" ?>
-<div class="signup bg-light">
+<div class="signup">
     <img src="../images/supporting-business-person-diagonal-svgrepo-com.svg" alt="">
     <form id="signupForm" action="" method="POST">
         <h2>Sign up and start learning</h2>

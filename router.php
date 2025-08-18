@@ -20,6 +20,7 @@ $routes = [
     '/salesSummary' => 'controllers/salesSummary.php',
     '/courseStadistics' => 'controllers/courseStadistics.php',
     '/diploma' => 'controllers/diploma.php',
+    '/exportPDF' => 'views/export_pdf.php',
     '/advancedSearch' => 'controllers/advancedSearch.php',
     '/checkout' => 'controllers/checkout.php',
     '/paymentCompleted' => 'controllers/paymentCompleted.php',
@@ -31,6 +32,7 @@ $routes = [
     '/editCourse' => 'controllers/editCourse.php',
     '/seeProfile' => 'controllers/seeProfile.php',
     '/logout' => 'controllers/logout.php',
+    '/chatlist' => 'controllers/chatlist.php',
 ];
 
 function abort($code = 404)

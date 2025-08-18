@@ -1,6 +1,6 @@
 <div class="msg-inc">
     <div class="incomming-message bg-primary">
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta cupiditate ullam ea consequuntur aliquid cumque earum sunt perferendis repellendus commodi?</p>
-        <p>13:46pm</p>
+        <p><?php echo htmlspecialchars($message->content);?></p>
+        <p><?php echo htmlspecialchars($message->createdAt);?></p>
     </div>
 </div>
